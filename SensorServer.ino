@@ -80,7 +80,7 @@ DHT DHT(10,DHT22);
 ESP8266WebServer server(80);
 #define BUFFDIM 2024
 const int led = 16; //.....13 for UNo..... 16 for ModeMCU
-
+int opt[20] = { 360,360 };
 File logfile;
 
 enum COP { WU_URL, SSID, PSW, ESP_STATION, TIME_STR };
@@ -232,10 +232,10 @@ struct Weather
 
 };
 
-#define MAX_WEATHER_READ 12
+#define MAX_WEATHER_READ 10
 Weather weather[MAX_WEATHER_READ]; byte iw = 0;
 #define ET0
-#define SUNPANELFACTOR 0.36
+#define SUNPANELFACTOR opt[17]/100. //0,36
 //---------------------------------Geo/sun constant structure
 #ifdef ET0
 struct Geo
@@ -246,7 +246,8 @@ struct Geo
 	float alfa ;//solar panels Elevation
 	float beta ;//solar panels Azimuth
 };
-Geo sta={ 44.12474,8.25445,23, 30. / 180. * PI, 12. / 180. * PI };
+Geo sta;
+//{ 44.12474,8.25445,23, 30. / 180. * PI, 12. / 180. * PI };
 float slopeV[10]; byte ki = 0;
 
 float rad_ratio = 0.8, prev_elevation = 0;
@@ -556,48 +557,66 @@ public:
 	  //--------------------------------------------------------------------------
 #define MIL_JSON_ANS 60000
 #define MAX_JSON_STRING 2500
-
+	//char json[2600];
+	byte prova() {
+		WiFiClient client;
+		const int httpPort = 80;
+		if (!client.connect("api.wunderground.com", 80))
+		{
+			client.stop();
+			SP("connection failed ");// SPL(jsonserver);
+			pulseLed(2000, 0, 1);
+			return 0;
+		}
+		/*/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json HTTP/1.1
+		Host: api.wunderground.com
+		Connection: close */
+		String url = "GET ";
+		String streamId = "/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json";
+		//url += "?pw=";
+		//url += privateKey;
+		url = url + streamId
+			+ " HTTP/1.1\r\n" + "Host: " + "api.wunderground.com" + "\r\n" + "Connection: close \r\n\r\n";
+		//url += "&value=";
+		//url += value;
+		//	client.flush();
+		//	Serial.print(" Requesting URL: ");
+		//	Serial.print(url);
+		client.print(url);
+	//	client.print("GET /api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json  HTTP/1.1 \r\n Connection: close \r\n \r\n");
+		ulong millismax = millis() + 10000;
+		while (!client.available() && millis() < millismax)delay(10);
+		if (!client.available())SPL("no rep");
+		while (client.available())SP(char(client.read()));
+		client.stop();
+	}
 	byte APIweatherV(String streamId,String nomi[], byte Nval, float val[]) {
 		WiFiClient client;
-		char json[2600];
-		
 	
-		if (client.connected()) client.stop();
+		char json[2500];
+	
+		//if (client.connected()) client.stop();
 		
 		
 		SPL("connecting to WU");
 	
 		const int httpPort = 80;
 		if (!client.connect("api.wunderground.com", 80))
-	//	if (!client.connect(IPAddress(192,168,1,77), 80))
 		{
 			client.stop();
-
 			SP("connection failed ");// SPL(jsonserver);
 			pulseLed(2000, 0, 1);
 			return 0;
 		}
 	    SP("mem.h."); SPL(ESP.getFreeHeap());
-		//	SP("Connect: "); SP(jsonserver);
 		String url = "GET ";
-		//String url = "/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json";
-		//url += "?pw=";
-		//url += privateKey;
+	//	streamId= "/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json";
 		url = url + streamId
 			+" HTTP/1.1\r\n" +"Host: " + "api.wunderground.com" + "\r\n" +"Connection: close \r\n\r\n";
-		//url += "&value=";
-		//url += value;
-		//	client.flush();
-		Serial.print(" Requesting URL: ");
-		Serial.print(url);
 			client.print(url);
-		// This will send the request to the server
-		//client.print(String("GET ") + streamId + " HTTP/1.1\r\n" +
-		//	"Host: " + "api.wunderground.com" + "\r\n" +
-		//	"Connection: close\r\n\r\n");
-
+	
 		int i = 0, json_try = 0; bool ISJSON = false; byte ii = 0;
-		Serial.println("Waiting Json");
+	//	Serial.println("Waiting Json");
 		long time_step = millis() + MIL_JSON_ANS;
 		char c, cp, cpp; bool obs = false;
 		delay(500);
@@ -612,11 +631,8 @@ public:
 #ifdef VERIFY_WU_ANSWER
 					Serial.print(client.read());
 #else
-					//	obs = client.findUntil(nomi[0].c_str(), "}}}");
 					obs = client.findUntil("current_observation", "}}}");
 #endif
-					//				if (obs)break;
-					//				else { SPL_D("error"); client.stop(); return 0; }
 				}
 				else
 				{
@@ -637,28 +653,23 @@ public:
 					cpp = cp;
 					cp = c;
 					c = client.read();
-				
-					//	buff[ii++] = c;
-					//if (cpp == 'r'&&cp=='e'&&cpp=='s'){
 					if (c == '{')
-						ISJSON = true;
-					
-					//	json[i++] = cpp; json[i++] = cp;}
-					if (ISJSON) { json[i++] = c; 
-					//Serial.print(c);
+						ISJSON = true;		
+					if (ISJSON) { 
+						json[i++] = c; 
+					//	SP(c);
 					}
 				}
-			//Serial.println("endwhile");
 			if (ISJSON) {
 				json[i - 1] = 0;
 				client.stop();
-
-				Serial.print("Connected ! "); //SPL(jsonserver);
-									  //SP_D(json);
-				Serial.print(" Json read!"); Serial.println(i);
+				SP("Connected ! "); SPL(url);
+				SP(" Json read!"); SPL(i);
 				Serial.print("m.b.h."); Serial.println(ESP.getFreeHeap());
+#define JSONLIB
 #ifndef JSONLIB
 				DynamicJsonBuffer jsonBuffer;
+
 				JsonObject& root = jsonBuffer.parseObject(json);
 				Serial.print("m.a.h."); Serial.println(ESP.getFreeHeap());
 				// Test if parsing succeeds.
@@ -689,16 +700,50 @@ public:
 					}
 					return 1;
 				}
-				//va_end(args);
+#else				//va_end(args);
+				byte ret = JsonDecode(Nval,json, nomi, val);
+			return ret;
+#endif
 			}
 
 			else SPL("no json");
 
 		}
-#endif
+
 		client.stop();
 		SP("mem.h."); SPL(ESP.getFreeHeap());
 		return 0;
+	}
+	byte JsonDecode(byte Nval,char json[], String nomi[], float val[]) {
+		DynamicJsonBuffer jsonBuffer;
+		JsonObject& root = jsonBuffer.parseObject(json);
+		//Serial.print("m.a.h."); Serial.println(ESP.getFreeHeap());
+		// Test if parsing succeeds.
+		if (!root.success()) {
+			SPL("Weather parseObject() failed");
+			return 0;
+		}
+		else {
+			SPL("Weather Parsing...");
+			for (byte i = 1; i < Nval + 1; i++) {
+				if (nomi[i] == "local_epoch")
+				{
+					time_t time = root["local_epoch"];
+					SPL(time);
+					val[i - 1] = (float)time;
+				}
+				else
+				{
+					float valore = root[nomi[i]];
+					//			const char * nul= root[nomi[i]];
+					//			if (nul == "--")valore = -1;
+					val[i - 1] = valore;
+					SP(nomi[i]); SPL(valore);
+					//	SP_D(valore);
+				}
+			}
+			return 1;
+		}
 	}
 	long lvalue[20], sumET0 = 0;
 #define WEATHERPOS 10		//eeprom pos for weather[i]
@@ -709,7 +754,7 @@ public:
 #define PINGTIMES 10
 #define EELONGW(x, y) { eeprom_write_block(&y,(void *)x,4);}
 #define EELONGR(x, y) {eeprom_read_block(&y,(void*)x,4); }
-#define POOLFACTOR 12;		// surface of swimming pool area 96mq / area of expansion tank 8mq
+#define POOLFACTOR opt[POOL_FACTOR]//12	// surface of swimming pool area 96mq / area of expansion tank 8mq
 
 //_____________________________________________________________________________________________________________________
 	bool readSensors(long timeint) {//read and record sensors values each time interval sec
@@ -743,6 +788,7 @@ public:
 					}
 					if (it > 0) {
 						lvalue[k] = 0;
+						SPS(maxv); SPS(minv);
 						maxv = minv*1.1 / it; minv = minv*0.9 / it; it = 0;
 						for (byte rept = 0; rept < PINGTIMES; rept++)
 							if (readings[rept] > minv&&readings[rept] < maxv) {
@@ -752,6 +798,7 @@ public:
 					}
 					else lvalue[k] = -10;
 					lvalue[k] /= 10;
+					SP("d_"); SPL(lvalue[k]);
 					if (now() % SECS_PER_DAY < timeint)EELONGW(WLEV0H, lvalue[k]);
 					value[k] = lvalue[k]; k++;   //value are mm.
 					weather[iw].rain1h = value[k - 1];
@@ -805,7 +852,7 @@ public:
 					for (byte ii = 1; ii < pin2[i] + 1; ii++)
 						nomi[ii]= param[k + ii - 1];
 					bool noData = true;
-					SPL(Str);
+
 					if (APIweatherV(Str, nomi, pin2[i], val)) noData = false;
 					if (noData||val[0]<now()-10000){  //_________________no readings__________
 						pulseLed(500, 200, 2);
@@ -1017,18 +1064,19 @@ private:
 		}
 		//		SPS_D("resp=");
 		if (i == 255) {
-			Serial.print("no resp"); return 0;
+			Serial.print("no resp"); client.stop(); return 0;
 		}
 		i = 0;
 		while (client.available()) {
 			buff[i++] = client.read();
-			Serial.print(buff[i - 1]);
+			//SP(buff[i - 1]);
 			delay(100);
 
 		}
+
 		buff[i++] = 0;
 		client.stop();
-	//	SPL(i);
+		SPL(buff);
 		return i;
 	}
 	byte addr[8];
@@ -1216,7 +1264,7 @@ void handleDownload(){
 	}
   }
 } 
-void handlePr() {}
+void handleRestart() { ESP.restart(); }
 void handleEdit()
 {
 	String str = "Edit old:";
@@ -1256,6 +1304,7 @@ void handleEdit()
 			return;
 		}
 		str += lines;
+		if (fend - fread < len)len = fend - fread;
 		f.read((uint8_t *)buf[0], len);
 		if (server.argName(2) != "del") {
 
@@ -1453,7 +1502,7 @@ enum    OP {
 	IP2,							//
 	IP3,							//
 	IP4,							//
-	MAX_WEATHER_SIZE,				//dimension of weather struct for averages
+	MAX_WEATHER_S,				//dimension of weather struct for averages
 	LINEAR_REGRESSION_DELTA_X,		//stored linear frequency sec.
 	NSPLIT,							//n. of linear regression subtotatls
 	LATITUDE,
@@ -1465,13 +1514,17 @@ enum    OP {
 
 
 };
-int opt[20] = { 360,360 };
-void restart(byte ind){
+void EEPROMk(byte ind){
+	byte old = EEPROM.read(0);
 	EEPROM.write(0, ind);
 	byte b = EEPROM.read(1);
-	b++;
+	if (ind == old)b++;
+	else b = 0;
 	EEPROM.write(1, b);
 	EEPROM.commit();
+}
+void restart(byte ind){
+	EEPROMk(ind);
 	ESP.restart();
 
 }
@@ -1483,6 +1536,8 @@ void setup(void) {
 	EEPROM.begin(2024);
 	EELONGR(SUMETPOS, my.sumET0);
 	Serial.begin(115200);
+	Serial.println(EEPROM.read(0), DEC);
+	Serial.println(EEPROM.read(1), DEC);
 	if (!SPIFFS.begin()) {
 		Serial.println("SPIFFS failed to mount !\r\n");
 		pulseLed(10000, 100, 2);
@@ -1490,7 +1545,7 @@ void setup(void) {
 	}
 #define READCONF
 
-
+	EEPROMk( 3);
 
 
 	String parametri[10];
@@ -1582,12 +1637,18 @@ void setup(void) {
 	parametri[4] = "DayLevVar";
 	my.beginSensor(4, 0, 5, "ET0", parametri);
 #endif
+	sta = { opt[LATITUDE] / 10000.,
+			opt[LONGITUDE] / 10000.,
+			opt[ELEVATION],
+			opt[PANEL_ANGLE] * PI / 180.,	
+			opt[PANEL_AZIMUT] * PI / 180 };
+	WiFi.mode(WIFI_STA);
 	delay(2000);
 	WiFi.begin(OpName[SSID].c_str(), OpName[PSW].c_str());
 	delay(500);
 	if (opt[IP1] > 0) {
-		SPS(opt[IP1]); SPS(opt[IP2]); SPS(opt[IP3]); SPS(opt[IP4]);
-		WiFi.config(IPAddress(opt[IP1], opt[IP2], opt[IP3], opt[IP4]), IPAddress(192, 168, 1, 1), IPAddress(255, 255, 255, 0), IPAddress(192, 168, 1, 1));
+//	if(EEPROM.read(0)!=4)
+//		WiFi.config(IPAddress(opt[IP1], opt[IP2], opt[IP3], opt[IP4]), IPAddress(192, 168, 1, 1), IPAddress(255, 255, 255, 0));
 	}
 
 	Serial.println("");
@@ -1597,7 +1658,7 @@ void setup(void) {
 	while (WiFi.status() != WL_CONNECTED) {
 		delay(500);
 		Serial.print("."); pulseLed(100, 10, 1);;
-		if (count++ >= 120) { pulseLed(10000, 0, 1); restart(0); }
+		if (count++ >= 120) { pulseLed(10000, 0, 1); restart(4); }
 	}
 
 	Serial.println("");
@@ -1616,7 +1677,7 @@ void setup(void) {
 	SP("pingOK"); SPL(ntry);
 	if (SyncNPT(1))Serial.println("NPT time sync"); 
 	if(now()<1000000000UL) {
-		pulseLed(5000, 1000, 2); restart(1);
+		pulseLed(5000, 1000, 2); restart(5);
 	}
   DateTime ora = now();
   SP(ora.hour()); SP(":"); SPL(ora.minute());
@@ -1629,7 +1690,7 @@ void setup(void) {
 		  logfile = SPIFFS.open("/logs.txt", "w+");
 
 	  if (!logfile) {
-		  Serial.println("Cannot open logFile"); pulseLed(5000, 1000, 3); restart(3);
+		  Serial.println("Cannot open logFile"); pulseLed(5000, 1000, 3); restart(6);
 	  }
 	  //	 while (logfile.available())Serial.print((char)logfile.read());
 	  logfile.seek(0, SeekEnd);
@@ -1664,7 +1725,7 @@ void setup(void) {
  server.on("/dir",handleDir);
  server.on("/del", handleDel);
  server.on("/edit", handleEdit);
- server.on("/pr", handlePr);
+ server.on("/restart", handleRestart);
  server.on("/sensor", handleSensorsGet);
  server.on("/level", handleLevelTrend);
  server.on("/inline", [](){
@@ -1701,6 +1762,7 @@ void setup(void) {
 	  }
   }
   else iw = 0;
+  EEPROMk( 0);
 }
 int RecordInterval = 1;
 void handleLevelTrend() {
@@ -1746,6 +1808,10 @@ void loop(void){
 #endif
 #ifdef OTA
 	ArduinoOTA.handle();
+#endif
+#ifdef PROVASITO
+	static ulong mymillis = 0;
+	if (millis() > mymillis) { my.prova(); mymillis = millis() + 60000; }
 #endif
 	if(my.readSensors(opt[RecordInterval]))
 				eeprom_write_block(&pool, (void*)MYPOS, sizeof(pool));
