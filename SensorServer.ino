@@ -18,6 +18,8 @@
 #include <DallasTemperature.h>
 #include <Arduino-Ping-master\ESP8266ping.h>
 #define TELNET
+byte eecode = 255;
+#define START_INTERVAL 200000
 
 #ifdef TELNET
 WiFiServer Tserver(23);
@@ -317,7 +319,7 @@ float ET0_calc(byte type) {
 				float solar_panels_watts = (weather[i].water - waterp) / (weather[i].time - timep);
 				if (solar_panels_watts < 2) {					//2*3600 ->7200 Watts max
 					w_mean.water += solar_panels_watts;
-					SPS("_"); SPS(weather[i].time - timep); SPS(solar_panels_watts); SPS("_");
+				//	SPS("_"); SPS(weather[i].time - timep); SPS(solar_panels_watts); SPS("_");
 					//			SP(weather[i].water); SP(" "); SPL(waterp);
 					nwaterread++;
 				}
@@ -558,6 +560,7 @@ public:
 #define MIL_JSON_ANS 60000
 #define MAX_JSON_STRING 2500
 	//char json[2600];
+	
 	byte prova() {
 		WiFiClient client;
 		const int httpPort = 80;
@@ -594,7 +597,6 @@ public:
 		WiFiClient client;
 	
 		char json[2500];
-	
 		//if (client.connected()) client.stop();
 		
 		
@@ -608,7 +610,7 @@ public:
 			pulseLed(2000, 0, 1);
 			return 0;
 		}
-	    SP("mem.h."); SPL(ESP.getFreeHeap());
+	 //   SP("mem.h."); SPL(ESP.getFreeHeap());
 		String url = "GET ";
 	//	streamId= "/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json";
 		url = url + streamId
@@ -627,16 +629,17 @@ public:
 			{
 			
 				int nby = client.available();
-				if (nby) {
+				if (nby>100) {
 #ifdef VERIFY_WU_ANSWER
 					Serial.print(client.read());
 #else
-					obs = client.findUntil("current_observation", "}}}");
+					obs = client.find("current_observation");			
 #endif
 				}
 				else
 				{
-					Serial.print(nby); Serial.print('-'); pulseLed(nby+40, 50, 1);
+				//	SP(nby); SP('-');
+					pulseLed(nby+40, 50, 1);
 				}
 			}
 			
@@ -647,61 +650,66 @@ public:
 				client.stop(); return 0;
 			}
 	
-			while (millis() < time_step&&c != '}'&&cp != '}'&&cpp != '}')
+		//	while (millis() < time_step&&c != '}'&&cp != '}'&&cpp != '}')
 
 				while (obs&&client.available() && i < MAX_JSON_STRING) {
 					cpp = cp;
 					cp = c;
 					c = client.read();
-					if (c == '{')
+//					if (c == '{')
 						ISJSON = true;		
 					if (ISJSON) { 
 						json[i++] = c; 
 					//	SP(c);
 					}
 				}
-			if (ISJSON) {
-				json[i - 1] = 0;
-				client.stop();
-				SP("Connected ! "); SPL(url);
-				SP(" Json read!"); SPL(i);
-				Serial.print("m.b.h."); Serial.println(ESP.getFreeHeap());
+				if (ISJSON) {
+					json[i - 1] = 0;
+					client.stop();
+					//SP("Connected ! "); SPL(url);
+					SP(" Json read!"); SPL(i);
+					Serial.print("m.b.h."); Serial.println(ESP.getFreeHeap());
 #define JSONLIB
 #ifndef JSONLIB
-				DynamicJsonBuffer jsonBuffer;
+					DynamicJsonBuffer jsonBuffer;
 
-				JsonObject& root = jsonBuffer.parseObject(json);
-				Serial.print("m.a.h."); Serial.println(ESP.getFreeHeap());
-				// Test if parsing succeeds.
-				if (!root.success()) {
-					SPL("Weather parseObject() failed");
-					return 0;
-				}
-				else {
-
-					SPL("Weather Parsing...");
-					for (byte i = 1; i < Nval+1 ; i++) {
-						if (nomi[i] == "local_epoch")
-						{
-							time_t time = root["local_epoch"];
-							SPL(time);
-							val[i - 1] = (float)time;
-						}
-						else
-						{
-							float valore = root[nomi[i]];
-							
-				//			const char * nul= root[nomi[i]];
-				//			if (nul == "--")valore = -1;
-							val[i - 1] = valore;
-							SP(nomi[i]); SPL(valore);
-							//	SP_D(valore);
-						}
+					JsonObject& root = jsonBuffer.parseObject(json);
+					Serial.print("m.a.h."); Serial.println(ESP.getFreeHeap());
+					// Test if parsing succeeds.
+					if (!root.success()) {
+						SPL("Weather parseObject() failed");
+						return 0;
 					}
-					return 1;
-				}
+					else {
+
+						SPL("Weather Parsing...");
+						for (byte i = 1; i < Nval + 1; i++) {
+							if (nomi[i] == "local_epoch")
+							{
+								time_t time = root["local_epoch"];
+								SPL(time);
+								val[i - 1] = (float)time;
+							}
+							else
+							{
+								float valore = root[nomi[i]];
+
+								//			const char * nul= root[nomi[i]];
+								//			if (nul == "--")valore = -1;
+								val[i - 1] = valore;
+								SP(nomi[i]); SPL(valore);
+								//	SP_D(valore);
+							}
+						}
+						return 1;
+					}
 #else				//va_end(args);
-				byte ret = JsonDecode(Nval,json, nomi, val);
+					byte ret = JsonDecode(Nval + 1, json, nomi, val);
+					for (byte i = 1; i <= Nval; i++) {
+						SP(nomi[i]);
+						val[i - 1] = val[i];
+						SPL(val[i]);
+					}
 			return ret;
 #endif
 			}
@@ -714,13 +722,104 @@ public:
 		SP("mem.h."); SPL(ESP.getFreeHeap());
 		return 0;
 	}
-	byte JsonDecode(byte Nval,char json[], String nomi[], float val[]) {
-		DynamicJsonBuffer jsonBuffer;
+//#define MYDECODE
+#ifdef MYDECODE
+float getvalue(char * buff, String nome) {
+	char* buffin;
+	char * p2;
+	char * p1;
+		nome = char(34) + nome + char(34);
+		SPL(nome);
+		buffin = strtok_r(buff, ",",&p1);
+		SPL(buffin);
+		while (buffin != NULL&&strtok_r(buffin, ":", &p2) != nome.c_str()) {
+			SPL(buffin); buffin = strtok_r(NULL, ",", &p1);
+		}
+		if (buffin == NULL)return -1;
+		else {
+			float val;
+			char * pointer = strtok_r(NULL, ",", &p2);
+			if (strchr(pointer, '.') == NULL) val = (float)atol(pointer);
+			else  val = atof(pointer);
+			return val;
+		}
+	}
+	byte JsonDecode(byte Nval, char json[], String nomi[], float val[]) {
+		for (byte i = 0; i < Nval; i++)
+			val[i] = getvalue(json, nomi[i]);
+	}
+#else
+
+#define MYDECOD
+
+#ifdef MYDECOD
+	byte JsonDecode(byte k, char buff[], String nome[], float val[]) {
+		byte ret = 0;
+		char* buffin;
+		char * p2;
+		char * p1;
+		byte i = 0;
+		//for (i = 0; i<k; i++)
+		//	nome[i] = char(34) + nome[i] + char(34);
+		//SPL(nome);
+		buffin = strtok_r(buff, ",", &p1);
+
+//		SPL(buffin);
+		char * title = " ";
+		int comp = -1;
+		while (buffin != NULL)
+		{
+			buffin = strtok_r(NULL, ",", &p1);
+			if (buffin != NULL) {
+				// SPL(buffin);
+				title = strchr(strtok_r(buffin, ":", &p2), '"');
+
+				if (title != NULL) {
+					// SP(strlen(title)); SPL(title);
+					i = 1;  //------------------------------first nome not used-------------
+					while (comp != 0 && i<k) {
+						String nomev = char(34)+nome[i] + char(34);
+						comp = strcmp(title,nomev.c_str()); i++;
+					}
+					if (comp == 0) {
+						Serial.print("T "); Serial.println(title);
+						// float val;
+						char valore[20];
+						char * pointer = strtok_r(NULL, ",", &p2);
+						char *point1 = strchr(pointer, '"');			//if value in between " " extract it
+						if (point1 != NULL) {
+							byte kk = 1;
+							while (point1[kk] != '"') { valore[kk - 1] = point1[kk++]; }
+							valore[kk - 1] = 0;
+						}
+						else strcpy(valore, pointer);
+					
+						if (strchr(valore, '.') == NULL) {
+							long v = atol(valore); Serial.println(v);
+							val[i - 1] = (float)v;
+						}
+						else  val[i - 1] = atof(valore);
+						ret = 1;
+						Serial.println(val[i - 1]);
+						comp = -1;
+					}
+				}
+				else comp = -1;
+			}
+		}
+		return ret;
+
+	}
+#else
+
+	byte JsonDecode(byte Nval,char * json, String nomi[], float val[]) {
+		DynamicJsonBuffer  jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
 		//Serial.print("m.a.h."); Serial.println(ESP.getFreeHeap());
 		// Test if parsing succeeds.
 		if (!root.success()) {
 			SPL("Weather parseObject() failed");
+			SPL(json);
 			return 0;
 		}
 		else {
@@ -745,6 +844,8 @@ public:
 			return 1;
 		}
 	}
+#endif
+#endif
 	long lvalue[20], sumET0 = 0;
 #define WEATHERPOS 10		//eeprom pos for weather[i]
 #define MYPOS 500			//eeprom pos for pool[24] 
@@ -858,7 +959,7 @@ public:
 						pulseLed(500, 200, 2);
 						for (byte ii = 0; ii < pin2[i]; ii++)val[ii] = -1;
 					}
-					else
+					
 						for (byte ii = 0; ii < pin2[i]; ii++)value[k++] = val[ii];
 					if (nomi[2] == "solarradiation") {
 							weather[iw].sunrad = val[1];
@@ -899,15 +1000,15 @@ public:
 
 			eeprom_write_byte((byte *)WEATHERPOS, iw);
 			eeprom_write_block(&weather[iw], (void*)(WEATHERPOS + 1+iw*sizeof(Weather)), sizeof(Weather));
-		return 0;
+		return 1;
 	}
-	return 1;
+	return 0;
 }
 #define SHORTFILE
 	void recordSensors(long timeint) {
 		byte k = 0;
 #ifdef SHORTFILE
-		if (time_sensor1 == 0)
+		if (time_sensor1 == START_INTERVAL)
 		{
 			
 			for (byte i = 0; i < nsensors; i++) {
@@ -923,14 +1024,19 @@ public:
 					k++;
 				}
 			}
+			logfile.print(" err_"); logfile.print(eecode);
+			logfile.print("t."); logfile.print(EEPROM.read(1));
 			logfile.println();
+			time_sensor1 = 0;
 		}
 #endif
 		
-		if (millis() > time_sensor1) {
+	//if (millis() > time_sensor1)
+	
+		{
 			logfile = SPIFFS.open("/logs.txt", "a+"); 
 			logfile.seek(0, SeekEnd);
-			time_sensor1 = millis() + timeint * 1000;
+			time_sensor1 = millis() + timeint;
 			logfile.print("t:");
 			logfile.print(now());
 			 k = 0;
@@ -1514,11 +1620,12 @@ enum    OP {
 
 
 };
+
 void EEPROMk(byte ind){
-	byte old = EEPROM.read(0);
+	
 	EEPROM.write(0, ind);
 	byte b = EEPROM.read(1);
-	if (ind == old)b++;
+	if (ind == eecode)b++;
 	else b = 0;
 	EEPROM.write(1, b);
 	EEPROM.commit();
@@ -1528,13 +1635,13 @@ void restart(byte ind){
 	ESP.restart();
 
 }
-
 void setup(void) {
 
 	pinMode(led, OUTPUT);
 	digitalWrite(led, 0);
 	EEPROM.begin(2024);
 	EELONGR(SUMETPOS, my.sumET0);
+	eecode = EEPROM.read(0);
 	Serial.begin(115200);
 	Serial.println(EEPROM.read(0), DEC);
 	Serial.println(EEPROM.read(1), DEC);
@@ -1647,8 +1754,8 @@ void setup(void) {
 	WiFi.begin(OpName[SSID].c_str(), OpName[PSW].c_str());
 	delay(500);
 	if (opt[IP1] > 0) {
-//	if(EEPROM.read(0)!=4)
-//		WiFi.config(IPAddress(opt[IP1], opt[IP2], opt[IP3], opt[IP4]), IPAddress(192, 168, 1, 1), IPAddress(255, 255, 255, 0));
+	if(eecode!=4)
+		WiFi.config({ opt[IP1], opt[IP2], opt[IP3], opt[IP4] }, { 192, 168, 1, 1 }, { 255, 255, 255, 0 });
 	}
 
 	Serial.println("");
@@ -1675,6 +1782,7 @@ void setup(void) {
 		pulseLed(100, 100, 1); ntry++;
 }
 	SP("pingOK"); SPL(ntry);
+	setSyncInterval(3600);
 	if (SyncNPT(1))Serial.println("NPT time sync"); 
 	if(now()<1000000000UL) {
 		pulseLed(5000, 1000, 2); restart(5);
@@ -1763,6 +1871,8 @@ void setup(void) {
   }
   else iw = 0;
   EEPROMk( 0);
+  my.time_sensor = START_INTERVAL;
+  my.time_sensor1 = START_INTERVAL;
 }
 int RecordInterval = 1;
 void handleLevelTrend() {
@@ -1802,7 +1912,7 @@ void handleSensorsContr() {
 	bool state = my.onSensor(nsensor, server.arg(1).c_str()  );  //pump,on=   "pool.dist>50&&temp>0", off=   "pool.dist<10"
 	if (state) digitalWrite(atoi(server.arg(2).c_str()),state);
 }
-void loop(void){
+void loop(void) {
 #ifdef TELNET
 	getClients();
 #endif
@@ -1813,10 +1923,10 @@ void loop(void){
 	static ulong mymillis = 0;
 	if (millis() > mymillis) { my.prova(); mymillis = millis() + 60000; }
 #endif
-	if(my.readSensors(opt[RecordInterval]))
-				eeprom_write_block(&pool, (void*)MYPOS, sizeof(pool));
-		
-	my.recordSensors(opt[ RecordInterval ]);
+	if (my.readSensors(opt[RecordInterval])) {
+		eeprom_write_block(&pool, (void*)MYPOS, sizeof(pool));
+		my.recordSensors(opt[RecordInterval]);
+	}
 
   server.handleClient();
 }

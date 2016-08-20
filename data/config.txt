@@ -5,5 +5,5 @@
 0,170,2,wlev,Dist,LevVar
 3,0,5,pws:ISAVONAL1,local_epoch,temp_c,relative_humidity,precip_today_metric,wind_kph
 3,0,2,SAVONA,local_epoch,solarradiation
-4,0,3,ET0,sunrad,sol_pan,Avg_var
+4,0,3,ET0,sunrad,sol_pan,avg_var
 5,2,1,DSTemp,Pool
