@@ -2,6 +2,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+
 #include <ESP8266mDNS.h>
 #include <FS.h>
 #include <SSIDPASSWORD.h>
@@ -17,6 +18,11 @@
 #include <ESP8266OneWire.h>
 #include <DallasTemperature.h>
 #include <Arduino-Ping-master\ESP8266ping.h>
+#define FTP
+#ifdef FTP
+#include <ESP8266FtpServer.h>
+FtpServer ftpSrv;
+#endif
 #define TELNET
 byte eecode = 255;
 #define START_INTERVAL 200000
@@ -638,19 +644,19 @@ public:
 				}
 				else
 				{
-				//	SP(nby); SP('-');
+					SP(nby); SP('-');
 					pulseLed(nby+40, 50, 1);
 				}
 			}
 			
 			if (!obs) {
 				SPL("error");
-				while (client.available()) Serial.print(client.read());
+				while (client.available()) SP(client.read());
 				pulseLed(1000, 0, 1);
 				client.stop(); return 0;
 			}
-	
-		//	while (millis() < time_step&&c != '}'&&cp != '}'&&cpp != '}')
+	//_________________timestep is connection timeout_______________________________ }}} ____end of jsonstring
+			while (millis() < time_step&&c != '}'&&cp != '}'&&cpp != '}')
 
 				while (obs&&client.available() && i < MAX_JSON_STRING) {
 					cpp = cp;
@@ -929,10 +935,11 @@ float getvalue(char * buff, String nome) {
 
 					byte count = 0;
 					//------------------------------------------------repeat reading for wrong values up to 10 times____
-					while (count < 10 &&lvalue[k]<=0||lvalue[k]>100000)
+					while (count < 10 &&lvalue[k]<=0)
 					{
 						count++;
-						pulseLed(2000, 100, 1);
+						pulseLed(1000, 100, 3);
+						
 						lvalue[k] = readSunKwh();
 					}
 					//	if (now() % SECS_PER_DAY < timeint)EELONGW(SUN0H, lvalue[k]);//----write Solar KWH at 0h
@@ -956,7 +963,7 @@ float getvalue(char * buff, String nome) {
 
 					if (APIweatherV(Str, nomi, pin2[i], val)) noData = false;
 					if (noData||val[0]<now()-10000){  //_________________no readings__________
-						pulseLed(500, 200, 2);
+						pulseLed(1000, 200, 2);
 						for (byte ii = 0; ii < pin2[i]; ii++)val[ii] = -1;
 					}
 					
@@ -977,12 +984,16 @@ float getvalue(char * buff, String nome) {
 						value[k++] = ET0_calc(0);				//ET from solar Radiation WU
 					if (pin2[i] > 1)				
 						value[k++] = ET0_calc(1);				//ET from  solar panel KWh
+					if (value[k - 1] > 0) {
 						byte iwm1 = iw - 1;
-						if (iw == 0)iwm1 = MAX_WEATHER_READ-1;
-						if (now() > weather[iwm1].time +timeint+ 100)sumET0 += value[k - 1] * 10000 * (now() - weather[iwm1].time) / 3600;
-						else						sumET0 += value[k-1] * 10000 * timeint / 3600;
-				//		SP("sET0"); SPL(sumET0);
+						if (iw == 0)iwm1 = MAX_WEATHER_READ - 1;
+						if (now() > weather[iwm1].time + timeint + 100)
+							sumET0 += value[k - 1] * 10000 * (now() - weather[iwm1].time) / 3600;
+						else						sumET0 += value[k - 1] * 10000 * timeint / 3600;
+						//		Reset SumET0 in case of errors!!
+						if (sumET0 > 60000. || sumET0 < 0)sumET0 = 0;
 						EELONGW(SUMETPOS, sumET0);
+					}
 				//	if (pin2[i] > 2)				
 				//		value[k++] = ET0_calc(3);				// pool level variation [mm]/h least square slope last 12 value						
 					if (pin2[i] > 2) {
@@ -1076,17 +1087,23 @@ float getvalue(char * buff, String nome) {
 		logfile = SPIFFS.open("/logs.txt", "r+");
 		//logfile.seek(0, SeekSet);
 		time_t time = now() - dtime;
-		logfile.seek(-dtime, SeekEnd);
+		logfile.seek(-dtime/2, SeekEnd);
+		//logfile.find("\n");
+		logfile.setTimeout(100);
 		if (!logfile.find("t:"))return -1;
-		
-		int n=logfile.readBytesUntil(',', buf, 10);
+		SP("+");
+		int n=logfile.readBytesUntil(',', buf, 100);
+		SP(n);
 		buf[n] = 0;
+		SPS(buf);
 		bool found = true;
-		while (atol(buf) < time ) {
+		while (atol(buf) < time &&logfile.available()) {
 
 			found = logfile.find("t:");// OpName[TIME_STR].c_str());
+			//found = logfile.findUntil("t:","\^d");
+			SP("_");
 			if (found) {
-				n = logfile.readBytesUntil(',', buf, 10);
+				n = logfile.readBytesUntil(',', buf, 100);
 				buf[n] = 0;
 				SPL(buf);
 			}
@@ -1094,33 +1111,40 @@ float getvalue(char * buff, String nome) {
 
 
 		}
-	
+		if (!logfile.available())return -1;
 		//logfile.seek(-12, SeekCur);
 		byte k = 0;
-		n= logfile.readBytesUntil('\n', buf, 300);
+		SP("<");
+		logfile.setTimeout(100);
+		n = logfile.readBytesUntil('\n', buf, 300);
 		buf[n] = 0;
+		SPL(buf);
 #ifdef SHORTFILE
 		char * buffer = (char *)malloc(300);
-
-		char * buff = strtok(buf, ":");
 		buffer[0] = 0;
+		char * buff="";
+		if (buf[0] != ':') 
+			buff = strtok(buf, ":");
 		for (byte i = 0; i < nsensors; i++) {
 			buffer = strcat(buffer, buff);
 
 			buffer = strcat(buffer, name[i].c_str());
 			buffer = strcat(buffer, ":");
-//			SPL(buffer);
-			buff = strtok(NULL, ":");
+			SPL(buffer);
+			if (buf[0] == ':'&&i==0)
+				buff = strtok(buf, ":");
+			else 
+				buff = strtok(NULL, ":");
 
 			for (byte j = 0; j <pin2[i]; j++) {
 
 				//while (buff!=NULL) {
-//				SPL(buff);
+				SPL(buff);
 				buffer = strcat(buffer, buff);
 
 				buffer = strcat(buffer, param[k++].c_str());
 				buffer = strcat(buffer, ":");
-//				SPL(buffer);
+				SPL(buffer);
 				if(j!=pin2[i]-1||i!=nsensors-1)
 					buff = strtok(NULL, ":");
 				else
@@ -1660,89 +1684,96 @@ void setup(void) {
 	byte formati[10];
 
 #ifdef READCONF
+
 	char buf[100];
+	if (SPIFFS.exists("/config.txt") 
+		&& eecode != 3
+		) {
+		File cfile = SPIFFS.open("/config.txt", "r");
+		//first line contain comments
 
-	File cfile = SPIFFS.open("/config.txt", "r");
-						//first line contain comments
-	cfile.find(13);
-	buf[0] = '/';
-	while (buf[0]=='/')buf[cfile.readBytesUntil(13, buf, 100)]=0;  //second option interger values
-	byte n;
-	SPL(buf);
-	byte n_opt = atoi(strtok(buf, ","));
-	for (byte i = 0; i < n_opt; i++)opt[i] = atoi(strtok(NULL, ",\n"));
-	buf[0] = '/';
-	while (buf[0] == '/')n=cfile.readBytesUntil(13, buf, 100);
-	buf[n ] = 0;  //thrird line options names
-	SPL(buf);
-
-	byte n_optn = atoi(strtok(buf, ","));
-
-	for (byte i = 0; i < n_optn; i++){
-		 char * nam= strtok(NULL, ",");
-		 OpName[i] = "";
-		 OpName[i] += nam; SPL(OpName[i]);
-	}
-	byte k = 0;
-	
-	while (cfile.available()) {			//following line contain one type(1st v) of (3rd v)sensors :name{sensor1:    ,sensor2:     ,     ,} connected to (2nd v.)
-		byte lbuf;
+		cfile.find(13);
 		buf[0] = '/';
-		while (buf[0] == '/')lbuf = cfile.readBytesUntil(13, buf, 100);
-		buf[lbuf] = 0;
-		if (lbuf>6) {
-			SPL(buf);
-			char * point = strtok(buf, ",");
-			if (point != NULL) {
-				SPL(point);
-				byte p1 = atoi(point);
-				point = strtok(NULL, ",");
+		while (buf[0] == '/')buf[cfile.readBytesUntil(13, buf, 100)] = 0;  //second option interger values
+		byte n;
+		SPL(buf);
+		byte n_opt = atoi(strtok(buf, ","));
+		for (byte i = 0; i < n_opt; i++)opt[i] = atoi(strtok(NULL, ",\n"));
+		buf[0] = '/';
+		while (buf[0] == '/')n = cfile.readBytesUntil(13, buf, 100);
+		buf[n] = 0;  //thrird line options names
+		SPL(buf);
+
+		byte n_optn = atoi(strtok(buf, ","));
+
+		for (byte i = 0; i < n_optn; i++) {
+			char * nam = strtok(NULL, ",");
+			OpName[i] = "";
+			OpName[i] += nam; SPL(OpName[i]);
+		}
+		byte k = 0;
+
+		while (cfile.available()) {			//following line contain one type(1st v) of (3rd v)sensors :name{sensor1:    ,sensor2:     ,     ,} connected to (2nd v.)
+			byte lbuf;
+			buf[0] = '/';
+			while (buf[0] == '/')lbuf = cfile.readBytesUntil(13, buf, 100);
+			buf[lbuf] = 0;
+			if (lbuf > 6) {
+				SPL(buf);
+				char * point = strtok(buf, ",");
 				if (point != NULL) {
 					SPL(point);
-					byte p2 = atoi(point);
+					byte p1 = atoi(point);
 					point = strtok(NULL, ",");
 					if (point != NULL) {
 						SPL(point);
-						byte p3 = atoi(point);
-						
-						char  nome[20];
-						strcpy(nome,strtok(NULL, ","));
-						SP(p1); SP(' '); SP(p2); SP(' '); SP(p3); SP(' '); SP(nome); SP(' ');
+						byte p2 = atoi(point);
+						point = strtok(NULL, ",");
+						if (point != NULL) {
+							SPL(point);
+							byte p3 = atoi(point);
 
-						for (byte i = 0; i < p3 - 1; i++) { parametri[i] =strtok(NULL, ","); SP(parametri[i]); SP(' '); }
-						parametri[p3 - 1] =strtok(NULL, "\n"); SP(parametri[p3 - 1]);
-						my.beginSensor(p1, p2, p3, nome, parametri);
+							char  nome[20];
+							strcpy(nome, strtok(NULL, ","));
+							SP(p1); SP(' '); SP(p2); SP(' '); SP(p3); SP(' '); SP(nome); SP(' ');
+
+							for (byte i = 0; i < p3 - 1; i++) { parametri[i] = strtok(NULL, ","); SP(parametri[i]); SP(' '); }
+							parametri[p3 - 1] = strtok(NULL, "\n"); SP(parametri[p3 - 1]);
+							my.beginSensor(p1, p2, p3, nome, parametri);
+						}
 					}
 				}
 			}
 		}
+		cfile.close();
 	}
-	cfile.close();
-#else
-	//const char* parametri[10];
-	parametri[0] = "Kwh";
-	my.beginSensor(2, 0, 1, "SunPan", parametri);
-	// ultrasonic sensor on GPIO 12
-	parametri[0] = "Dist";
-	my.beginSensor(0, 10 * 16 + 10, 1, "wlev", parametri);
-	parametri[0] = "temp";
-	parametri[1] = "humidity";
-	//my.beginSensor(1, 10, 2, "hous",parametri);
-	parametri[0] = "local_epoch";
-	parametri[1] = "temp_c";
-	parametri[2] = "relative_humidity";
-	parametri[4] = "wind_kph";
-	parametri[3] = "precip_today_metric";
-	my.beginSensor(3, 0, 5, "pws:ISAVONAL1", parametri);
-	parametri[0] = "local_epoch";
-	parametri[1] = "solarradiation";
-	my.beginSensor(3, 0, 2, "SAVONA", parametri);
-	parametri[0] = "sunrad";
-	parametri[1] = "sol_pan";
-	parametri[2] = "1hlev_var";
-	parametri[3] = "dayETsum";
-	parametri[4] = "DayLevVar";
-	my.beginSensor(4, 0, 5, "ET0", parametri);
+	else
+	{
+		//const char* parametri[10];
+		parametri[0] = "Kwh";
+		my.beginSensor(2, 0, 1, "SunPan", parametri);
+		// ultrasonic sensor on GPIO 12
+		parametri[0] = "Dist";
+		parametri[1] = "dayLevC";
+
+		my.beginSensor(0, 10 * 16 + 10, 2, "wlev", parametri);
+		parametri[0] = "temp";
+		parametri[1] = "humidity";
+		//my.beginSensor(1, 10, 2, "hous",parametri);
+		parametri[0] = "local_epoch";
+		parametri[1] = "temp_c";
+		parametri[2] = "relative_humidity";
+		parametri[4] = "wind_kph";
+		parametri[3] = "precip_today_metric";
+		my.beginSensor(3, 0, 5, "pws:ISAVONAL1", parametri);
+		parametri[0] = "local_epoch";
+		parametri[1] = "solarradiation";
+		my.beginSensor(3, 0, 2, "SAVONA", parametri);
+		parametri[0] = "sunrad";
+		parametri[1] = "sol_pan";
+		parametri[2] = "dayETsum";
+		my.beginSensor(4, 0, 3, "ET0", parametri);
+	}
 #endif
 	sta = { opt[LATITUDE] / 10000.,
 			opt[LONGITUDE] / 10000.,
@@ -1755,7 +1786,7 @@ void setup(void) {
 	delay(500);
 	if (opt[IP1] > 0) {
 	if(eecode!=4)
-		WiFi.config({ opt[IP1], opt[IP2], opt[IP3], opt[IP4] }, { 192, 168, 1, 1 }, { 255, 255, 255, 0 });
+		WiFi.config({ opt[IP1], opt[IP2], opt[IP3], opt[IP4] }, { 192, 168, 1, 1 }, { 255, 255, 255, 0 }, { 192,168,1,1 }, { 192,168,1,1 });
 	}
 
 	Serial.println("");
@@ -1828,6 +1859,11 @@ void setup(void) {
   ArduinoOTA.begin();
 
 #endif
+
+#ifdef FTP
+  ftpSrv.begin("esp8266", "esp8266");    //username, password for ftp.  set ports in ESP8266FtpServer.h  (default 21, 50009 for PASV)
+#endif
+
   server.on("/", handleRoot);
  server.on("/download",handleDownload);
  server.on("/dir",handleDir);
@@ -1897,12 +1933,15 @@ void handleSensorsGet() {
 	String reply = "";
 	sprintf(buf, "%d:%d", hour( now() - timedelay),minute(now() - timedelay));
 	reply += buf;
+	SP(buf); SPS(reply);
 	if(my.readSensorsFromFile(timedelay, buf) == -1) {
+		SPL("not found");
 		server.send(200, "text/plain",reply+ " not found! \r\n");
 		return;
 	}
 	reply += buf;
-	SPL(reply);
+	SP("<");
+	SP(reply); SPL(">");
 	server.send(200, "text/plain",reply+"\r\n");
 
 }
@@ -1913,6 +1952,9 @@ void handleSensorsContr() {
 	if (state) digitalWrite(atoi(server.arg(2).c_str()),state);
 }
 void loop(void) {
+#ifdef FTP
+	//ftpSrv.handleFTP();        //make sure in loop you call handleFTP()!!  
+#endif
 #ifdef TELNET
 	getClients();
 #endif

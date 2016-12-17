@@ -17,6 +17,8 @@ d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(21):
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(22): warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(23): warning C4117: il nome macro '__cplusplus' è riservato. '#undef' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(24): warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(30): warning C4005: '__asm__': ridefinizione macro
+  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(29): note: vedere la precedente definizione di '__asm__'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(37): warning C4068: pragma sconosciuto
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf\bits/c++config.h(186): error C4430: identificatore di tipo mancante, verrà utilizzato int. Nota: default-int non è più supportato in C++
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf\bits/c++config.h(186): error C2146: errore di sintassi: ';' mancante prima dell'identificatore 'size_t'
@@ -44,18 +46,18 @@ d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
   d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(46): note: vedere la dichiarazione di 'std'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(120): warning C4068: pragma sconosciuto
 d:\users\pbecc\appdata\local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\_ansi.h(65): warning C4005: '_EXFUN': ridefinizione macro
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(74): note: vedere la precedente definizione di '_EXFUN'
+  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(75): note: vedere la precedente definizione di '_EXFUN'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h(212): error C2371: 'size_t': ridefinizione. Tipi di base differenti.
   ..\TimeNTP_ESP8266WiFi\TimeNTP_ESP8266WiFi.ino\NPTtimeSync.cpp: note: vedere la dichiarazione di 'size_t'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stdarg.h(40): warning C4091: 'typedef ': ignorato a sinistra di 'int' quando non si dichiara alcuna variabile
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(69): error C2059: errore di sintassi: ':'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(77): error C2059: errore di sintassi: ':'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(84): error C2059: errore di sintassi: ':'
-d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Esp.h(147): error C2059: errore di sintassi: ':'
 d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\MD5Builder.h(34): warning C4267: 'argomento': conversione da 'size_t' a 'uint16_t'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(89): warning C4005: 'interrupts': ridefinizione macro
+d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Esp.h(147): error C2059: errore di sintassi: ':'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(93): warning C4005: 'interrupts': ridefinizione macro
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Arduino.h(161): note: vedere la precedente definizione di 'interrupts'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(90): warning C4005: 'noInterrupts': ridefinizione macro
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(94): warning C4005: 'noInterrupts': ridefinizione macro
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Arduino.h(162): note: vedere la precedente definizione di 'noInterrupts'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\memory(46): warning C4068: pragma sconosciuto
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits/cpp_type_traits.h(35): warning C4068: pragma sconosciuto
@@ -266,89 +268,88 @@ d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(895): warning C4244: '=
 d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(897): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
 d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(903): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
 d:\users\pbecc\onedrive\Arduino\libraries\DallasTemperature\DallasTemperature.h(185): warning C4180: il qualificatore applicato al tipo della funzione è privo di significato. È stato ignorato.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(45): warning C4018: '>': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(128): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(111): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(112): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(182): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(186): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(197): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(201): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(204): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(207): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(210): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(212): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(213): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(215): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(216): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(220): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(246): warning C4838: la conversione da 'double' a 'float' richiede una conversione verso un tipo di dati più piccolo
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(246): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(249): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(350): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(353): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(353): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(354): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(354): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(358): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(48): warning C4018: '>': errata corrispondenza tra signed e unsigned
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(133): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(116): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(117): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(187): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(191): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(202): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(206): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(209): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(212): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(215): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(217): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(218): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(220): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(221): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(225): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(255): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(356): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(359): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(359): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(365): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(441): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(442): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(446): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(450): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(451): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(452): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(454): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(454): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(461): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(463): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(469): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(469): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(472): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(473): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(474): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(476): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(476): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(483): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(488): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(493): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(496): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(497): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(506): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(509): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(510): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(511): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4305: 'argomento': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(549): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(894): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(592): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(595): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(620): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(703): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(730): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(739): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(740): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(741): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(769): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(793): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(797): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(798): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(799): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(800): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(810): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(811): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(817): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(824): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(830): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(910): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(917): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(928): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1032): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1095): warning C4244: '=': conversione da 'double' a 'unsigned long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): error C2593: 'operator +=' ambiguo
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(360): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(360): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(364): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(365): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(371): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(447): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(448): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(452): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(456): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(457): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(458): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(460): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(460): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(467): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(469): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(475): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(475): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(478): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(479): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(480): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(482): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(482): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(489): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(494): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(499): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(502): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(503): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(512): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(515): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(516): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(517): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(519): warning C4305: 'argomento': troncamento da 'double' a 'float'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(519): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(519): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(555): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1071): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(625): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(628): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(653): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(801): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(865): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(893): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(903): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(904): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(905): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(914): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(940): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(966): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(970): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(971): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(972): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(973): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(985): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(986): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(994): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1002): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1089): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1100): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1113): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1224): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1287): warning C4244: '=': conversione da 'double' a 'unsigned long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1343): error C2593: 'operator +=' ambiguo
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(156): note: potrebbe essere 'String &String::operator +=(const __FlashStringHelper *)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(152): note: o 'String &String::operator +=(double)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(148): note: o 'String &String::operator +=(float)'
@@ -360,25 +361,23 @@ d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): error C2593
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(124): note: o 'String &String::operator +=(char)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(120): note: o 'String &String::operator +=(const char *)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(116): note: o 'String &String::operator +=(const String &)'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): note: durante la ricerca di corrispondenza con l'elenco di argomenti '(String, size_t)'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1179): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1212): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1220): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1222): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1231): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1247): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1628): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1628): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1629): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1629): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1630): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1630): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1631): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1631): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1632): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1632): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1633): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1633): fatal error C1003: il conteggio degli errori supera 100. Interruzione della compilazione
+  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1343): note: durante la ricerca di corrispondenza con l'elenco di argomenti '(String, size_t)'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1371): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1404): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1412): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1414): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1423): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1440): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1697): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1713): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1776): error C2397: la conversione da 'double' a 'float' richiede una conversione verso un tipo di dati più piccolo
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1776): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1783): error C2398: Elemento '1': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1783): error C2398: Elemento '2': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1783): error C2398: Elemento '3': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1783): error C2398: Elemento '4': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1856): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1856): fatal error C1003: il conteggio degli errori supera 100. Interruzione della compilazione
   DHT11lib.cpp
 c1xx : warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(13): warning C4005: '__ESP8266_ESp8266__': ridefinizione macro
@@ -398,6 +397,8 @@ d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(21):
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(22): warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(23): warning C4117: il nome macro '__cplusplus' è riservato. '#undef' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(24): warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(30): warning C4005: '__asm__': ridefinizione macro
+  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(29): note: vedere la precedente definizione di '__asm__'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(37): warning C4068: pragma sconosciuto
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf\bits/c++config.h(186): error C4430: identificatore di tipo mancante, verrà utilizzato int. Nota: default-int non è più supportato in C++
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf\bits/c++config.h(186): error C2146: errore di sintassi: ';' mancante prima dell'identificatore 'size_t'
@@ -425,18 +426,18 @@ d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
   d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(46): note: vedere la dichiarazione di 'std'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(120): warning C4068: pragma sconosciuto
 d:\users\pbecc\appdata\local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\_ansi.h(65): warning C4005: '_EXFUN': ridefinizione macro
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(74): note: vedere la precedente definizione di '_EXFUN'
+  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(75): note: vedere la precedente definizione di '_EXFUN'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h(212): error C2371: 'size_t': ridefinizione. Tipi di base differenti.
   DHT11lib.cpp: note: vedere la dichiarazione di 'size_t'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stdarg.h(40): warning C4091: 'typedef ': ignorato a sinistra di 'int' quando non si dichiara alcuna variabile
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(69): error C2059: errore di sintassi: ':'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(77): error C2059: errore di sintassi: ':'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(84): error C2059: errore di sintassi: ':'
-d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Esp.h(147): error C2059: errore di sintassi: ':'
 d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\MD5Builder.h(34): warning C4267: 'argomento': conversione da 'size_t' a 'uint16_t'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(89): warning C4005: 'interrupts': ridefinizione macro
+d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Esp.h(147): error C2059: errore di sintassi: ':'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(93): warning C4005: 'interrupts': ridefinizione macro
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Arduino.h(161): note: vedere la precedente definizione di 'interrupts'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(90): warning C4005: 'noInterrupts': ridefinizione macro
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(94): warning C4005: 'noInterrupts': ridefinizione macro
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Arduino.h(162): note: vedere la precedente definizione di 'noInterrupts'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\memory(46): warning C4068: pragma sconosciuto
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits/cpp_type_traits.h(35): warning C4068: pragma sconosciuto
@@ -647,89 +648,88 @@ d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(895): warning C4244: '=
 d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(897): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
 d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(903): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
 d:\users\pbecc\onedrive\Arduino\libraries\DallasTemperature\DallasTemperature.h(185): warning C4180: il qualificatore applicato al tipo della funzione è privo di significato. È stato ignorato.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(45): warning C4018: '>': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(128): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(111): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(112): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(182): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(186): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(197): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(201): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(204): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(207): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(210): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(212): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(213): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(215): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(216): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(220): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(246): warning C4838: la conversione da 'double' a 'float' richiede una conversione verso un tipo di dati più piccolo
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(246): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(249): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(350): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(353): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(353): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(354): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(354): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(358): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(359): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(365): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(441): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(442): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(446): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(450): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(451): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(452): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(454): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(454): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(461): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(463): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(469): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(469): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(472): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(473): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(474): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(476): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(476): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(483): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(488): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(493): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(496): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(497): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(506): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(509): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(510): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(511): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4305: 'argomento': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(549): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(894): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(592): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(595): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(620): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(703): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(730): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(739): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(740): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(741): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(769): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(793): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(797): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(798): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(799): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(800): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(810): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(811): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(817): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(824): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(830): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(910): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(917): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(928): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1032): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1095): warning C4244: '=': conversione da 'double' a 'unsigned long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): error C2593: 'operator +=' ambiguo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(48): warning C4018: '>': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(133): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(116): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(117): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(187): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(191): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(202): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(206): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(209): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(212): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(215): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(217): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(218): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(220): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(221): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(225): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(255): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(356): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(359): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(359): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(360): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(360): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(364): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(365): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(371): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(447): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(448): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(452): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(456): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(457): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(458): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(460): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(460): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(467): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(469): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(475): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(475): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(478): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(479): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(480): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(482): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(482): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(489): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(494): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(499): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(502): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(503): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(512): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(515): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(516): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(517): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(519): warning C4305: 'argomento': troncamento da 'double' a 'float'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(519): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(519): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(555): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1071): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(625): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(628): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(653): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(801): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(865): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(893): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(903): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(904): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(905): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(914): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(940): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(966): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(970): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(971): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(972): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(973): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(985): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(986): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(994): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1002): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1089): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1100): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1113): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1224): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1287): warning C4244: '=': conversione da 'double' a 'unsigned long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1343): error C2593: 'operator +=' ambiguo
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(156): note: potrebbe essere 'String &String::operator +=(const __FlashStringHelper *)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(152): note: o 'String &String::operator +=(double)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(148): note: o 'String &String::operator +=(float)'
@@ -741,25 +741,23 @@ d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): error C2593
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(124): note: o 'String &String::operator +=(char)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(120): note: o 'String &String::operator +=(const char *)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(116): note: o 'String &String::operator +=(const String &)'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): note: durante la ricerca di corrispondenza con l'elenco di argomenti '(String, size_t)'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1179): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1212): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1220): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1222): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1231): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1247): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1628): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1628): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1629): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1629): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1630): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1630): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1631): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1631): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1632): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1632): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1633): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1633): fatal error C1003: il conteggio degli errori supera 100. Interruzione della compilazione
+  d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1343): note: durante la ricerca di corrispondenza con l'elenco di argomenti '(String, size_t)'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1371): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1404): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1412): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1414): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1423): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1440): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1697): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1713): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1776): error C2397: la conversione da 'double' a 'float' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1776): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '1': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '2': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '3': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '4': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1856): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1856): fatal error C1003: il conteggio degli errori supera 100. Interruzione della compilazione
   Eeprom_ESP.cpp
 c1xx : warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(13): warning C4005: '__ESP8266_ESp8266__': ridefinizione macro
@@ -779,6 +777,8 @@ d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(21):
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(22): warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(23): warning C4117: il nome macro '__cplusplus' è riservato. '#undef' ignorato
 d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(24): warning C4117: il nome macro '__cplusplus' è riservato. '#define' ignorato
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(30): warning C4005: '__asm__': ridefinizione macro
+  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(29): note: vedere la precedente definizione di '__asm__'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(37): warning C4068: pragma sconosciuto
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf\bits/c++config.h(186): error C4430: identificatore di tipo mancante, verrà utilizzato int. Nota: default-int non è più supportato in C++
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf\bits/c++config.h(186): error C2146: errore di sintassi: ';' mancante prima dell'identificatore 'size_t'
@@ -806,18 +806,18 @@ d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
   d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(46): note: vedere la dichiarazione di 'std'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\new(120): warning C4068: pragma sconosciuto
 d:\users\pbecc\appdata\local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\_ansi.h(65): warning C4005: '_EXFUN': ridefinizione macro
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(74): note: vedere la precedente definizione di '_EXFUN'
+  d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(75): note: vedere la precedente definizione di '_EXFUN'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h(212): error C2371: 'size_t': ridefinizione. Tipi di base differenti.
   Eeprom_ESP.cpp: note: vedere la dichiarazione di 'size_t'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stdarg.h(40): warning C4091: 'typedef ': ignorato a sinistra di 'int' quando non si dichiara alcuna variabile
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(69): error C2059: errore di sintassi: ':'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(77): error C2059: errore di sintassi: ':'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include\ets_sys.h(84): error C2059: errore di sintassi: ':'
-d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Esp.h(147): error C2059: errore di sintassi: ':'
 d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\MD5Builder.h(34): warning C4267: 'argomento': conversione da 'size_t' a 'uint16_t'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(89): warning C4005: 'interrupts': ridefinizione macro
+d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Esp.h(147): error C2059: errore di sintassi: ':'
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(93): warning C4005: 'interrupts': ridefinizione macro
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Arduino.h(161): note: vedere la precedente definizione di 'interrupts'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(90): warning C4005: 'noInterrupts': ridefinizione macro
+d:\Users\pbecc\OneDrive\Arduino\SensorServer\__vm\.SensorServer.vsarduino.h(94): warning C4005: 'noInterrupts': ridefinizione macro
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\Arduino.h(162): note: vedere la precedente definizione di 'noInterrupts'
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\memory(46): warning C4068: pragma sconosciuto
 d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits/cpp_type_traits.h(35): warning C4068: pragma sconosciuto
@@ -1028,89 +1028,88 @@ d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(895): warning C4244: '=
 d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(897): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
 d:\users\pbecc\onedrive\arduino\sensorserver\ET_penmam.h(903): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
 d:\users\pbecc\onedrive\Arduino\libraries\DallasTemperature\DallasTemperature.h(185): warning C4180: il qualificatore applicato al tipo della funzione è privo di significato. È stato ignorato.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(45): warning C4018: '>': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(128): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(111): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(112): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(182): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(186): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(197): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(201): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(204): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(207): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(210): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(212): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(213): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(215): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(216): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(220): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(246): warning C4838: la conversione da 'double' a 'float' richiede una conversione verso un tipo di dati più piccolo
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(246): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(249): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(350): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(353): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(353): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(354): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(354): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(358): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(359): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(365): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(441): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(442): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(446): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(450): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(451): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(452): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(454): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(454): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(461): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(463): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(469): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(469): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(472): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(473): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(474): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(476): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(476): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(483): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(488): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(493): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(496): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(497): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(506): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(509): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(510): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(511): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4305: 'argomento': troncamento da 'double' a 'float'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(513): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(549): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(894): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(592): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(595): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(620): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(703): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(730): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(739): warning C4018: '<': errata corrispondenza tra signed e unsigned
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(740): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(741): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(769): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(793): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(797): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(798): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(799): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(800): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(810): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(811): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(817): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(824): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(830): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(910): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(917): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(928): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1032): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1095): warning C4244: '=': conversione da 'double' a 'unsigned long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): error C2593: 'operator +=' ambiguo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(48): warning C4018: '>': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(133): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(116): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(117): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(187): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(191): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(202): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(206): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(209): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(212): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(215): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(217): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(218): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(220): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(221): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(225): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(255): warning C4305: 'inizializzazione': troncamento da 'double' a 'float'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(356): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(359): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(359): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(360): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(360): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(364): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(365): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(371): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(447): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(448): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(452): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(456): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(457): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(458): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(460): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(460): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(467): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(469): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(475): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(475): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(478): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(479): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(480): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(482): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(482): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(489): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(494): warning C4244: 'return': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(499): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(502): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(503): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(512): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(515): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(516): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(517): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(519): warning C4305: 'argomento': troncamento da 'double' a 'float'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(519): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(519): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(555): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1071): warning C4003: parametri effettivi insufficienti per la macro 'SPL'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(625): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(628): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(653): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(801): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(865): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(893): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(903): warning C4018: '<': errata corrispondenza tra signed e unsigned
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(904): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(905): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(914): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(940): warning C4244: '=': conversione da 'long' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(966): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(970): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(971): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(972): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(973): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(985): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(986): warning C4244: '+=': conversione da 'float' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(994): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1002): warning C4244: '=': conversione da 'int' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1089): warning C4267: 'inizializzazione': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1100): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1113): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1224): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1287): warning C4244: '=': conversione da 'double' a 'unsigned long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1343): error C2593: 'operator +=' ambiguo
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(156): note: potrebbe essere 'String &String::operator +=(const __FlashStringHelper *)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(152): note: o 'String &String::operator +=(double)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(148): note: o 'String &String::operator +=(float)'
@@ -1122,24 +1121,21 @@ d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): error C2593
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(124): note: o 'String &String::operator +=(char)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(120): note: o 'String &String::operator +=(const char *)'
   d:\users\pbecc\appdata\local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\WString.h(116): note: o 'String &String::operator +=(const String &)'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1151): note: durante la ricerca di corrispondenza con l'elenco di argomenti '(String, size_t)'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1179): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1212): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1220): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1222): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1231): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1247): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1628): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1628): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1629): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1629): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1630): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1630): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1631): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1631): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1632): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-  d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1632): note: Il contesto non permette la risoluzione dell'ambiguità della funzione in overload
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1633): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
-d:\Users\pbecc\OneDrive\Arduino\SensorServer\SensorServer.ino(1633): fatal error C1003: il conteggio degli errori supera 100. Interruzione della compilazione
-  Esecuzione dell'analisi codice per C/C++ in corso...
+  d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1343): note: durante la ricerca di corrispondenza con l'elenco di argomenti '(String, size_t)'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1371): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1404): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1412): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1414): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1423): warning C4267: 'inizializzazione': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1440): warning C4267: '=': conversione da 'size_t' a 'long'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1697): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1713): warning C4267: '=': conversione da 'size_t' a 'byte'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1776): error C2397: la conversione da 'double' a 'float' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1776): warning C4244: 'inizializzazione': conversione da 'double' a 'float'. Possibile perdita di dati.
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '1': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '2': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '3': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1783): error C2398: Elemento '4': la conversione da 'int' a 'uint8_t' richiede una conversione verso un tipo di dati più piccolo
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1856): error C2664: 'void ESP8266WebServer::on(const char *,HTTPMethod)': impossibile convertire l'argomento 2 da 'void (__cdecl *)(void)' a 'HTTPMethod'
+d:\users\pbecc\onedrive\arduino\sensorserver\SensorServer.ino(1856): fatal error C1003: il conteggio degli errori supera 100. Interruzione della compilazione
   Generazione del codice in corso...
