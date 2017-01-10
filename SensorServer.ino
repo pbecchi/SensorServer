@@ -1,29 +1,45 @@
+#define OTA
+#define IOT			//......for IOT thingsSpeak data upload (---IOT--input TBD.)
+#define FIX_IP			//......for Fixed IP connection as from config.txt
+#define OS_API			//......for use of command interpreter and remote nodes control
+//#define FTP				//......for FTP on SPIFFS file
+#define TELNET          //......for TELNET debug connection on port 23
+#define READCONF
+#define DHT11L 10       //..... for  use DTH & RHT family sensors define input pin 
+/////////////////////////////////////////////////////////////////////////////////////
 #include "DHT11lib.h"
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
-
+#include <WiFiUdp.h>
 #include <ESP8266mDNS.h>
 #include <FS.h>
-#include <SSIDPASSWORD.h>
+//#include <SSIDPASSWORD.h>
 #include <ArduinoOTA.h>
 #include <TimeLib.h>
 #include <Wire.h>
 #include <RTClib.h>
 #include <EEPROM.h>
-#include "NPTtimeSync.h"
-#include <ArduinoJson.h>
+#include "NPTtimeSync1.h"
+//#include <ArduinoJson.h>
 #include "ET_penmam.h"
 #include "Eeprom_ESP.h"
 #include <ESP8266OneWire.h>
 #include <DallasTemperature.h>
 #include <Arduino-Ping-master\ESP8266ping.h>
-#define FTP
+#include <ThingSpeak.h>
+#define VARIAB Lvalue                   //define internal variable accessed using function val(position);
+long Lvalue[20];
+#include "bitlashMio.h"                //bitlash interpreter called with espressione("expression formula")
+#include "bitlashMio-functions.h"      //bitlash interprter functions including added now()->epochtime ; val(i)->internal VARIAB[i]
+
+//#define FTP
 #ifdef FTP
 #include <ESP8266FtpServer.h>
 FtpServer ftpSrv;
 #endif
-#define TELNET
+//#define TELNET
+byte ntimes = 0;
 byte eecode = 255;
 #define START_INTERVAL 200000
 
@@ -31,6 +47,11 @@ byte eecode = 255;
 WiFiServer Tserver(23);
 WiFiClient Tclient;
 
+const char * IotAPIkey = "KX8OBCOWA7MP8H56";
+long IotChannel = 178477UL;
+byte IOTflag[8] = { 1,0,1,10,11,0,0,0 };
+
+byte n_out_pin=0;
 bool noClient = true;
 long TimeOUT;
 #define ONTIME 2000000L
@@ -73,22 +94,18 @@ int getClients()
 #define SPS_D(x) Serial.print(' ');Serial.print(x)
 #endif
 
-#define DHT11L
-
 #ifdef DHT11L
 //#include <SparkFun_RHT03_Particle_Library-master\firmware\SparkFunRHT03.h>
 //#include <Arduino-DHT22-master\DHT22.h>
 //#include "DHT11lib.h"
 #include <DHT-sensor-library-master\DHT.h>
-DHT DHT(10,DHT22);
+DHT DHT(DHT11L,DHT22);
 #endif
-//const char* ssid = "........";
-//const char* password = "........";
-#define OTA
+
 ESP8266WebServer server(80);
 #define BUFFDIM 2024
 const int led = 16; //.....13 for UNo..... 16 for ModeMCU
-int opt[20] = { 360,360 };
+int opt[20] = { 360,360,10	,0	,12	,192,168,1,30,10	,3600,	24, 441247,	82544,	23,		30,		12, 32 };//  default values
 File logfile;
 
 enum COP { WU_URL, SSID, PSW, ESP_STATION, TIME_STR };
@@ -309,7 +326,7 @@ float ET0_calc(byte type) {
 			if (w_max.humidity < weather[i].humidity)w_max.humidity = weather[i].humidity;
 			if (w_min.humidity > weather[i].humidity)w_min.humidity = weather[i].humidity;
 		}
-		if (weather[i].wind > 0) {
+		if (weather[i].wind >= 0) {
 			w_mean.wind += weather[i].wind;
 			n_wind++;
 			if (w_max.wind < weather[i].wind)w_max.wind = weather[i].wind;
@@ -566,7 +583,145 @@ public:
 #define MIL_JSON_ANS 60000
 #define MAX_JSON_STRING 2500
 	//char json[2600];
-	
+	byte APIweatherV(String streamId, String nomi[], byte Nval, float val[]) {
+		WiFiClient client;
+
+		char json[2500];
+		//if (client.connected()) client.stop();
+
+
+		SPL("connecting to WU");
+
+		const int httpPort = 80;
+		if (!client.connect("api.wunderground.com", 80))
+		{
+			client.stop();
+			SP("connection failed ");// SPL(jsonserver);
+			pulseLed(2000, 0, 1);
+			return 0;
+		}
+		//   SP("mem.h."); SPL(ESP.getFreeHeap());
+		String url = "GET ";
+		//	streamId= "/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json";
+		url = url + streamId
+			+ " HTTP/1.1\r\n" + "Host: " + "api.wunderground.com" + "\r\n" + "Connection: close \r\n\r\n";
+		client.print(url);
+
+		int i = 0, json_try = 0; bool ISJSON = false; byte ii = 0;
+		//	Serial.println("Waiting Json");
+		long time_step = millis() + MIL_JSON_ANS;
+		char c, cp, cpp; bool obs = false;
+		delay(500);
+		while (millis() < time_step)
+		{
+			// Read all the lines of the reply from server and print them to Serialbol 
+			while (millis() < time_step -MIL_JSON_ANS / 2 && !obs)
+			{
+
+				int nby = client.available();
+				if (nby>100) {
+#ifdef VERIFY_WU_ANSWER
+					Serial.print(client.read());
+#else
+					obs = client.find("current_observation");
+#endif
+
+				}
+				else
+				{
+					SP(nby); SP('-');
+					pulseLed(nby + 40, 50, 1);
+				}
+			}
+
+			if (!obs) {
+				SPL("error");
+				while (client.available()) SP(client.read());
+				pulseLed(1000, 0, 1);
+				client.stop(); return 0;
+
+			}
+			//_________________timestep is connection timeout_______________________________ }}} ____end of jsonstring
+			while (millis() < time_step&&c != '}'&&cp != '}'&&cpp != '}')
+
+				while (obs&&client.available() && i < MAX_JSON_STRING) {
+					cpp = cp;
+					cp = c;
+					c = client.read();
+					//					if (c == '{')
+					ISJSON = true;
+					if (ISJSON) {
+						json[i++] = c;
+						//	SP(c);
+
+					}
+
+				}
+			if (ISJSON) {
+				json[i - 1] = 0;
+				client.stop();
+				//SP("Connected ! "); SPL(url);
+				SP(" Json read!"); SPL(i);
+				Serial.print("m.b.h."); Serial.println(ESP.getFreeHeap());
+#define JSONLIB
+#ifndef JSONLIB
+				DynamicJsonBuffer jsonBuffer;
+
+				JsonObject& root = jsonBuffer.parseObject(json);
+				Serial.print("m.a.h."); Serial.println(ESP.getFreeHeap());
+				// Test if parsing succeeds.
+				if (!root.success()) {
+					SPL("Weather parseObject() failed");
+					return 0;
+
+				}
+				else {
+
+					SPL("Weather Parsing...");
+					for (byte i = 1; i < Nval + 1; i++) {
+						if (nomi[i] == "local_epoch")
+						{
+							time_t time = root["local_epoch"];
+							SPL(time);
+							val[i - 1] = (float)time;
+						}
+						else
+						{
+							float valore = root[nomi[i]];
+
+							//			const char * nul= root[nomi[i]];
+							//			if (nul == "--")valore = -1;
+							val[i - 1] = valore;
+							SP(nomi[i]); SPL(valore);
+							//	SP_D(valore);
+						}
+
+					}
+					return 1;
+
+				}
+#else				//va_end(args);
+				byte ret = JsonDecode(Nval + 1, json, nomi, val);
+				for (byte i = 1; i <= Nval; i++) {
+					SP(nomi[i]);
+					val[i - 1] = val[i];
+					SPL(val[i]);
+
+				}
+				return ret;
+#endif
+
+			}
+
+			else SPL("no json");
+
+		}
+
+		client.stop();
+	//	SP("mem.h."); SPL(ESP.getFreeHeap());
+		return 0;
+
+	}
 	byte prova() {
 		WiFiClient client;
 		const int httpPort = 80;
@@ -599,135 +754,7 @@ public:
 		while (client.available())SP(char(client.read()));
 		client.stop();
 	}
-	byte APIweatherV(String streamId,String nomi[], byte Nval, float val[]) {
-		WiFiClient client;
-	
-		char json[2500];
-		//if (client.connected()) client.stop();
-		
-		
-		SPL("connecting to WU");
-	
-		const int httpPort = 80;
-		if (!client.connect("api.wunderground.com", 80))
-		{
-			client.stop();
-			SP("connection failed ");// SPL(jsonserver);
-			pulseLed(2000, 0, 1);
-			return 0;
-		}
-	 //   SP("mem.h."); SPL(ESP.getFreeHeap());
-		String url = "GET ";
-	//	streamId= "/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json";
-		url = url + streamId
-			+" HTTP/1.1\r\n" +"Host: " + "api.wunderground.com" + "\r\n" +"Connection: close \r\n\r\n";
-			client.print(url);
-	
-		int i = 0, json_try = 0; bool ISJSON = false; byte ii = 0;
-	//	Serial.println("Waiting Json");
-		long time_step = millis() + MIL_JSON_ANS;
-		char c, cp, cpp; bool obs = false;
-		delay(500);
-		while (millis() < time_step)
-		{
-			// Read all the lines of the reply from server and print them to Serialbol 
-			while (millis() < time_step - MIL_JSON_ANS / 2 && !obs)
-			{
-			
-				int nby = client.available();
-				if (nby>100) {
-#ifdef VERIFY_WU_ANSWER
-					Serial.print(client.read());
-#else
-					obs = client.find("current_observation");			
-#endif
-				}
-				else
-				{
-					SP(nby); SP('-');
-					pulseLed(nby+40, 50, 1);
-				}
-			}
-			
-			if (!obs) {
-				SPL("error");
-				while (client.available()) SP(client.read());
-				pulseLed(1000, 0, 1);
-				client.stop(); return 0;
-			}
-	//_________________timestep is connection timeout_______________________________ }}} ____end of jsonstring
-			while (millis() < time_step&&c != '}'&&cp != '}'&&cpp != '}')
 
-				while (obs&&client.available() && i < MAX_JSON_STRING) {
-					cpp = cp;
-					cp = c;
-					c = client.read();
-//					if (c == '{')
-						ISJSON = true;		
-					if (ISJSON) { 
-						json[i++] = c; 
-					//	SP(c);
-					}
-				}
-				if (ISJSON) {
-					json[i - 1] = 0;
-					client.stop();
-					//SP("Connected ! "); SPL(url);
-					SP(" Json read!"); SPL(i);
-					Serial.print("m.b.h."); Serial.println(ESP.getFreeHeap());
-#define JSONLIB
-#ifndef JSONLIB
-					DynamicJsonBuffer jsonBuffer;
-
-					JsonObject& root = jsonBuffer.parseObject(json);
-					Serial.print("m.a.h."); Serial.println(ESP.getFreeHeap());
-					// Test if parsing succeeds.
-					if (!root.success()) {
-						SPL("Weather parseObject() failed");
-						return 0;
-					}
-					else {
-
-						SPL("Weather Parsing...");
-						for (byte i = 1; i < Nval + 1; i++) {
-							if (nomi[i] == "local_epoch")
-							{
-								time_t time = root["local_epoch"];
-								SPL(time);
-								val[i - 1] = (float)time;
-							}
-							else
-							{
-								float valore = root[nomi[i]];
-
-								//			const char * nul= root[nomi[i]];
-								//			if (nul == "--")valore = -1;
-								val[i - 1] = valore;
-								SP(nomi[i]); SPL(valore);
-								//	SP_D(valore);
-							}
-						}
-						return 1;
-					}
-#else				//va_end(args);
-					byte ret = JsonDecode(Nval + 1, json, nomi, val);
-					for (byte i = 1; i <= Nval; i++) {
-						SP(nomi[i]);
-						val[i - 1] = val[i];
-						SPL(val[i]);
-					}
-			return ret;
-#endif
-			}
-
-			else SPL("no json");
-
-		}
-
-		client.stop();
-		SP("mem.h."); SPL(ESP.getFreeHeap());
-		return 0;
-	}
 //#define MYDECODE
 #ifdef MYDECODE
 float getvalue(char * buff, String nome) {
@@ -853,6 +880,7 @@ float getvalue(char * buff, String nome) {
 #endif
 #endif
 	long lvalue[20], sumET0 = 0;
+	// EEPROM 900--remote commands--------1000--rules---------
 #define WEATHERPOS 10		//eeprom pos for weather[i]
 #define MYPOS 500			//eeprom pos for pool[24] 
 #define SUMETPOS 6			//eeprom pos for total dayly ET0
@@ -867,27 +895,29 @@ float getvalue(char * buff, String nome) {
 	bool readSensors(long timeint) {//read and record sensors values each time interval sec
 		
 		if (millis() > time_sensor) {
-//          0h first time of the day
+			//          0h first time of the day
 			if (now() % SECS_PER_DAY < timeint) {
-				sumET0 = 0; 
+				sumET0 = 0;
 				pool.levelBegin(); //sumY = 0; sumXY = 0; sumX = 0; sumX2 = 0; n_sample = 0;
 			}
 
 			byte ntry = 0;
+			SP("ping ");
 			while (!Ping.ping(IPAddress(192, 168, 1, 1))) {
 				pulseLed(100, 100, 1); ntry++;
+				if (ntry > 250)return 0;
 			}
-			SP("pingOK"); SPL(ntry);
+			SP("OK"); SPL(ntry);
 			byte k = 0;
 			time_sensor = millis() + timeint * 1000;
 			iw++; if (iw >= MAX_WEATHER_READ)iw = 0;
 			for (byte i = 0; i < nsensors; i++) {
-				if (sensorT[i] == 0)// Ultrasonic Distance sensor
+				if (sensorT[i] == 0)           //---------------------- Ultrasonic Distance sensor
 				{
 					int readings[PINGTIMES], minv = 0, maxv, it = 0;
 					byte rept = 0;
-					while(rept < 20&&it<PINGTIMES ) {
-						readings[rept] = readDistance(pin1[i] / 16, pin1[i] % 16,weather[iw].temp);//distance 0..1 mm
+					while (rept < 20 && it < (opt[2]>PINGTIMES ? PINGTIMES : opt[2])) {
+						readings[rept] = readDistance(pin1[i] / 16, pin1[i] % 16, weather[iw].temp);//distance 0..1 mm
 						if (readings[rept] > 0) {
 							minv += readings[rept]; it++;
 						}
@@ -897,120 +927,147 @@ float getvalue(char * buff, String nome) {
 						lvalue[k] = 0;
 						SPS(maxv); SPS(minv);
 						maxv = minv*1.1 / it; minv = minv*0.9 / it; it = 0;
-						for (byte rept = 0; rept < PINGTIMES; rept++)
+						for (byte rept = 0; rept < (opt[2]>PINGTIMES ? PINGTIMES : opt[2]); rept++)
 							if (readings[rept] > minv&&readings[rept] < maxv) {
 								lvalue[k] += readings[rept]; it++;
 							}
 						if (it > 0)lvalue[k] /= it;
 					}
-					else lvalue[k] = -10;
-					lvalue[k] /= 10;
+					else lvalue[k] = -(opt[2]>PINGTIMES ? PINGTIMES : opt[2]);
+					lvalue[k] /= (opt[2]>PINGTIMES ? PINGTIMES : opt[2]);
 					SP("d_"); SPL(lvalue[k]);
+					value[k] = lvalue[k];
+#ifdef IOT1
+					ThingSpeak.setField(3, value[k]);
+#endif
 					if (now() % SECS_PER_DAY < timeint)EELONGW(WLEV0H, lvalue[k]);
-					value[k] = lvalue[k]; k++;   //value are mm.
+					k++;   //value are mm.
 					weather[iw].rain1h = value[k - 1];
-					
+
 					n_sample++;
-					long ora= hour() * 3600 + minute() * 60+second();
-					pool.levelFit(ora/10, value[k-1]);
+					long ora = hour() * 3600 + minute() * 60 + second();
+					pool.levelFit(ora / 10, value[k - 1]);
 					if (pin2[i] > 1) {
 						//float sl,si; pool.levelGet(0, 1, &sl, &si);	//get 0h water level from least sq. fit
 						long lev; EELONGR(WLEV0H, lev);
 						SPS("0h_lev"); SPS(lev);							//get 0h water level from EEprom saved val.
 						value[k++] = weather[iw].rain1h - lev;
 					}
-	
+
 				}
-				else if (sensorT[i] == 1) //-------------------------DHT11other sensors
+				else if (sensorT[i] == 1)    //-------------------------DHT11other sensors
 				{
 #ifdef DHT11L       
-	
+
 					value[k++] = DHT.readTemperature();
 					value[k++] = DHT.readHumidity();
-		
+
 #endif
 				}
-				else if (sensorT[i] == 2) {//------------------------Connect to Solar Panels KWh
+				else if (sensorT[i] == 2) { //------------------------Connect to Solar Panels KWh
 					lvalue[k] = readSunKwh();
 
 					byte count = 0;
 					//------------------------------------------------repeat reading for wrong values up to 10 times____
-					while (count < 10 &&lvalue[k]<=0)
+					while (count < 10 && lvalue[k] <= 0)
 					{
 						count++;
 						pulseLed(1000, 100, 3);
-						
+
 						lvalue[k] = readSunKwh();
 					}
 					//	if (now() % SECS_PER_DAY < timeint)EELONGW(SUN0H, lvalue[k]);//----write Solar KWH at 0h
-						value[k] = lvalue[k]; k++;
-						weather[iw].water = value[k - 1];
+					value[k] = lvalue[k];
+#ifdef IOT1
+					ThingSpeak.setField(1, lvalue[k]);
+#endif		
+					k++;
+					weather[iw].water = value[k - 1];
 				}
 				else if (sensorT[i] == 3)//__________________ Weather data from Underground Station___________
 				{
 					float val[8];
-					
-					String Str="";
-					Str+= OpName[WU_URL];
+
+					String Str = "";
+					Str += OpName[WU_URL];
 					SPL(OpName[0]);
 					Str += name[i];
-					Str+=".json";
-					
+					Str += ".json";
+
 					String nomi[10] = { "current_observation","             ","                ","            ","               ","             ","","","","" };
 					for (byte ii = 1; ii < pin2[i] + 1; ii++)
-						nomi[ii]= param[k + ii - 1];
+						nomi[ii] = param[k + ii - 1];
 					bool noData = true;
 
 					if (APIweatherV(Str, nomi, pin2[i], val)) noData = false;
-					if (noData||val[0]<now()-10000){  //_________________no readings__________
+					if (noData || val[0] < now() - 10000) {  //_________________no readings__________
 						pulseLed(1000, 200, 2);
 						for (byte ii = 0; ii < pin2[i]; ii++)val[ii] = -1;
 					}
-					
-						for (byte ii = 0; ii < pin2[i]; ii++)value[k++] = val[ii];
+
+					for (byte ii = 0; ii < pin2[i]; ii++)value[k++] = val[ii];
 					if (nomi[2] == "solarradiation") {
-							weather[iw].sunrad = val[1];
-						}
-						else {
-							weather[iw].time = now();
-							weather[iw].temp = val[1];
-							weather[iw].humidity = val[2];
-							weather[iw].rain = val[3];
-							weather[iw].wind = val[4];
-						}							
-					
+						weather[iw].sunrad = val[1];
+					}
+					else {
+						weather[iw].time = now();
+						weather[iw].temp = val[1];
+						weather[iw].humidity = val[2];
+						weather[iw].rain = val[3];
+						weather[iw].wind = val[4];
+					}
+
 				}//-------------------------------------ET0 calculation--------------------------------------------------
 				else if (sensorT[i] == 4) {
-						value[k++] = ET0_calc(0);				//ET from solar Radiation WU
-					if (pin2[i] > 1)				
+					value[k++] = ET0_calc(0);				//ET from solar Radiation WU
+					if (pin2[i] > 1)
 						value[k++] = ET0_calc(1);				//ET from  solar panel KWh
-					if (value[k - 1] > 0) {
+#ifdef IOT1
+					if (value[k - 1] >= 0)ThingSpeak.setField(3, value[k - 1]);
+					else
+						ThingSpeak.setField(2, value[k - 2]);
+#endif		
+					
+					if (value[k - 1] > 0 || value[k - 2] > 0) {
 						byte iwm1 = iw - 1;
 						if (iw == 0)iwm1 = MAX_WEATHER_READ - 1;
+						float ETval = value[k - 1];
+						if (ETval <= 0.&&value[k - 2] > 0) ETval = value[k - 2];
 						if (now() > weather[iwm1].time + timeint + 100)
-							sumET0 += value[k - 1] * 10000 * (now() - weather[iwm1].time) / 3600;
-						else						sumET0 += value[k - 1] * 10000 * timeint / 3600;
+							sumET0 += ETval * 10000 * (now() - weather[iwm1].time) / 3600;
+						else						sumET0 += ETval * 10000 * timeint / 3600;
 						//		Reset SumET0 in case of errors!!
 						if (sumET0 > 60000. || sumET0 < 0)sumET0 = 0;
 						EELONGW(SUMETPOS, sumET0);
 					}
-				//	if (pin2[i] > 2)				
-				//		value[k++] = ET0_calc(3);				// pool level variation [mm]/h least square slope last 12 value						
+					//	if (pin2[i] > 2)				
+					//		value[k++] = ET0_calc(3);				// pool level variation [mm]/h least square slope last 12 value						
 					if (pin2[i] > 2) {
 						value[k++] = sumET0 / 10000.;				//daily ET sum
 						SPL(value[k - 1]);
 					}
-					
+
 				}
 				else if (sensorT[i] == 5) {
 					int temp[10];
 					byte nres = start_read_OneWire(pin1[i], temp, 1);
-					for (byte j = 0; j < nres; j++)value[k ++ ] = temp[j];
+					for (byte j = 0; j < nres; j++)value[k++] = temp[j];
 				}
 			}
-
+#ifdef OS_API
+			//sensor data are passed to rule interpreter variable (<1 are 100000 multiplied)
+			for (byte i = 0; i < k; i++) { Lvalue[i] = value[i]; if (abs(lvalue[i]) == 0)Lvalue[i] = value[i] * 100000; }
+#endif	
 			eeprom_write_byte((byte *)WEATHERPOS, iw);
-			eeprom_write_block(&weather[iw], (void*)(WEATHERPOS + 1+iw*sizeof(Weather)), sizeof(Weather));
+			eeprom_write_block(&weather[iw], (void*)(WEATHERPOS + 1 + iw * sizeof(Weather)), sizeof(Weather));
+#ifdef IOT
+			//byte iotInd[8] = { 1,0,1,10,11,0,0,0 }; 
+			for (byte iot = 0; iot < 8; iot++)
+				ThingSpeak.setField(iot, value[IOTflag[iot]]);
+			if (ThingSpeak.writeFields(IotChannel, IotAPIkey)) { SPL_D("written ThinkSpeak"); }
+			else{ SPL_D("TinkSpeak failed");
+		}
+#endif
 		return 1;
 	}
 	return 0;
@@ -1036,7 +1093,7 @@ float getvalue(char * buff, String nome) {
 				}
 			}
 			logfile.print(" err_"); logfile.print(eecode);
-			logfile.print("t."); logfile.print(EEPROM.read(1));
+			logfile.print("t."); logfile.print(ntimes);
 			logfile.println();
 			time_sensor1 = 0;
 		}
@@ -1066,6 +1123,7 @@ float getvalue(char * buff, String nome) {
 #endif
 					logfile.print(':');
 					SP(value[k]);
+
 #ifdef SHORTFILE
 					if(param[k][0]<='Z'||value[k]==0)
 						logfile.print(int(value[k++]));
@@ -1088,8 +1146,9 @@ float getvalue(char * buff, String nome) {
 		//logfile.seek(0, SeekSet);
 		time_t time = now() - dtime;
 		logfile.seek(-dtime/2, SeekEnd);
+		SPL(logfile.read());
 		//logfile.find("\n");
-		logfile.setTimeout(100);
+		logfile.setTimeout(500);
 		if (!logfile.find("t:"))return -1;
 		SP("+");
 		int n=logfile.readBytesUntil(',', buf, 100);
@@ -1171,7 +1230,7 @@ float getvalue(char * buff, String nome) {
 
 	}// command: < number && > number || < number
 
-private:
+//private:
 	byte ServerCall(char buff[], char command[], IPAddress jserver) {
 		// buff			return string
 		// command		string 
@@ -1204,7 +1263,7 @@ private:
 
 		}
 
-		buff[i++] = 0;
+		buff[i] = 0;
 		client.stop();
 		SPL(buff);
 		return i;
@@ -1236,13 +1295,15 @@ private:
 	
 	
 	long readSunKwh() {
-		char buff[20]; char * ii; int ival[4]; byte i = 1;
+		char buff[30]; char * ii; int ival[4]; byte i = 1;
 		IPAddress ip(192, 168, 1, 77);
-		if (ServerCall(buff, "//", ip) > 1) {
+		if (ServerCall(buff, "//", ip) > 3) {
 			ival[0] = atoi(strtok(buff, " "));
 			ii = strtok(NULL, " ");
 			while (ii != NULL) { ival[i++] = atoi(ii); ii = strtok(NULL, " "); }
-			return ival[2];
+			if(i>2)
+				return ival[2];
+			else return -2;
 		}
 		else return -1;
 	}
@@ -1367,18 +1428,18 @@ if (i == 0)server.send(200, "text/plain", "no files\r\n");
 void handleDownload(){
  {
     String str = "";
-	
-    File f = SPIFFS.open(server.arg(0), "r");
+	SP("Download "); SP(server.arg(0));
+    File f = SPIFFS.open(server.arg(0), "r+");
     if (!f) {
       server.send(200,"text/plain","Can't open SPIFFS file "+server.arg(0)+" !\r\n");          
     }
 	else {
 		char buf[BUFFDIM];
 		long siz = f.size();
-		SP("Download "); SP(server.arg(0)); SPL(siz);
-		long bytes = atol(server.arg(1).c_str());
-		if (bytes > 0) siz = bytes;
+		//long bytes = atol(server.arg(1).c_str());
+		//if (bytes > 0) siz = bytes;
 		if (siz > MAXSIZ) { f.seek(-MAXSIZ, SeekEnd); siz = MAXSIZ; }
+		SP("size"); SPL(siz);
 		while (siz > 0) {
 			size_t len = siz;
 			if (len > BUFFDIM)len = BUFFDIM;
@@ -1645,10 +1706,428 @@ enum    OP {
 
 };
 
+#ifdef OS_API
+//////////////////////////////// BITLASH ROUTINES///////////////////////////////////////////////////////////
+long stackvalue[10];
+long sun_rad(void) { };  //compute sun radiation from kW produced
+long et_0(void) {		//arg0=name   return ET0 value *1000
+};
+byte factor[30];
+long gval_f(void) {
+	if (!isstringarg(1))return my.value[getarg(1)] *pow( 10 , factor[getarg(1)]);
+	else 
+		for (byte i = 0; i < 5; i++)
+		  
+			if (strcmp((char *)getstringarg(i), my.param[i].c_str())) return my.value[i] * pow(10 , factor[i]);
+
+}
+long sval_f(void) {
+	if (!isstringarg(1))my.value[getarg(1)]  = getarg(2)/pow(10, factor[getarg(1)]);
+	else {
+		for (byte i = 0; i < 5; i++) if (strcmp((char *)getstringarg(i), my.param[i].c_str()))  my.value[i] = getarg(2) / pow(10, factor[i]);
+	}
+}
+long getdistance(void) {// arg1=pin  //return Ultrasonic measured distance in mm 
+	return my.readDistance(getarg(1), getarg(1),0);
+};
+long DHT_sensor(void) { // no arg  //return DHT sensor temperature in °C *10 tem,humidity to stack vector
+	stackvalue[0] = DHT.readTemperature();
+	stackvalue[1] = DHT.readHumidity();
+	return stackvalue[0];
+};
+
+long One_Wire(void) {   // arg0=n.of one wire sensor   //return DHT sensor temperature in °C *10 
+	int temp[10];
+	byte nres = my.start_read_OneWire(getarg(1), temp, 1);
+	for (byte j = 0; j < nres; j++)stackvalue[j] = temp[j];
+	return stackvalue[getarg(1)];
+};
+long WU_getdata(void) { //arg0=name of station  //return weather station data to stack vector};
+}
+
+long api_com(void)
+{
+	String buffer = "";
+	String comm= (char *)getstringarg(2);
+	byte sta = getarg(1);
+	for (byte i = 2; i < getarg(0); i++)
+		if (isstringarg(i ))
+			buffer += (char *)getstringarg(i );
+		else
+		{
+			char buff[10];
+			sprintf(buff, "=%d,", getarg(i ));
+			buffer += buff;
+		}
+	return API_command(comm, buffer, sta);
+
+}
+long  API_get(void) {  //string varName//byte factor //byte ic station IP4//string Url:command //Url:val//url:command//url:val...)
+	WiFiClient client;
+
+	char json[1000];
+	const int httpPort = 80;
+	if (!client.connect(IPAddress(192,168,1,getarg(3)), 80))
+	{
+		client.stop();
+		SP("connection failed ");// SPL(jsonserver);
+		pulseLed(2000, 0, 1);
+		return 0;
+	}
+	String url = "GET ";
+	url += getstringarg(4);
+	for (byte i = 5; i < getarg(0) + 1; i+=2) {
+		url += getstringarg(i);
+		char bu[10];
+		sprintf(bu, "=%d&", getarg(i + 1));
+		url += bu;
+	}
+	url	+= " HTTP/1.1\r\n Connection: close \r\n\r\n";
+	client.print(url);
+	SPL(url);
+	//////////////////////////////////////////////////////////////////////////////////////
+	int i = 0; bool ISJSON = false; byte ii = 0;
+	//	Serial.println("Waiting Json");
+	char c; 
+	delay(500);
+		// Read all the lines of the reply from server and print them to Serialbol 
+		
+#define MAX_SEC 30
+			byte inc = 0;
+			while (!client.available() && inc < MAX_SEC * 2) {
+				inc++; delay(500);
+			}
+			if (inc == MAX_SEC*2) {
+				SPL("no answer");
+				client.stop(); return 0;
+			}
+		//_________________timestep is connection timeout_______________________________ }}} ____end of jsonstring
+			while (client.available() && i < MAX_JSON_STRING) {
+	
+				c = client.read();
+				if(c=='{')ISJSON = true;
+				if (ISJSON) {
+					json[i++] = c;
+					//	SP(c);
+				}
+			}
+		if (ISJSON) {
+			json[i - 1] = 0;
+			client.stop();
+			SP(" Json read!"); SPL(i);
+			float valo[2];
+			String nome[1] = { (char*)getstringarg(1) };
+			byte ret = my.JsonDecode( 2, json,nome, valo);
+			long retnum= valo[1] * pow(10 , getarg(2));
+			return retnum;
+
+		}
+
+		else SPL("no json");
+
+	
+
+	client.stop();
+	//SP("mem.h."); SPL(ESP.getFreeHeap());
+	return 0;
+}
+///--------------end of BITLASH routines---------------------------------------------------------------
+struct stations  {       //incoming commands......... 1 for each internal valve or output relay operated
+	bool Flag = 0;                    //status 0 or 1 closed or opened
+	unsigned long Stop_time = 0;      //epoch time to stop
+	byte out_pin = 0;    //pin 1--8 internal pin 9--256 external / ->/8= IP4 %8= sid;from 0 to 32  
+};
+#define EE_CONF_POS 1600
+#define MAX_RULE_CHAR 800
+#define EE_POS_RULES 1000
+#define EEPROM_ST     900
+#define MAX_OUT_CHAN 8
+#define PIN_OUT_FREQ 1000
+#define FIRST_PIN_OUT 32
+byte statn = 0;
+stations st[MAX_OUT_CHAN];
+byte rulen = 0, rulepos = 0;
+unsigned long next_out_mill = 0;
+
+void handleLogRule() { GetRule(EE_CONF_POS);}
+void handleGetRule() { GetRule(EE_POS_RULES); }
+
+void GetRule(int EEpos) {
+	String outstr = "";
+	if (server.argName(0) == "add") {                 //--------------append one rule-----------
+		int rulep = EEpos;// EE_POS_RULES;
+		rulen = EEPROM.read(EEpos);// EE_POS_RULES);
+		rulep++;
+		for (byte i = 0; i < rulen; i++)
+		{
+			rulep += EEPROM.read(rulep) + 1;
+		}
+
+		char  rule[80];
+		strcpy(rule, server.arg(0).c_str());
+		rule[strlen(rule) ]=0 ;
+		SPL_D(rule);
+		rulen++;
+		EEPROM.write(EEpos, rulen);// EE_POS_RULES, rulen);
+		EEPROM.write(rulep++, strlen(rule));
+		eeprom_write_block(&rule, (void *)rulep, strlen(rule));
+//		rulepos += strlen(rule)+1;
+		outstr += "added"; outstr += rule;
+		SP_D("n.rules "); SPL_D(rulen);
+		EEPROM.commit();
+	}
+	else if (server.argName(0) == "del"|| server.argName(0) == "rep") {
+																//-----------replace and delete commands!!!!!
+		int rulep = EEpos;// EE_POS_RULES;
+		int rulepp; byte k = 0; char buff[600];
+		rulen = EEPROM.read(rulep++);
+		int recordN = atoi(server.arg(0).c_str());
+		SP_D(server.argName(0)); SPL_D(recordN);
+		rulepp = rulep;
+		if (recordN < 0) {										//--------rep=-1 means run the rule now (only this time!)
+			strcpy(buff, server.arg(1).c_str());
+			SP("Run rule:"); SP(buff); SP("=");
+			long val = espressione(buff); SPL(val);
+			server.send(202, "text/plain", "computed \r\n");
+			return;
+		}
+		for (byte i = 0; i <= recordN; i++)
+		{
+			rulepp = rulep;
+			byte rulelen = EEPROM.read(rulep);
+			rulep += rulelen + 1;
+			SPL_D(rulelen);
+		}
+		if (server.argName(0) == "rep") {
+			byte rulelen = strlen(server.arg(1).c_str());
+			EEPROM.write(rulepp++, rulelen);
+			Serial.print("new string:");
+			for (byte i = 0; i < rulelen; i++)
+			{
+				if (rulepp >= rulep)buff[k++] = EEPROM.read(rulepp);	//-------------new rule is longer store in buff extra char
+				EEPROM.write(rulepp++, server.arg(1)[i]);
+				Serial.print(server.arg(1)[i]);
+			}
+			Serial.println();
+		}
+		if (k > 0) {																		
+				byte k0 = 0;											//---------copy from buff to EEPROM and append remaining char to buff
+				for (byte i = recordN + 1; i < rulen; i++)
+				{
+					byte ruleng = buff[k0++];// EEPROM.read(rulep);
+					buff[k++]= EEPROM.read(rulepp);
+					EEPROM.write(rulepp++, ruleng);
+					for (byte j = 0; j < ruleng; j++) {
+						buff[k++] = EEPROM.read(rulepp);
+						EEPROM.write(rulepp++, buff[k0++]);
+						Serial.print(buff[k0-1]);
+					}
+					Serial.println();
+					//rulepp += ruleng + 1;
+					rulep += ruleng + 1;
+				}
+
+				for (byte i = k0; i < k; i++) { EEPROM.write(rulepp++, buff[i]); }   // need to empty buff buffer 
+			}
+		else
+		for (byte i = recordN+1; i < rulen; i++)                          //----------copy only following rules
+		{
+			byte ruleng = EEPROM.read(rulep);
+			EEPROM.write(rulepp++, ruleng);
+			for (byte j = 0; j < ruleng; j++)EEPROM.write(rulepp++, EEPROM.read(rulep + j + 1));
+			//rulepp +=ruleng+1;
+			rulep  += ruleng + 1;
+		}
+		outstr += "deleted";
+	if(server.argName(0) == "del")
+		EEPROM.write(EEpos, rulen - 1);// EE_POS_RULES, rulen - 1);
+		EEPROM.commit();
+	}
+	else if(server.argName(0) == "list") {
+		int rulep = EEpos;// EE_POS_RULES;
+			
+		rulen = EEPROM.read(EEpos);// EE_POS_RULES);
+			rulep++;
+			SPL_D(rulen);
+			for (byte i = 0; i < rulen; i++)
+			{
+				byte ruleng = EEPROM.read(rulep);
+				SPL_D(ruleng);
+				for (byte j = 0; j < ruleng; j++) {
+					char c = EEPROM.read(rulep + 1 + j);
+					if (c != 13 && c != 10)  outstr += c;// SP_D(c); 
+				}
+				//SPL_D();
+				outstr += "\r\n";
+				rulep += EEPROM.read(rulep) + 1;
+			}
+			SPL_D(outstr);
+	}
+	server.send(202, "text/plain", outstr + "\r\n");
+
+}
+void handleRunOnce() // receive API command for Digital IO ( sid=station n.&en=1-open_0-close&t=duration_in_seconds)
+{
+	//if (statn == MAX_OUT_CHAN)return;
+	String outstr = "{result=0}";
+	//n_out_pin = 4;
+	SPL(n_out_pin);
+	for (byte i = 0; i < n_out_pin; i++) {
+		SPL(st[i].out_pin);
+		if (st[i].out_pin == atoi(server.arg(1).c_str())) {
+			//st[statn].out_pin = atoi(server.arg(1).c_str());
+			st[i].Flag = atoi(server.arg(2).c_str());
+			st[i].Stop_time = now() + atoi(server.arg(3).c_str());
+			eeprom_write_block(&st[i], (void *)(EEPROM_ST + statn * sizeof(stations)), sizeof(stations)); //command is stored in EEPROM
+			SP_D(st[i].out_pin); if (st[i].Flag) { SPL_D(" start"); }
+			else { SPL_D(" stop"); }
+			outstr[8] = 1;
+			break;
+
+		}
+	}
+	server.send(202, "text/plain", outstr + "\r\n");
+
+}
+void applyRemoteToValve() {                              // --------apply remote API command to digital IO
+	if (millis() < next_out_mill)return;
+
+	next_out_mill = millis() + PIN_OUT_FREQ;
+	for (byte i = 0; i < n_out_pin; i++)
+	{
+		if (st[i].Stop_time != 0 && now() > st[i].Stop_time) {
+			st[i].Flag = 0;
+			st[i].Stop_time = 0;
+			eeprom_write_block(&st[i], (void *)(EEPROM_ST + i * sizeof(stations)), sizeof(stations));
+			SP_D(st[i].out_pin); SPL_D(" closed");
+		}
+	//	if (st[i].out_pin < 8)
+			digitalWrite( st[i].out_pin, st[i].Flag);  //FIRST_PIN_OUT first pin connected to valve or relay
+
+	}
+}
+	//conditional Rules to be stored in EEPROM-------------------------------------------------------------------
+/*void API_repeat(long timeDel) {
+
+	for (byte k = 0; k < nTry; k++)
+		if (millis() >timeTry[k] && ntrial[k]<10) {
+			String streamId = storedStream[k];
+			String command = storedCommand[k];
+			byte ic = ipStored[k] - 20;
+			timeTry[k] = millis() + timeDel;
+			ntrial[k]++;
+			if (API_command(streamId, command, ic)) {
+				SP_D(command); SPL_D(ic);
+				for (byte j = k + 1; j < nTry; j++) {
+					storedStream[j - 1] = storedStream[j];
+					storedCommand[j - 1] = storedCommand[j];
+					timeTry[j - 1] = timeTry[j];
+					ipStored[j - 1] = ipStored[j];
+					ntrial[j - 1] = ntrial[j];
+				}
+				k--;
+				nTry--;
+			}
+		}
+	return;
+}*/
+byte API_command(String streamId, String command, byte ic) {
+
+	String privateKey = "a6d82bced638de3def1e9bbb4983225c"; //MD5 hashed
+	const int httpPort = 80;
+	WiFiClient client;
+	IPAddress jsonserver = IPAddress(192, 168, 1, ic + 20);
+	SP(jsonserver);
+	if (!client.connect(jsonserver, 80))
+	{
+		client.stop();
+
+		SPL(" connection failed ");
+		return 0;
+	}
+	//	SP("Connect: "); SP(jsonserver);
+	String url = streamId;
+	url += "?pw=";
+	url += privateKey;
+	url += command;
+	SP_D(" Requesting URL: ");
+	SPL_D(url);
+	// This will send the request to the server
+	client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+		"Host: " + "192.168.1.20" + "\r\n" +
+		"Connection: close\r\n\r\n");
+	byte count = 0; bool res = false;
+	while (!client.available() && count<240) { delay(100); count++; }
+	if (count == 240)return 0;
+	while (client.available()) {
+		char c = client.read();
+		SP_D(c);
+		if (c == ':'&&client.available()) {
+			c = client.read();
+			SP_D(c);
+			if (c == '1')res = true;
+		}
+	}
+	//if (res)if (client.read() != '1'&&client.read()!='1')res = false;
+	client.stop();
+	return res;
+}
+
+	byte nespr = 0; byte esp_old[10] ;                             //number of conditional espressions
+	unsigned long ruleCheck=120000;
+																   //char * express[10]; byte channel[10]; STORED IN EEPROM                     //conditional expressions and channel
+
+	void Rule_Apply() {
+	//	API_repeat(10000);
+		if (millis() < ruleCheck)return;
+		SP("Apply ");
+		ruleCheck = millis() + 60000;                 //---------------apply rules aevery minute------------
+		int rulepos = EE_POS_RULES;
+			byte	  rulen = eeprom_read_byte((byte *)rulepos++);
+			if (rulen > 250) {
+				rulen = 0; eeprom_write_byte((byte *)(rulepos - 1), 0);
+			}
+			SP(rulen); SPL(" rules");
+		for (byte i = 0; i < rulen; i++) {
+			byte ruleLen = eeprom_read_byte((byte *)rulepos++);         // --------------read rules from EEprom
+		//	byte channel = eeprom_read_byte((byte *)rulepos++);
+			char rule[80];
+			eeprom_read_block(&rule,(void *) rulepos, ruleLen);
+			rule[ruleLen] = 0;
+			rulepos += ruleLen;
+			SP_D(rule);
+			long esp = espressione(rule);
+			SP_D("="); SPL_D(esp);
+			//-------------INTERPRET THE RULE-----------
+		/*	if (esp != esp_old[i]) {                   // ---------------- rule result is cahnged?-------------------
+				if (channel < 48)
+				{
+					digitalWrite(channel, esp);        //---------------apply to digital IO
+					esp_old[i] = esp;
+				}
+				else
+					if (remoteSet(channel, esp, 0))    //---------------apply to remote Station
+						esp_old[i] = esp;
+			}
+			*/
+		}
+
+	}
+
+	byte remoteSet(byte chan, byte val, time_t timer) {
+		byte ic = (chan - 48) / 16;
+		byte ch = (chan - 48) % 16;
+		char buff[30];
+		sprintf(buff,"&sid=%d,&en=%d,&t=%d", ch, val, timer);
+		API_command("/cr", buff, ic);
+		return 0;
+	}
+#endif
+
 void EEPROMk(byte ind){
 	
 	EEPROM.write(0, ind);
-	byte b = EEPROM.read(1);
+	byte b = ntimes;
 	if (ind == eecode)b++;
 	else b = 0;
 	EEPROM.write(1, b);
@@ -1659,22 +2138,66 @@ void restart(byte ind){
 	ESP.restart();
 
 }
-void setup(void) {
+void handleReset() {
+	EEPROM.write(0, 0);
+	EEPROM.write(1, 0);
+#ifdef OS_API
+	EEPROM.write(EE_POS_RULES, 0);
+#endif
+	EEPROM.write(EE_CONF_POS, 255);
+	EEPROM.commit();
+	restart(0);
+}
 
+int EEpoint = EE_CONF_POS;   //pointer to EEPROM configuration data;
+byte readBytesFromEEprom(char buff[], int maxbuf) {
+	byte buffLen=EEPROM.read(EEpoint++);
+	for (byte i = 0; i < buffLen; i++)if (i < maxbuf)buff[i] = EEPROM.read(EEpoint++); else EEPROM.read(EEpoint++);
+	buff[buffLen] = 0;
+	return buffLen;
+}
+WiFiUDP Udp;
+
+void setup(void) {
+	// eecode :
+	//		if			 exec
+	//	0	past setup			
+	//	2   no SPIFFS	
+	//	3   OK SPIFFS	no read config.txt
+	//	4	no conn		no fix IP
+	//	5	no NPT
+	//	6	no logfile
+	
 	pinMode(led, OUTPUT);
 	digitalWrite(led, 0);
 	EEPROM.begin(2024);
 	EELONGR(SUMETPOS, my.sumET0);
 	eecode = EEPROM.read(0);
+	ntimes = EEPROM.read(1);
+	if (EEPROM.read(EE_POS_RULES) > 40) EEPROM.write(EE_POS_RULES, 0);     // if wrong reset n. of rules to 0
+	if(digitalRead(0)==0)EEPROM.write(EE_CONF_POS, 255);
 	Serial.begin(115200);
 	Serial.println(EEPROM.read(0), DEC);
+#ifdef OS_API
+	vinit();
+	addBitlashFunction("apicom", (bitlash_function)api_com);		//send a URL command (string1,string2,n1,string3,n2.....)
+	addBitlashFunction("et0", (bitlash_function)et_0);				//get current ET0      ?????????????????
+	addBitlashFunction("distance", (bitlash_function)getdistance);	//get SR 04 sensor distance reading on (pin)
+	addBitlashFunction("dht_s", (bitlash_function)DHT_sensor);		//get DHT011 sensor values temp.°C*10 
+	addBitlashFunction("onew_s", (bitlash_function)One_Wire);		//get onewire sensors readings (sensor n.)
+	addBitlashFunction("wu_data", (bitlash_function)WU_getdata);	//get weather underground station data  ???????????
+	addBitlashFunction("apiget", (bitlash_function)API_get);		//get value of remote station var from Json API query
+	addBitlashFunction("sval", (bitlash_function)sval_f);			//set value of my.sensor variable ( number or name)*factor
+	addBitlashFunction("gval", (bitlash_function)gval_f);           //get value of my.sensor variable (number or name)*factor
+
+#endif
 	Serial.println(EEPROM.read(1), DEC);
 	if (!SPIFFS.begin()) {
 		Serial.println("SPIFFS failed to mount !\r\n");
 		pulseLed(10000, 100, 2);
 		restart(2);
 	}
-#define READCONF
+
 
 	EEPROMk( 3);
 
@@ -1682,73 +2205,171 @@ void setup(void) {
 	String parametri[10];
 	
 	byte formati[10];
+	//opt[8] = 31;
+#define EElogRule
+	#ifdef READCONF
 
-#ifdef READCONF
+	char buf[150];
+	if((eecode == 3 && EEPROM.read(1)>10))EEPROM.write(EE_CONF_POS, 255);
 
-	char buf[100];
-	if (SPIFFS.exists("/config.txt") 
-		&& eecode != 3
-		) {
-		File cfile = SPIFFS.open("/config.txt", "r");
-		//first line contain comments
+		if( EEPROM.read(EE_CONF_POS) == 255 && SPIFFS.exists("/config.txt"))
+		{
+			File cfile = SPIFFS.open("/config.txt", "r");
+			// -----------------read from file and write EEPROM-------------------------------
+#ifdef EElogRule
+			byte k = 0;
+			SPL("Rewriting EEprom Config Memory.....")
+				EEpoint = EE_CONF_POS + 1;
+			while (cfile.available()) { byte n = cfile.readBytesUntil(13, buf, 150); buf[n] = 0; if (!(buf[1] == '/')) { k++; SPL(buf); EEPROM.write(EEpoint++, n); for (byte i = 0; i < n; i++)EEPROM.write(EEpoint++, buf[i]); } };
+			EEPROM.write(EE_CONF_POS, k);
+			EEPROM.commit();
+		}
+	//	__________________________________________read from EEPROM______________________________
+		{
+#else
+		//cfile.find(13);
+	//cfile.seek(0, SeekSet);
+ 
+#endif
 
-		cfile.find(13);
-		buf[0] = '/';
-		while (buf[0] == '/')buf[cfile.readBytesUntil(13, buf, 100)] = 0;  //second option interger values
+		//second line may  contain comments	
 		byte n;
-		SPL(buf);
+
+#ifndef EElogRule
+		buf[0] = '/';
+		Serial.println("Options:");
+		while (buf[0] == '/')buf[cfile.readBytesUntil(13, buf, 100)] = 0;  // comment line or   line with option interger values
+		Serial.println(buf);                      //decode options
+#else
+		EEpoint = EE_CONF_POS + 1;
+		n = readBytesFromEEprom(buf, 100);// __________________first line with n.of opt and int opt[] values
+		buf[n] = 0; SPL(buf);
+#endif
+
+
 		byte n_opt = atoi(strtok(buf, ","));
-		for (byte i = 0; i < n_opt; i++)opt[i] = atoi(strtok(NULL, ",\n"));
+		for (byte i = 0; i < n_opt; i++) {
+			opt[i] = atoi(strtok(NULL, ",\n"));
+			Serial.println(opt[i]);
+		}
+		Serial.println("OpNames:");
+#ifndef EElogRule
 		buf[0] = '/';
 		while (buf[0] == '/')n = cfile.readBytesUntil(13, buf, 100);
 		buf[n] = 0;  //thrird line options names
-		SPL(buf);
-
+		Serial.println(buf);
+#else
+		n = readBytesFromEEprom(buf, 100);  //______________________second line with n.of.Opnames  and char* OpNames[] string values
+		buf[n] = 0; SPL(buf);
+#endif
 		byte n_optn = atoi(strtok(buf, ","));
 
 		for (byte i = 0; i < n_optn; i++) {
 			char * nam = strtok(NULL, ",");
 			OpName[i] = "";
-			OpName[i] += nam; SPL(OpName[i]);
+			OpName[i] += nam;
+			Serial.println(OpName[i]);
 		}
 		byte k = 0;
-
-		while (cfile.available()) {			//following line contain one type(1st v) of (3rd v)sensors :name{sensor1:    ,sensor2:     ,     ,} connected to (2nd v.)
+#ifndef EElogRule
+		while (cfile.available()>6) {			//following line contain one type(1st v) of (3rd v)sensors :name{sensor1:    ,sensor2:     ,     ,} connected to (2nd v.)
 			byte lbuf;
+			int fileleft = cfile.available();
+
 			buf[0] = '/';
-			while (buf[0] == '/')lbuf = cfile.readBytesUntil(13, buf, 100);
+			
+			while (buf[0] == '/') {
+				Serial.print("Reading:"); lbuf = cfile.readBytesUntil(13, buf,fileleft< 100?fileleft:100); Serial.println(lbuf);
+			}
+#else
+		//read all reacord n=total - 2 header records
+		byte nrec = EEPROM.read(EE_CONF_POS);
+		for (byte k=0;k<nrec-2;k++)
+		{
+			byte lbuf = readBytesFromEEprom(buf, 100);  //___________________________following lines contain logrule commands values
+#endif
 			buf[lbuf] = 0;
 			if (lbuf > 6) {
-				SPL(buf);
+				Serial.println(buf);
 				char * point = strtok(buf, ",");
 				if (point != NULL) {
-					SPL(point);
+					Serial.println(point);
 					byte p1 = atoi(point);
 					point = strtok(NULL, ",");
 					if (point != NULL) {
-						SPL(point);
+						Serial.println(point);
 						byte p2 = atoi(point);
 						point = strtok(NULL, ",");
 						if (point != NULL) {
-							SPL(point);
+							Serial.println(point);
 							byte p3 = atoi(point);
 
 							char  nome[20];
 							strcpy(nome, strtok(NULL, ","));
-							SP(p1); SP(' '); SP(p2); SP(' '); SP(p3); SP(' '); SP(nome); SP(' ');
+							Serial.print(p1); Serial.print(' '); Serial.print(p2); Serial.print(' '); Serial.print(p3); Serial.print(' '); Serial.print(nome); Serial.print(' ');
 
-							for (byte i = 0; i < p3 - 1; i++) { parametri[i] = strtok(NULL, ","); SP(parametri[i]); SP(' '); }
-							parametri[p3 - 1] = strtok(NULL, "\n"); SP(parametri[p3 - 1]);
-							my.beginSensor(p1, p2, p3, nome, parametri);
+							for (byte i = 0; i < p3 - 1; i++) { parametri[i] = strtok(NULL, ","); Serial.println(parametri[i]); Serial.print(' '); }
+							parametri[p3 - 1] = strtok(NULL, "\n"); Serial.print(parametri[p3 - 1]);
+							if (p1 < 10)
+								my.beginSensor(p1, p2, p3, nome, parametri);
+
+							else if (p1 == 10) // output pin definition line  10,0,n_out_pin,X=nome pin x,Y=nome pin Y,...
+							{
+#ifdef OS_API
+
+								n_out_pin = p3;
+								Serial.println(n_out_pin);
+								for (byte i = 0; i < p3; i++) {
+									st[i].out_pin = atoi(parametri[i].c_str());
+									/*	if (st[i].out_pin < 10) {
+											char* command = "+pinmode(1,1)";
+											command[10] = '0' + st[i].out_pin;
+											espressione(command);
+										}*/
+									pinMode(st[i].out_pin, 1);
+									Serial.print("out_pin"); Serial.println(st[i].out_pin);
+								}
+#endif
+							}
+#ifdef IOT
+								//if not comment first line contain ThingsSpeak channel,APIkey,index[0-7](value sequence n. on logs file)
+
+								//cfile.readBytesUntil(13, buf, 150);
+							else if (p1 >= 20) {
+								IotChannel = p1;
+								IotAPIkey = nome;
+								for(byte j=0;j<p3;j++)IOTflag[j]= atoi(parametri[j].c_str());
+								SP_D("IOT:"); SPL_D(nome);
+							}
+								/*if (buf[0] != '/') {
+							
+									IotAPIkey = strtok(buf, ",");
+									SPL_D(buf);
+									IotChannel = atol(strtok(NULL, ","));
+									byte kk = 0;
+									IOTflag[kk++] = atoi(strtok(NULL, ","));
+									char * strtr = strtok(NULL, ",\n");
+									while (strtr != NULL) {
+										IOTflag[kk++] = atoi(strtr);
+										strtr = strtok(NULL, ",\n\r");
+									}
+								}*/
+#endif
+							
+
 						}
 					}
 				}
 			}
 		}
+		Serial.println("CONFIG DONE ");
+#ifndef		EElogRule
 		cfile.close();
+#endif
 	}
-	else
+/*	else
 	{
+		Serial.print("C_nf ");
 		//const char* parametri[10];
 		parametri[0] = "Kwh";
 		my.beginSensor(2, 0, 1, "SunPan", parametri);
@@ -1773,32 +2394,48 @@ void setup(void) {
 		parametri[1] = "sol_pan";
 		parametri[2] = "dayETsum";
 		my.beginSensor(4, 0, 3, "ET0", parametri);
-	}
+	}*/
 #endif
-	sta = { opt[LATITUDE] / 10000.,
-			opt[LONGITUDE] / 10000.,
-			opt[ELEVATION],
+	for (byte i = 0; i < 20; i++)Serial.println(opt[i]);
+
+	sta = { opt[LATITUDE] / 10000.   ,
+			opt[LONGITUDE] / 10000.   ,
+			opt[ELEVATION]             ,
 			opt[PANEL_ANGLE] * PI / 180.,	
 			opt[PANEL_AZIMUT] * PI / 180 };
-	WiFi.mode(WIFI_STA);
-	delay(2000);
-	WiFi.begin(OpName[SSID].c_str(), OpName[PSW].c_str());
-	delay(500);
-	if (opt[IP1] > 0) {
-	if(eecode!=4)
-		WiFi.config({ opt[IP1], opt[IP2], opt[IP3], opt[IP4] }, { 192, 168, 1, 1 }, { 255, 255, 255, 0 }, { 192,168,1,1 }, { 192,168,1,1 });
-	}
-
-	Serial.println("");
-	
+	Serial.print("WIFI CONN:");
+//	delay(5000);
+//	WiFi.mode(WIFI_STA);
+//	delay(5000);
+	Serial.println("Connecting to:");
+	Serial.println(OpName[SSID].c_str()); 
+	Serial.print("PSW:");
+	Serial.println(OpName[PSW].c_str());
+	WiFi.begin( OpName[SSID].c_str(), OpName[PSW].c_str());
+//	delay(1000);
+//	SPL(" conn");
 	byte count = 0;
-	// Wait for connection
+	// Wait for connection .5 sec pulses
 	while (WiFi.status() != WL_CONNECTED) {
 		delay(500);
 		Serial.print("."); pulseLed(100, 10, 1);;
 		if (count++ >= 120) { pulseLed(10000, 0, 1); restart(4); }
 	}
 
+
+	
+#ifdef FIX_IP
+	
+	if (opt[IP1] > 0) {
+		if (!(eecode == 4&&ntimes>10)) {
+			Serial.println("Fip "); Serial.println(opt[IP1]); Serial.println(opt[IP2]); Serial.println(opt[IP3]); Serial.println(opt[IP4]);
+
+			WiFi.config(IPAddress(opt[IP1], opt[IP2], opt[IP3], opt[IP4]), IPAddress(192, 168, 1, 1),
+				IPAddress(255, 255, 255, 0));//, IPAddress( 192,168,1,1 ));
+		}
+	}
+#endif
+	
 	Serial.println("");
 	Serial.print("Connected to ");
 	Serial.println(OpName[SSID]);
@@ -1806,16 +2443,25 @@ void setup(void) {
 	Serial.println(WiFi.localIP());
 	Serial.println(WiFi.gatewayIP());
 	Serial.println(WiFi.dnsIP());
+//	udp.begin(8888);
+	server.onNotFound(handleNotFound);
+	server.begin();
+	Serial.println("HTTP server started");
 
 	IPAddress GateIP(192, 168, 1, 1);
 	byte ntry = 0;
 	while (!Ping.ping(GateIP)) {
 		pulseLed(100, 100, 1); ntry++;
+		if (ntry > 100){pulseLed(10000, 0, 1); restart(4);
+	}
 }
 	SP("pingOK"); SPL(ntry);
+
 	setSyncInterval(3600);
+	SPL("TimeSync...");
 	if (SyncNPT(1))Serial.println("NPT time sync"); 
 	if(now()<1000000000UL) {
+		SPL("No time sync.....Restart!")
 		pulseLed(5000, 1000, 2); restart(5);
 	}
   DateTime ora = now();
@@ -1832,8 +2478,8 @@ void setup(void) {
 		  Serial.println("Cannot open logFile"); pulseLed(5000, 1000, 3); restart(6);
 	  }
 	  //	 while (logfile.available())Serial.print((char)logfile.read());
-	  logfile.seek(0, SeekEnd);
-  
+	 // logfile.seek(0, SeekEnd);
+	  logfile.close();
   
 #ifdef OTA
   ArduinoOTA.onStart([]() {
@@ -1857,13 +2503,32 @@ void setup(void) {
   ArduinoOTA.setHostname("EspSensors");
 
   ArduinoOTA.begin();
+#endif
+#ifdef IOT
+  static WiFiClient IOTclient;
+  static int status = WL_IDLE_STATUS;
+ // unsigned long myChannelNumber = 31461;
 
+  ThingSpeak.begin(IOTclient);
+//bool IOTwrite(float value,byte field){ ThingSpeak.setField(field, value); }
+//ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
 #endif
 
 #ifdef FTP
   ftpSrv.begin("esp8266", "esp8266");    //username, password for ftp.  set ports in ESP8266FtpServer.h  (default 21, 50009 for PASV)
 #endif
-
+//-------------------------OpenSprinkler API----------------------------
+//#define OS_API
+  
+#ifdef OS_API
+  for(byte i=0;i<MAX_OUT_CHAN;i++)
+  eeprom_read_block(&st[i], (void *)(EEPROM_ST + i * sizeof(stations)), sizeof(stations));
+  server.on("/cr", handleRunOnce);
+  //server.on("/cm", handleProgramRun);
+  server.on("/rule", handleGetRule);
+  server.on("/logrule", handleLogRule);
+#endif
+  server.on("/rst", handleReset);
   server.on("/", handleRoot);
  server.on("/download",handleDownload);
  server.on("/dir",handleDir);
@@ -1877,11 +2542,6 @@ void setup(void) {
 	 server.send(200, "text/plain", "this works as well");
   });
 
-  server.onNotFound(handleNotFound);
-
-  server.begin();
-
-  Serial.println("HTTP server started");
 #ifdef TELNET
   Tserver.begin();
 #endif
@@ -1892,6 +2552,7 @@ void setup(void) {
 
   
   //------------------------------read weather from EEPROM
+
 
 
   iw=eeprom_read_byte((byte *)WEATHERPOS);
@@ -1953,7 +2614,7 @@ void handleSensorsContr() {
 }
 void loop(void) {
 #ifdef FTP
-	//ftpSrv.handleFTP();        //make sure in loop you call handleFTP()!!  
+	ftpSrv.handleFTP();        //make sure in loop you call handleFTP()!!  
 #endif
 #ifdef TELNET
 	getClients();
@@ -1969,6 +2630,9 @@ void loop(void) {
 		eeprom_write_block(&pool, (void*)MYPOS, sizeof(pool));
 		my.recordSensors(opt[RecordInterval]);
 	}
-
+#ifdef OS_API
+	Rule_Apply();
+	applyRemoteToValve();
+#endif
   server.handleClient();
 }

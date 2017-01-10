@@ -16,12 +16,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SensorServer.ino" />
+    <None Include="..\bitlashMio\bitlashMio-functions.h">
+      <Filter>File di intestazione</Filter>
+    </None>
+    <None Include="README.md">
+      <Filter>File di risorse</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.SensorServer.vsarduino.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="..\TimeNTP_ESP8266WiFi\TimeNTP_ESP8266WiFi.ino\NPTtimeSync.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="DHT11lib.h">
@@ -33,15 +36,30 @@
     <ClInclude Include="Eeprom_ESP.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="..\TimeNTP_ESP8266WiFi\TimeNTP_ESP8266WiFi.ino\NPTtimeSync1.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="bitlashMioOld.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="bitlashMio-functionsOld.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bitlashMio\bitlashMio.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\TimeNTP_ESP8266WiFi\TimeNTP_ESP8266WiFi.ino\NPTtimeSync.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
     <ClCompile Include="DHT11lib.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Eeprom_ESP.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TimeNTP_ESP8266WiFi\TimeNTP_ESP8266WiFi.ino\NPTtimeSync1.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,5 +72,10 @@
     <Text Include="data\config.txt">
       <Filter>File di risorse</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SensorServer.rc">
+      <Filter>File di risorse</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
