@@ -548,6 +548,27 @@ float ET0_calc(byte type) {
 void pulseLed(int dur, int pause, int times) {
 	for (byte i = 0; i < times; i++) { digitalWrite(led, 0); delay(dur); digitalWrite(led, 1); delay(pause); }
 }
+volatile unsigned long npulses = 0, oldmillis = 0, pulsmils;
+void setupinterrupt(byte pin, byte mode) {
+	pinMode(pin, INPUT_PULLUP);
+
+	//  digitalWrite(pin,HIGH);
+	attachInterrupt(digitalPinToInterrupt(pin), count, mode);
+}
+#define MINPULSDUR 100
+void count() {
+	noInterrupts();
+	
+	unsigned long dif= millis() - oldmillis;
+	if (dif > MINPULSDUR) {  //____________________________short pulses not considered____________________________ 
+		npulses++;
+		oldmillis = millis();
+		pulsmils = dif;
+	}
+	interrupts();
+}
+
+//_________________________________________________________________________________________________________________________________________class SENSOR
 class Sensor {
 public:
 	
@@ -555,8 +576,8 @@ public:
 	byte nsensors = 0, sensorT[10], pin1[10], pin2[10],kk=0;
 	float value[30];
 	unsigned long time_sensor = 0, time_sensor1 = 0;
-	String  name[10];
-	String  param[20];
+	String  name[15];
+	String  param[30];
 //	byte format[30] = { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 };
 	float sumY, sumXY,sumX,sumX2;
 	float SX[24], SY[24], SX2[24], SXY[24];
@@ -576,7 +597,8 @@ public:
 		SP(name[nsensors - 1]); SP(' ');
 		for (byte i = 0; i < n_par; i++)SP(param[kk-1-i]);
 		SPL();
-		if (type == 5)if (start_read_OneWire(pin, temp, 0) < n_par) SPL("not found Temp sensor");
+		if (type == 5) { if (start_read_OneWire(pin, temp, 0) < n_par) SPL("not found Temp sensor"); }
+		else if (type == 8) setupinterrupt(pin, CHANGE);
 
 	} //setup sensors (type,byte pin);
 	  //--------------------------------------------------------------------------
@@ -722,7 +744,7 @@ public:
 		return 0;
 
 	}
-	byte prova() {
+/*	byte prova() {
 		WiFiClient client;
 		const int httpPort = 80;
 		if (!client.connect("api.wunderground.com", 80))
@@ -732,9 +754,9 @@ public:
 			pulseLed(2000, 0, 1);
 			return 0;
 		}
-		/*/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json HTTP/1.1
-		Host: api.wunderground.com
-		Connection: close */
+	//	/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json HTTP/1.1
+	//	Host: api.wunderground.com
+	//	Connection: close 
 		String url = "GET ";
 		String streamId = "/api/48dfa951428393ba/conditions/q/Italy/pws:ISAVONAL1.json";
 		//url += "?pw=";
@@ -754,7 +776,7 @@ public:
 		while (client.available())SP(char(client.read()));
 		client.stop();
 	}
-
+*/
 //#define MYDECODE
 #ifdef MYDECODE
 float getvalue(char * buff, String nome) {
@@ -891,6 +913,7 @@ float getvalue(char * buff, String nome) {
 #define EELONGR(x, y) {eeprom_read_block(&y,(void*)x,4); }
 #define POOLFACTOR opt[POOL_FACTOR]//12	// surface of swimming pool area 96mq / area of expansion tank 8mq
 
+
 //_____________________________________________________________________________________________________________________
 	bool readSensors(long timeint) {//read and record sensors values each time interval sec
 		
@@ -911,17 +934,21 @@ float getvalue(char * buff, String nome) {
 			byte k = 0;
 			time_sensor = millis() + timeint * 1000;
 			iw++; if (iw >= MAX_WEATHER_READ)iw = 0;
+			
 			for (byte i = 0; i < nsensors; i++) {
 				if (sensorT[i] == 0)           //---------------------- Ultrasonic Distance sensor
 				{
 					int readings[PINGTIMES], minv = 0, maxv, it = 0;
 					byte rept = 0;
-					while (rept < 20 && it < (opt[2]>PINGTIMES ? PINGTIMES : opt[2])) {
-						readings[rept] = readDistance(pin1[i] / 16, pin1[i] % 16, weather[iw].temp);//distance 0..1 mm
-						if (readings[rept] > 0) {
-							minv += readings[rept]; it++;
+					SPL((opt[2] > PINGTIMES ? PINGTIMES : opt[2]));
+					while ((rept<20)&&(it < (opt[2]>PINGTIMES ? PINGTIMES : opt[2]))) {
+						readings[it] = readDistance(pin1[i] / 16, pin1[i] % 16, weather[iw].temp);//distance 0..1 mm
+						if (readings[it] > 0) {
+							minv += readings[it]; it++;
 						}
 						rept++;
+						SP(rept); SP("  "); SPL(it);
+						
 					}
 					if (it > 0) {
 						lvalue[k] = 0;
@@ -1052,6 +1079,16 @@ float getvalue(char * buff, String nome) {
 					int temp[10];
 					byte nres = start_read_OneWire(pin1[i], temp, 1);
 					for (byte j = 0; j < nres; j++)value[k++] = temp[j];
+				}
+				else if (sensorT[i] == 6) { value[k++] = analogRead(A0); }  //-------------analog read --------
+				else if (sensorT[i] == 7) {  //-------------digital read --------
+					long pinv = 0;
+					for (byte i = 0; i < pin2[i]; i++) pinv+=pinv*2+digitalRead(i);
+					lvalue[k++] = pinv;
+				}
+				else if (sensorT[i] == 8) {   //-------------pulse read --------
+					value[k++] = npulses;
+					if(pin2[i]>1)value[k++] = 1000. / pulsmils;
 				}
 			}
 #ifdef OS_API
@@ -1351,7 +1388,10 @@ float getvalue(char * buff, String nome) {
 			duration = micros() - startMill;
 		}
 		//distance = duration * 17 / 100 ;
-		distance = duration*(331 + 0.6*temp) / 200;
+		if(temp>0&&temp<500)
+		   distance = duration*(331 + 0.6*temp) / 200;
+		else
+			distance = duration*(332) / 200;
 		SP("Duration: ");
 		SP(duration);
 		SP(" micros   ");
@@ -1716,15 +1756,15 @@ byte factor[30];
 long gval_f(void) {
 	if (!isstringarg(1))return my.value[getarg(1)] *pow( 10 , factor[getarg(1)]);
 	else 
-		for (byte i = 0; i < 5; i++)
+		for (byte i = 0; i < my.nsensors; i++)
 		  
-			if (strcmp((char *)getstringarg(i), my.param[i].c_str())) return my.value[i] * pow(10 , factor[i]);
+			if (strcmp((char *)getstringarg(1), my.param[i].c_str())) return my.value[i+1] * pow(10 , factor[i]);
 
 }
 long sval_f(void) {
 	if (!isstringarg(1))my.value[getarg(1)]  = getarg(2)/pow(10, factor[getarg(1)]);
 	else {
-		for (byte i = 0; i < 5; i++) if (strcmp((char *)getstringarg(i), my.param[i].c_str()))  my.value[i] = getarg(2) / pow(10, factor[i]);
+		for (byte i = 0; i < my.nsensors; i++) if (strcmp((char *)getstringarg(1), my.param[i].c_str()))  my.value[i+1] = getarg(2) / pow(10, factor[i]);
 	}
 }
 long getdistance(void) {// arg1=pin  //return Ultrasonic measured distance in mm 
@@ -1750,19 +1790,19 @@ long api_com(void)
 	String buffer = "";
 	String comm= (char *)getstringarg(2);
 	byte sta = getarg(1);
-	for (byte i = 2; i < getarg(0); i++)
+	for (byte i = 3; i < getarg(0)+1; i++)
 		if (isstringarg(i ))
 			buffer += (char *)getstringarg(i );
 		else
 		{
 			char buff[10];
-			sprintf(buff, "=%d,", getarg(i ));
+			sprintf(buff, "=%d", getarg(i ));
 			buffer += buff;
 		}
 	return API_command(comm, buffer, sta);
 
 }
-long  API_get(void) {  //string varName//byte factor //byte ic station IP4//string Url:command //Url:val//url:command//url:val...)
+long  API_get(void) {  //1/string varName/2/byte factor /3/byte ic station IP4/4/string Url:command /5/Url:val/6/url:command/7/url:val...)
 	WiFiClient client;
 
 	char json[1000];
@@ -1888,7 +1928,9 @@ void GetRule(int EEpos) {
 			strcpy(buff, server.arg(1).c_str());
 			SP("Run rule:"); SP(buff); SP("=");
 			long val = espressione(buff); SPL(val);
-			server.send(202, "text/plain", "computed \r\n");
+			String replay = "{run:OK},{result:";
+			replay += answer+"}\r\n";
+			server.send(202, "text/plain", replay);
 			return;
 		}
 		for (byte i = 0; i <= recordN; i++)
@@ -2119,7 +2161,7 @@ byte API_command(String streamId, String command, byte ic) {
 		byte ch = (chan - 48) % 16;
 		char buff[30];
 		sprintf(buff,"&sid=%d,&en=%d,&t=%d", ch, val, timer);
-		API_command("/cr", buff, ic);
+		API_command("/cm", buff, ic);
 		return 0;
 	}
 #endif
@@ -2192,6 +2234,7 @@ void setup(void) {
 
 #endif
 	Serial.println(EEPROM.read(1), DEC);
+
 	if (!SPIFFS.begin()) {
 		Serial.println("SPIFFS failed to mount !\r\n");
 		pulseLed(10000, 100, 2);
@@ -2200,8 +2243,10 @@ void setup(void) {
 
 
 	EEPROMk( 3);
-
-
+#ifdef OS_API
+	for (byte i = 0; i<MAX_OUT_CHAN; i++)
+		eeprom_read_block(&st[i], (void *)(EEPROM_ST + i * sizeof(stations)), sizeof(stations));
+#endif
 	String parametri[10];
 	
 	byte formati[10];
@@ -2309,7 +2354,9 @@ void setup(void) {
 							Serial.print(p1); Serial.print(' '); Serial.print(p2); Serial.print(' '); Serial.print(p3); Serial.print(' '); Serial.print(nome); Serial.print(' ');
 
 							for (byte i = 0; i < p3 - 1; i++) { parametri[i] = strtok(NULL, ","); Serial.println(parametri[i]); Serial.print(' '); }
-							parametri[p3 - 1] = strtok(NULL, "\n"); Serial.print(parametri[p3 - 1]);
+							parametri[p3 - 1] = strtok(NULL, ",\n"); Serial.print(parametri[p3 - 1]);
+							char * remain = strtok(NULL, ",\n"); byte kk = my.nsensors;
+							while (remain != NULL) { factor[kk++] = atoi(remain); remain = strtok(NULL, ",\n"); }
 							if (p1 < 10)
 								my.beginSensor(p1, p2, p3, nome, parametri);
 
@@ -2521,10 +2568,10 @@ void setup(void) {
 //#define OS_API
   
 #ifdef OS_API
-  for(byte i=0;i<MAX_OUT_CHAN;i++)
-  eeprom_read_block(&st[i], (void *)(EEPROM_ST + i * sizeof(stations)), sizeof(stations));
-  server.on("/cr", handleRunOnce);
-  //server.on("/cm", handleProgramRun);
+ // for(byte i=0;i<MAX_OUT_CHAN;i++)
+ // eeprom_read_block(&st[i], (void *)(EEPROM_ST + i * sizeof(stations)), sizeof(stations));
+  server.on("/cm", handleRunOnce);
+  //server.on("/cr", handleProgramRun);
   server.on("/rule", handleGetRule);
   server.on("/logrule", handleLogRule);
 #endif
