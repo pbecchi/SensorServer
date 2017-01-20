@@ -46,9 +46,26 @@ input data can be also optained by Web Query :e.g. data from another unit and We
 ### Local computations:
 
 Computation are mainly performed by Bitlash command line that are executed in intervals.
-Some special peace of SW has been written for special computation : 
 
-ETo (evotranspiration water lost during day)computations using data from local or remote weather stations: the required sun radiation is obtained from WU station (if "solarradiation" is available) or from kw produced by SOLAR PANEL (if available provide input data for calculation to correct for panel location,inclination & azimuth) least square smooting routines to interpolate sensor inputs.
+####Routines available for special computation : 
+
+-ETo (evotranspiration water lost during day)computations using data from local or remote weather stations: the required sun radiation is obtained from WU station (if "solarradiation" is available) or from kw produced by SOLAR PANEL (if available provide input data for calculation to correct for panel location,inclination & azimuth) least square smooting routines to interpolate sensor inputs. Require as input values that are averaged for last hour (names must mach first column names: WU parameters names):
+
+    -temp_c             measured    temp [centigrade],
+    -relative_humidity  humidity[%],
+    -wind_kph           wind[km/h],
+    -solarradiation     sun radiation[w]
+    -kwh                sunpower[kwh] (from solar panels)
+    
+Compute :
+
+    1.hourly ET0         from solarradiation input
+    2.hourly ET0         from solarpower (from Solar Panels knowing positions , angles and factor(solar radiation/Panelspower*100)
+    3.dayly ET0           sum of day hourly values.
+   
+   
+    
+    
  
 ### Data recording:
  
