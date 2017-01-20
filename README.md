@@ -49,7 +49,8 @@ Computation are mainly performed by Bitlash command line that are executed in in
 
 ####Routines available for special computation : 
 
--ETo (evotranspiration water lost during day)computations using data from local or remote weather stations: the required sun radiation is obtained from WU station (if "solarradiation" is available) or from kw produced by SOLAR PANEL (if available provide input data for calculation to correct for panel location,inclination & azimuth) least square smooting routines to interpolate sensor inputs. Require as input values that are averaged for last hour (names must mach first column names: WU parameters names):
+-ETo (evotranspiration water lost during day)computations using data from local or remote weather stations: the required sun radiation is obtained from WU station (if "solarradiation" is available) or from kw produced by SOLAR PANEL (if available you should provide  panel location,inclination & azimuth to compute a correction factors)  
+Required input values to be read every 6 minutes  (names must mach first column names: WU parameters names):
 
     -temp_c             measured    temp [centigrade],
     -relative_humidity  humidity[%],
@@ -164,8 +165,8 @@ gval(i) return value of sensor variable where i is the sequence number or the na
 sval(i,val)  set value val of sensor variable where i is the sequence number or the name of the logged values
 
  other function added to Bitlash:
-	 apicom(host:value,URL:string+value+string+value....) to allow user to send an URL to a station in the same network following OpenSprinkler API syntax.
-     apiget(host:value,query:string,name:string) get value of a remote station variables in with a Json API query ......to be implemented......
+	 apicom(host  Pvalue,URL:string+value+string+value....) to allow user to send an URL command to a station in the same network following OpenSprinkler API syntax.
+     apiget(host:value Varname,query:string,name:string,val,string,val......) get value of a remote station variables in with a Json API query
 
 RULE are managed with following URL command:
  
@@ -209,13 +210,14 @@ In addition to standard Bithlash functions a full set of user functions have bee
 
 	+now();
 	+millis();
-    +"apicom"									//send a URL command (string1,string2,n1,string3,n2.....)
-	+"et0"										//get current ET0      ?????????????????
-	+"distance"									//get SR 04 sensor distance reading on (pin)
-	+"dht_s"									//get DHT011 sensor values temp.°C*10 
-	+"onew_s"									//get onewire sensors readings (sensor n.)
-	+"wu_data"									//get weather underground station data  ???????????
-	+"apiget"									//get value of remote station var from Json API query
+    +"apicom(string1,string2,n1,string3,n2.....)"			//send a URL command 
+	+"et0"										            //get current ET0 not implemented yet
+	+"distance(pin)"									        //get SR 04 sensor distance mm reading on (pin)
+	+"dht_s(pin)"									            //get DHT011 sensor values temp.°C*10 
+	+"onew_s(pin,n)"							    	    	//get pin onewire sensors readings (sensor n)
+	+"wu_data"							        	    	    //get weather underground station data  not implemented
+	+"apiget(varname,fact,ic,IP4,urlstring,urlval,urlstring,ulrval...)"									//get value of remote station var from Json API 
+	
 	+"sval"										//set value of my.sensor variable ( number or name)*factor
 	+"gval"									    //get value of my.sensor variable (number or name)*factor
 
