@@ -7,6 +7,8 @@ Please let me know your comments and suggestions that will be precious for may r
  
 ## INSTALLATION
 
+[[QuickCopperExport.jpg]]
+
 No special HW is required: an ESP8266 family device is sufficient (better with 4MB flash)!
 Code use various Flags (#define is on first few lines) to activate or disactivate SW functions like:
 	
