@@ -5,8 +5,15 @@
 //#define FTP				//......for FTP on SPIFFS file
 #define TELNET          //......for TELNET debug connection on port 23
 #define READCONF
+//#define PING_F 1
 #define DHT11L 10       //..... for  use DTH & RHT family sensors define input pin 
 /////////////////////////////////////////////////////////////////////////////////////
+extern "C" {
+#include "user_interface.h"
+	uint16 readvdd33(void);
+	bool wifi_set_sleep_type(sleep_type_t);
+	sleep_type_t wifi_get_sleep_type(void);
+}
 #include "DHT11lib.h"
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
@@ -913,6 +920,8 @@ float getvalue(char * buff, String nome) {
 #define EELONGR(x, y) {eeprom_read_block(&y,(void*)x,4); }
 #define POOLFACTOR opt[POOL_FACTOR]//12	// surface of swimming pool area 96mq / area of expansion tank 8mq
 
+#define MININTERVAL 350																				 // 6 minutes less 10 second tollerance
+#define NEW_ET0																				 // 6 minutes less 10 second tollerance
 
 //_____________________________________________________________________________________________________________________
 	bool readSensors(long timeint) {//read and record sensors values each time interval sec
@@ -923,7 +932,7 @@ float getvalue(char * buff, String nome) {
 				sumET0 = 0;
 				pool.levelBegin(); //sumY = 0; sumXY = 0; sumX = 0; sumX2 = 0; n_sample = 0;
 			}
-
+#ifdef PING_F
 			byte ntry = 0;
 			SP("ping ");
 			while (!Ping.ping(IPAddress(192, 168, 1, 1))) {
@@ -931,10 +940,12 @@ float getvalue(char * buff, String nome) {
 				if (ntry > 250)return 0;
 			}
 			SP("OK"); SPL(ntry);
+#endif
 			byte k = 0;
 			time_sensor = millis() + timeint * 1000;
+#ifndef NEW_ET0
 			iw++; if (iw >= MAX_WEATHER_READ)iw = 0;
-			
+#endif			
 			for (byte i = 0; i < nsensors; i++) {
 				if (sensorT[i] == 0)           //---------------------- Ultrasonic Distance sensor
 				{
@@ -969,16 +980,19 @@ float getvalue(char * buff, String nome) {
 #endif
 					if (now() % SECS_PER_DAY < timeint)EELONGW(WLEV0H, lvalue[k]);
 					k++;   //value are mm.
+//--------------------store on weather-------------------------------
+#ifndef NEW_ET0
 					weather[iw].rain1h = value[k - 1];
-
+#endif
 					n_sample++;
+					float p_val= value[k - 1];
 					long ora = hour() * 3600 + minute() * 60 + second();
 					pool.levelFit(ora / 10, value[k - 1]);
 					if (pin2[i] > 1) {
 						//float sl,si; pool.levelGet(0, 1, &sl, &si);	//get 0h water level from least sq. fit
 						long lev; EELONGR(WLEV0H, lev);
 						SPS("0h_lev"); SPS(lev);							//get 0h water level from EEprom saved val.
-						value[k++] = weather[iw].rain1h - lev;
+						value[k++] = p_val - lev;
 					}
 
 				}
@@ -1009,7 +1023,9 @@ float getvalue(char * buff, String nome) {
 					ThingSpeak.setField(1, lvalue[k]);
 #endif		
 					k++;
+#ifndef NEW_ET0
 					weather[iw].water = value[k - 1];
+#endif
 				}
 				else if (sensorT[i] == 3)//__________________ Weather data from Underground Station___________
 				{
@@ -1033,6 +1049,13 @@ float getvalue(char * buff, String nome) {
 					}
 
 					for (byte ii = 0; ii < pin2[i]; ii++)value[k++] = val[ii];
+#ifdef NUOVO
+					
+					void averageParam(&temp, &solar1, &solar2, &wind,&humidity) {
+					}
+#endif
+
+#ifndef NEW_ET0
 					if (nomi[2] == "solarradiation") {
 						weather[iw].sunrad = val[1];
 					}
@@ -1043,7 +1066,7 @@ float getvalue(char * buff, String nome) {
 						weather[iw].rain = val[3];
 						weather[iw].wind = val[4];
 					}
-
+#endif
 				}//-------------------------------------ET0 calculation--------------------------------------------------
 				else if (sensorT[i] == 4) {
 					value[k++] = ET0_calc(0);				//ET from solar Radiation WU
@@ -1091,12 +1114,32 @@ float getvalue(char * buff, String nome) {
 					if(pin2[i]>1)value[k++] = 1000. / pulsmils;
 				}
 			}
+#ifdef NEW_ET0
+			for (byte i = 0; i < k; i++) {
+				if (strcmp(param[i].c_str(), "temp_c") == 0) weather[iw].temp = value[i];
+				if (strcmp(param[i].c_str(), "solarradiation") == 0) weather[iw].sunrad = value[i];
+				if (strcmp(param[i].c_str(), "realive_humidity") == 0) weather[iw].humidity = value[i];
+				if (strcmp(param[i].c_str(), "wind_kph") == 0) weather[iw].wind = value[i];
+				if (strcmp(param[i].c_str(), "precip_today_metric") == 0) weather[iw].rain = value[i];
+				if (strcmp(param[i].c_str(), "Kwh") == 0) weather[iw].water = value[i];
+			}
+			long nowtime = now();
+			//if (nowtime > weather[iw].time + MININTERVAL) {
+				weather[iw].time = nowtime;
+				eeprom_write_byte((byte *)WEATHERPOS, iw);
+				eeprom_write_block(&weather[iw], (void*)(WEATHERPOS + 1 + iw * sizeof(Weather)), sizeof(Weather));
+				iw++; if (iw >= MAX_WEATHER_READ)iw = 0;
+
+			//}
+#endif
 #ifdef OS_API
 			//sensor data are passed to rule interpreter variable (<1 are 100000 multiplied)
 			for (byte i = 0; i < k; i++) { Lvalue[i] = value[i]; if (abs(lvalue[i]) == 0)Lvalue[i] = value[i] * 100000; }
 #endif	
+#ifndef NEW_ET0
 			eeprom_write_byte((byte *)WEATHERPOS, iw);
 			eeprom_write_block(&weather[iw], (void*)(WEATHERPOS + 1 + iw * sizeof(Weather)), sizeof(Weather));
+#endif
 #ifdef IOT
 			//byte iotInd[8] = { 1,0,1,10,11,0,0,0 }; 
 			for (byte iot = 0; iot < 8; iot++)
@@ -1485,6 +1528,7 @@ void handleDownload(){
 			if (len > BUFFDIM)len = BUFFDIM;
 			f.read((uint8_t *)buf, len);
 			buf[len] = 0;
+			SP(len); SP(" ");
 			str += buf;
 			siz -= sizeof(buf) - 1;
 
@@ -1757,14 +1801,16 @@ long gval_f(void) {
 	if (!isstringarg(1))return my.value[getarg(1)] *pow( 10 , factor[getarg(1)]);
 	else 
 		for (byte i = 0; i < my.nsensors; i++)
-		  
-			if (strcmp((char *)getstringarg(1), my.param[i].c_str())) return my.value[i+1] * pow(10 , factor[i]);
-
+		{
+		//	SP(my.param[i].c_str()); SPL(strcmp((char *)getstringarg(1), my.param[i].c_str()));
+			if (strcmp((char *)getstringarg(1), my.param[i].c_str())==0) return my.value[i ] * pow(10, factor[i]);
+		}
+	return 0;
 }
 long sval_f(void) {
 	if (!isstringarg(1))my.value[getarg(1)]  = getarg(2)/pow(10, factor[getarg(1)]);
 	else {
-		for (byte i = 0; i < my.nsensors; i++) if (strcmp((char *)getstringarg(1), my.param[i].c_str()))  my.value[i+1] = getarg(2) / pow(10, factor[i]);
+		for (byte i = 0; i < my.nsensors; i++) if (strcmp((char *)getstringarg(1), my.param[i].c_str())==0)  my.value[i] = getarg(2) / pow(10, factor[i]);
 	}
 }
 long getdistance(void) {// arg1=pin  //return Ultrasonic measured distance in mm 
@@ -1780,7 +1826,7 @@ long One_Wire(void) {   // arg0=n.of one wire sensor   //return DHT sensor tempe
 	int temp[10];
 	byte nres = my.start_read_OneWire(getarg(1), temp, 1);
 	for (byte j = 0; j < nres; j++)stackvalue[j] = temp[j];
-	return stackvalue[getarg(1)];
+	return stackvalue[getarg(2)];
 };
 long WU_getdata(void) { //arg0=name of station  //return weather station data to stack vector};
 }
@@ -1796,7 +1842,7 @@ long api_com(void)
 		else
 		{
 			char buff[10];
-			sprintf(buff, "=%d", getarg(i ));
+			sprintf(buff, "%d", getarg(i ));
 			buffer += buff;
 		}
 	return API_command(comm, buffer, sta);
@@ -1873,12 +1919,13 @@ long  API_get(void) {  //1/string varName/2/byte factor /3/byte ic station IP4/4
 }
 ///--------------end of BITLASH routines---------------------------------------------------------------
 struct stations  {       //incoming commands......... 1 for each internal valve or output relay operated
-	bool Flag = 0;                    //status 0 or 1 closed or opened
+	byte Flag = 0;                    //status 0 or 1 closed or opened
 	unsigned long Stop_time = 0;      //epoch time to stop
 	byte out_pin = 0;    //pin 1--8 internal pin 9--256 external / ->/8= IP4 %8= sid;from 0 to 32  
 };
-#define EE_CONF_POS 1600
-#define MAX_RULE_CHAR 800
+////////////////////////////////////////////EEPROM OCCUPATION///////////////////////////////////////////////
+#define EE_CONF_POS 1600     // max 600 char all rules (max single rule 200 char) 
+#define MAX_RULE_CHAR 600    // 
 #define EE_POS_RULES 1000
 #define EEPROM_ST     900
 #define MAX_OUT_CHAN 8
@@ -2037,16 +2084,20 @@ void applyRemoteToValve() {                              // --------apply remote
 	next_out_mill = millis() + PIN_OUT_FREQ;
 	for (byte i = 0; i < n_out_pin; i++)
 	{
-		if (st[i].Stop_time != 0 && now() > st[i].Stop_time) {
-			st[i].Flag = 0;
-			st[i].Stop_time = 0;
-			eeprom_write_block(&st[i], (void *)(EEPROM_ST + i * sizeof(stations)), sizeof(stations));
-			SP_D(st[i].out_pin); SPL_D(" closed");
+		if (st[i].Flag > 0)
+		{
+			if (now() > st[i].Stop_time||st[i].Flag>1) {
+				st[i].Flag = 0;
+				st[i].Stop_time = 0;
+				eeprom_write_block(&st[i], (void *)(EEPROM_ST + i * sizeof(stations)), sizeof(stations));
+				SP_D(st[i].out_pin); SPL_D(" closed");
+			}
+			//	if (st[i].out_pin < 8)
+			digitalWrite(st[i].out_pin, st[i].Flag);  //FIRST_PIN_OUT first pin connected to valve or relay
+			SP_D(st[i].out_pin); SP_D(" DW");SPL_D(st[i].Flag);
 		}
-	//	if (st[i].out_pin < 8)
-			digitalWrite( st[i].out_pin, st[i].Flag);  //FIRST_PIN_OUT first pin connected to valve or relay
-
 	}
+	
 }
 	//conditional Rules to be stored in EEPROM-------------------------------------------------------------------
 /*void API_repeat(long timeDel) {
@@ -2133,7 +2184,7 @@ byte API_command(String streamId, String command, byte ic) {
 		for (byte i = 0; i < rulen; i++) {
 			byte ruleLen = eeprom_read_byte((byte *)rulepos++);         // --------------read rules from EEprom
 		//	byte channel = eeprom_read_byte((byte *)rulepos++);
-			char rule[80];
+			char rule[200];
 			eeprom_read_block(&rule,(void *) rulepos, ruleLen);
 			rule[ruleLen] = 0;
 			rulepos += ruleLen;
@@ -2165,7 +2216,46 @@ byte API_command(String streamId, String command, byte ic) {
 		return 0;
 	}
 #endif
+	void handleLevelTrend() {
+		String rep = "";
+		char buff[80];
+		byte step = atoi(server.arg(0).c_str());
+		for (byte i = 0; i < 24 - step; i++) {
+			float slope, inter;
+			if (pool.levelGet(i, i + step, &slope, &inter)>0) {
+				sprintf(buff, "%d slope %d  intercepts %d %d \r\n", i, int(slope * 3600), int(inter + slope*i * 360), int(inter + slope*(i + step) * 360));
+				rep += buff;
+			}
 
+		}
+		server.send(200, "text/plain", rep);
+
+	}
+	void handleSensorsGet() {
+		long timedelay = atol(server.arg(0).c_str());
+		char buf[300];
+		SPL(now() - timedelay);
+		String reply = "";
+		sprintf(buf, "%d:%d", hour(now() - timedelay), minute(now() - timedelay));
+		reply += buf;
+		SP(buf); SPS(reply);
+		if (my.readSensorsFromFile(timedelay, buf) == -1) {
+			SPL("not found");
+			server.send(200, "text/plain", reply + " not found! \r\n");
+			return;
+		}
+		reply += buf;
+		SP("<");
+		SP(reply); SPL(">");
+		server.send(200, "text/plain", reply + "\r\n");
+
+	}
+	void handleSensorsContr() {
+
+		byte nsensor = atoi(server.arg(0).c_str());
+		bool state = my.onSensor(nsensor, server.arg(1).c_str());  //pump,on=   "pool.dist>50&&temp>0", off=   "pool.dist<10"
+		if (state) digitalWrite(atoi(server.arg(2).c_str()), state);
+	}
 void EEPROMk(byte ind){
 	
 	EEPROM.write(0, ind);
@@ -2356,7 +2446,7 @@ void setup(void) {
 							for (byte i = 0; i < p3 - 1; i++) { parametri[i] = strtok(NULL, ","); Serial.println(parametri[i]); Serial.print(' '); }
 							parametri[p3 - 1] = strtok(NULL, ",\n"); Serial.print(parametri[p3 - 1]);
 							char * remain = strtok(NULL, ",\n"); byte kk = my.nsensors;
-							while (remain != NULL) { factor[kk++] = atoi(remain); remain = strtok(NULL, ",\n"); }
+							while (remain != NULL) { factor[kk++] = atoi(remain); remain = strtok(NULL, ",\n"); SP("F_"); SPL(factor[kk - 1]); }
 							if (p1 < 10)
 								my.beginSensor(p1, p2, p3, nome, parametri);
 
@@ -2494,7 +2584,7 @@ void setup(void) {
 	server.onNotFound(handleNotFound);
 	server.begin();
 	Serial.println("HTTP server started");
-
+#ifdef PING_F
 	IPAddress GateIP(192, 168, 1, 1);
 	byte ntry = 0;
 	while (!Ping.ping(GateIP)) {
@@ -2503,7 +2593,7 @@ void setup(void) {
 	}
 }
 	SP("pingOK"); SPL(ntry);
-
+#endif
 	setSyncInterval(3600);
 	SPL("TimeSync...");
 	if (SyncNPT(1))Serial.println("NPT time sync"); 
@@ -2614,52 +2704,30 @@ void setup(void) {
 	  }
   }
   else iw = 0;
+#ifdef NEW_ET0
+  iw++; if (iw >= MAX_WEATHER_READ)iw = 0;
+#endif
   EEPROMk( 0);
   my.time_sensor = START_INTERVAL;
   my.time_sensor1 = START_INTERVAL;
+  wifi_set_sleep_type(LIGHT_SLEEP_T);
 }
 int RecordInterval = 1;
-void handleLevelTrend() {
-	String rep = "";
-	char buff[80];
-	byte step= atoi(server.arg(0).c_str());
-	for (byte i = 0; i < 24-step; i++) {
-		float slope, inter;
-		if(pool.levelGet(i, i + step, &slope, &inter)>0){
-			sprintf(buff, "%d slope %d  intercepts %d %d \r\n", i, int(slope*3600), int(inter+slope*i*360),int( inter + slope*(i+step) * 360));
-			rep += buff;
-		}
-
-	}
-	server.send(200, "text/plain", rep);
-
-}
-void handleSensorsGet() {
-	long timedelay = atol(server.arg(0).c_str());
-	char buf[300];
-	SPL(now()-timedelay);
-	String reply = "";
-	sprintf(buf, "%d:%d", hour( now() - timedelay),minute(now() - timedelay));
-	reply += buf;
-	SP(buf); SPS(reply);
-	if(my.readSensorsFromFile(timedelay, buf) == -1) {
-		SPL("not found");
-		server.send(200, "text/plain",reply+ " not found! \r\n");
-		return;
-	}
-	reply += buf;
-	SP("<");
-	SP(reply); SPL(">");
-	server.send(200, "text/plain",reply+"\r\n");
-
-}
-void handleSensorsContr() {
-
-	byte nsensor = atoi(server.arg(0).c_str());
-	bool state = my.onSensor(nsensor, server.arg(1).c_str()  );  //pump,on=   "pool.dist>50&&temp>0", off=   "pool.dist<10"
-	if (state) digitalWrite(atoi(server.arg(2).c_str()),state);
-}
+byte secdelay = 9;
 void loop(void) {
+#ifndef NO_DELAY
+	digitalWrite(4, 0);
+//light sleep for secdelay 
+	delay(1000 * secdelay);
+//this is only for getting +60 mA for .4 sec consumption to keep alive Solar Battery 16 Ohm resistor from GPIO 4 and 5
+	digitalWrite(5, 1);
+	digitalWrite(4, 1);
+	delay(400);                    // minimum time for Yokkao 
+	digitalWrite(5, 0);
+#endif	
+#if PING_F==1
+	Ping.ping(IPAddress(192, 168, 1, 1));
+#endif
 #ifdef FTP
 	ftpSrv.handleFTP();        //make sure in loop you call handleFTP()!!  
 #endif

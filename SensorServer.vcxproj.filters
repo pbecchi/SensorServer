@@ -1,81 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="File di origine">
+    <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="File di intestazione">
+    <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="File di risorse">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SensorServer.ino" />
-    <None Include="..\bitlashMio\bitlashMio-functions.h">
-      <Filter>File di intestazione</Filter>
-    </None>
-    <None Include="README.md">
-      <Filter>File di risorse</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.SensorServer.vsarduino.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="DHT11lib.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="ET_penmam.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="Eeprom_ESP.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="..\TimeNTP_ESP8266WiFi\TimeNTP_ESP8266WiFi.ino\NPTtimeSync1.h">
-      <Filter>File di intestazione</Filter>
+    <ClInclude Include="bitlashMio-functionsOld.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bitlashMioOld.h">
-      <Filter>File di intestazione</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bitlashMio-functionsOld.h">
-      <Filter>File di intestazione</Filter>
+    <ClInclude Include="DHT11lib.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\bitlashMio\bitlashMio.h">
-      <Filter>File di intestazione</Filter>
+    <ClInclude Include="Eeprom_ESP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eeprom_mio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ET_penmam.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>File di intestazione</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bitlashMio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bitlashMio-functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NPTtimeSync1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.SensorServer.vsarduino.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DHT11lib.cpp">
-      <Filter>File di origine</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Eeprom_ESP.cpp">
-      <Filter>File di origine</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\TimeNTP_ESP8266WiFi\TimeNTP_ESP8266WiFi.ino\NPTtimeSync1.cpp">
-      <Filter>File di origine</Filter>
+    <ClCompile Include="eeprom_mio.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\NODEMCU_DEVKIT_V1.0_PINMAP.png">
-      <Filter>File di risorse</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="data\config.txt">
-      <Filter>File di risorse</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="SensorServer.rc">
-      <Filter>File di risorse</Filter>
-    </ResourceCompile>
+    <ClCompile Include="NPTtimeSync1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

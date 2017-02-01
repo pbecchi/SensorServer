@@ -1,5 +1,6 @@
 // eeprom_mio.h
-#include "libsel.h"
+//#include "libsel.h" replaced by following line //i2c eeprom is not an option!!!!
+#define EEPROM_ESP
 #ifndef EEPROM_ESP
 #ifndef _EEPROM_MIO_h
 #define _EEPROM_MIO_h
