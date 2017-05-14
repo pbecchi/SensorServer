@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UTFT_Demo_320x240_Serial_HW", "UTFT_Demo_320x240_Serial_HW.vcxproj", "{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UTouch_ButtonTest", "..\..\..\..\UTouch_official\examples\Arduino\UTouch_ButtonTest\UTouch_ButtonTest.vcxproj", "{E89DD2CE-7739-4E9C-B886-0DA235F56B21}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XPTPaint", "..\..\..\..\..\XPTPaint\XPTPaint.vcxproj", "{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Debug|x64.ActiveCfg = Debug|x64
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Debug|x64.Build.0 = Debug|x64
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Debug|x86.ActiveCfg = Debug|Win32
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Debug|x86.Build.0 = Debug|Win32
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Release|x64.ActiveCfg = Release|x64
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Release|x64.Build.0 = Release|x64
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Release|x86.ActiveCfg = Release|Win32
+		{2A09C662-2E71-47F2-B0EB-E4BBC39DA31D}.Release|x86.Build.0 = Release|Win32
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Debug|x64.ActiveCfg = Debug|x64
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Debug|x64.Build.0 = Debug|x64
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Debug|x86.ActiveCfg = Debug|Win32
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Debug|x86.Build.0 = Debug|Win32
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Release|x64.ActiveCfg = Release|x64
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Release|x64.Build.0 = Release|x64
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Release|x86.ActiveCfg = Release|Win32
+		{E89DD2CE-7739-4E9C-B886-0DA235F56B21}.Release|x86.Build.0 = Release|Win32
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Debug|x64.ActiveCfg = Debug|x64
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Debug|x64.Build.0 = Debug|x64
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Debug|x86.Build.0 = Debug|Win32
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Release|x64.ActiveCfg = Release|x64
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Release|x64.Build.0 = Release|x64
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Release|x86.ActiveCfg = Release|Win32
+		{3287FA64-C8D8-4C31-ACEC-E7D26D4208A3}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

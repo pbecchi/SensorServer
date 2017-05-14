@@ -5,6 +5,7 @@
 //#define FTP				//......for FTP on SPIFFS file
 #define TELNET          //......for TELNET debug connection on port 23
 #define READCONF
+#define NO_DELAY		//.......if defined unit never sleep..........!
 //#define PING_F 1
 #define DHT11L 10       //..... for  use DTH & RHT family sensors define input pin 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -2453,7 +2454,7 @@ void setup(void) {
 							else if (p1 == 10) // output pin definition line  10,0,n_out_pin,X=nome pin x,Y=nome pin Y,...
 							{
 #ifdef OS_API
-
+								
 								n_out_pin = p3;
 								Serial.println(n_out_pin);
 								for (byte i = 0; i < p3; i++) {
@@ -2710,7 +2711,9 @@ void setup(void) {
   EEPROMk( 0);
   my.time_sensor = START_INTERVAL;
   my.time_sensor1 = START_INTERVAL;
+#ifndef NO_DELAY
   wifi_set_sleep_type(LIGHT_SLEEP_T);
+#endif
 }
 int RecordInterval = 1;
 byte secdelay = 9;
@@ -2722,7 +2725,7 @@ void loop(void) {
 //this is only for getting +60 mA for .4 sec consumption to keep alive Solar Battery 16 Ohm resistor from GPIO 4 and 5
 	digitalWrite(5, 1);
 	digitalWrite(4, 1);
-	delay(400);                    // minimum time for Yokkao 
+	delay(500);                    // minimum time for Yokkao 
 	digitalWrite(5, 0);
 #endif	
 #if PING_F==1

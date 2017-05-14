@@ -1,10 +1,10 @@
 //  ,t_r,t_w,p-ty	,n4	,pof,ip1,ip2,ip3,ip4,s_w,de_x,nspl,	lat,	long,	elev,	pa_el,	pa_az,pa_fact 
 18,360,360,10	,	,12	,192,168,001,030,10	,3600,	12, 441247,	82544,	23,		31,		12, 32
-4,/api/48dfa951428393ba/conditions/q/Italy/,TP-LINK_C20B,paolo-48,poolESP
+4,/api/48dfa951428393ba/conditions/q/Italy/,Vodafone-Out,paolo-48,poolESP
 2,0,1,Sunpan,Kwh
 0,170,2,wlev,Dist,LevVar
 3,0,5,pws:ISAVONAL1,local_epoch,temp_c,relative_humidity,precip_today_metric,wind_kph
-3,0,2,SAVONA,local_epoch,solarradiation
 4,0,3,ET0,sunrad,sol_pan,avg_var
 5,2,1,DSTemp,Pool
+6,0,1,Sensor,solarradiation
 10,0,3,prova,0,4,5

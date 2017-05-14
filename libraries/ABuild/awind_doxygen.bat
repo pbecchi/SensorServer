@@ -1,0 +1,14 @@
+cd ..
+cd AFrame
+rd html
+doxygen docs\Doxyfile
+cd ..
+cd ASensor
+rd html
+doxygen docs\Doxyfile
+cd ..
+cd AWind
+rd html
+doxygen docs\Doxyfile
+cd ..
+cd ABuild

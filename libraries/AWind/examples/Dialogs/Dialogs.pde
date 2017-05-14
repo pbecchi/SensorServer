@@ -1,0 +1,87 @@
+/*
+  AWind.h - Arduino window library support for Color TFT LCD Boards
+  Copyright (C)2015 Andrei Degtiarev. All right reserved
+  
+  You can find the latest version of the library at 
+  https://github.com/AndreiDegtiarev/AWind
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the CC BY-NC-SA 3.0 license.
+  Please see the included documents for further information.
+
+  Commercial use of this library requires you to buy a license that
+  will allow commercial use. This includes using the library,
+  modified or not, as a tool to sell products.
+
+  The license applies to all part of the library including the 
+  examples and tools supplied with the library.
+*/
+
+#include <UTFT.h>
+#include <UTouch.h>
+#include <XPT2046.h>
+#include <SPI.h>
+#include "Log.h"
+#include "Environment.h"
+#include "WindowsManager.h"
+#include "Dialog1.h"
+#include "Dialog2.h"
+#include "Dialogs.h"
+#ifdef ESP8266
+#define F
+#include <SPI.h>
+UTFT myGLCD(ILI9341_S5P, 15, 5, 2);
+UTouch  myTouch(4, 4, 32, 3, 5);
+
+#else
+// Setup TFT display + touch (see UTFT and UTouch library documentation)
+#ifdef _VARIANT_ARDUINO_DUE_X_   //DUE +tft shield
+UTFT    myGLCD(CTE32,25,26,27,28);
+UTouch  myTouch(6,5,32,3,2);
+#else
+UTFT    myGLCD(ITDB32S,39,41,43,45);
+UTouch  myTouch( 49, 51, 53, 50, 52);
+#endif
+#endif
+//manager which is responsible for window updating process
+WindowsManager<Dialogs> windowsManager(&myGLCD,&myTouch);
+
+
+void setup()
+{
+	//setup log (out is wrap about Serial class)
+	out.begin(57600);
+	out<<F("Setup")<<endln;
+
+	//initialize display
+	myGLCD.InitLCD();
+	myGLCD.clrScr();
+	//initialize touch
+	myTouch.InitTouch();
+	myTouch.setPrecision(PREC_MEDIUM);
+	//my speciality I have connected LED-A display pin to the pin 47 on Arduino board. Comment next two lines if the example from UTFT library runs without any problems 
+	pinMode(47,OUTPUT);
+	digitalWrite(47,HIGH);
+
+	//Initialize apperance. Create your own DefaultDecorators class if you would like different application look
+	DefaultDecorators::InitAll();
+	//initialize window manager
+	windowsManager.Initialize();
+
+	//create and register dialogs
+	windowsManager.MainWnd()->Initialize(); 
+	Dialog1 *dlg1=new Dialog1(F("Number 1"),20,40,255,150);
+	Dialog2 *dlg2=new Dialog2(F("Number 2"),30,50,210,115);
+	windowsManager.MainWnd()->RegisterDialog(F("Dialog1"),dlg1);
+	windowsManager.MainWnd()->RegisterDialog(F("Dialog2"),dlg2);
+
+	delay(1000); 
+	out<<F("End setup")<<endln;
+
+}
+
+void loop()
+{
+	//give window manager an opportunity to update display
+	windowsManager.loop();
+}

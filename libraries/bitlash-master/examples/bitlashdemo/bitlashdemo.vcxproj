@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{93BD22DC-59B9-46EA-B68A-C8D02605677C}</ProjectGuid>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <ProjectName>bitlashdemo</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>
+    </PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>d:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master;d:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\utility;d:\Program Files\arduino023\arduino-0023\libraries;d:\Program Files\arduino023\arduino-0023\hardware\arduino\libraries;d:\Users\pbecc\OneDrive\Arduino\libraries;d:\Program Files\arduino023\arduino-0023\hardware\arduino\cores\arduino;D:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\examples\bitlashdemo;d:\program files\arduino023\arduino-0023\hardware\tools\avr\avr\include\;d:\program files\arduino023\arduino-0023\hardware\tools\avr\avr\include\avr\;d:\program files\arduino023\arduino-0023\hardware\tools\avr\avr\;d:\program files\arduino023\arduino-0023\hardware\tools\avr\lib\gcc\avr\4.3.2\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\examples\bitlashdemo\__vm\.bitlashdemo.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;ARDUINO=166;ARDUINO_MAIN;__AVR__;__avr__;F_CPU=16000000L;__cplusplus=201103L;GCC_VERSION=40302;ARDUINO_ARCH_AVR;ARDUINO_AVR_UNO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>d:\users\pbecc\onedrive\Arduino\libraries\bitlash-master;d:\users\pbecc\onedrive\Arduino\libraries\bitlash-master\utility;d:\Program Files\Arduino\libraries;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\libraries;d:\users\pbecc\onedrive\Arduino\libraries;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\libb64;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\spiffs;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266\umm_malloc;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\variants\nodemcu;d:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\examples\bitlashdemo;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1/tools/sdk/include;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1/tools/sdk/lwip/include;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include;d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\tools\sdk\include;d:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>d:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\examples\bitlashdemo\__vm\.bitlashdemo.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>__ESP8266_ESp8266__;__ESP8266_ESP8266__;__ets__;ICACHE_FLASH;F_CPU=80000000L;ARDUINO=10608;ARDUINO_ESP8266_NODEMCU;ARDUINO_ARCH_ESP8266;ESP8266;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="VisualMicro" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bitlashdemo.pde">
+      <FileType>CppCode</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\conio.h" />
+    <ClInclude Include="__vm\.bitlashdemo.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\bitlash-api.c" />
+    <ClCompile Include="..\..\src\bitlash-builtins.c" />
+    <ClCompile Include="..\..\src\bitlash-cmdline.c" />
+    <ClCompile Include="..\..\src\bitlash-eeprom.c" />
+    <ClCompile Include="..\..\src\bitlash-error.c" />
+    <ClCompile Include="..\..\src\bitlash-functions.c" />
+    <ClCompile Include="..\..\src\bitlash-instream.c" />
+    <ClCompile Include="..\..\src\bitlash-interpreter.c" />
+    <ClCompile Include="..\..\src\bitlash-parser.c" />
+    <ClCompile Include="..\..\src\bitlash-serial.c" />
+    <ClCompile Include="..\..\src\bitlash-taskmgr.c" />
+    <ClCompile Include="..\..\src\bitlash-unix-file.c" />
+    <ClCompile Include="..\..\src\bitlash-unix.c" />
+    <ClCompile Include="..\..\src\eeprom.c" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,354 @@
+<VisualMicro>
+  <Program Name="bitlashdemo" Ext=".pde" Location="d:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\examples\bitlashdemo">
+    <Compile ReCompileIfSourceIsNewer="1" IsDebugStart="1" IsCompiled="0" ConfigurationName="Debug" StopOnError="False" OptimiseLibs="True" OptimiseCore="True" BuildPath="d:\Users\pbecc\AppData\Local\Temp\VMicroBuilds\bitlashdemo\esp8266_generic" IncludesDebug="0" SketchName="bitlashdemo" ReportDigitalPins="0" ReportAnalogPins="0" ReportI2C="0" ReportFreeMemory="0" IncludeDebug="1" LastDebugPreProcessorDefinitions="VM_DEBUG;VM_DEBUG_ENABLE 1;VM_DEBUG_BANDWIDTH_THROTTLE_MS 100;VM_DEBUGGER_TYPE_HARDWARESERIAL 0;VM_DEBUGGER_TYPE_SOFTWARESERIAL 1;VM_DEBUGGER_TYPE_FASTSERIAL 2;VM_DEBUGGER_TYPE_USB 3;VM_DEBUGGER_TYPE_TEENSY 4;VM_DEBUGGER_TYPE_UART 5;VM_DEBUGGER_TYPE_USART 6;VM_DEBUGGER_TYPE_USBSERIAL 7;VM_DEBUGGER_TYPE_TTYUART 8;VM_DEBUGGER_TYPE_NET_CONSOLE 9;VM_DEBUGGER_TYPE_Uart 10;VM_DEBUGGER_TYPE_COSA 11;VM_DEBUGGER_TYPE_CDCSerialClass 12;VM_DEBUGGER_TYPE_HARDWARESERIAL1 13;VM_DEBUGGER_TYPE_HARDWARESERIAL2 14;VM_DEBUGGER_TYPE_HARDWARESERIAL3 15;VM_DEBUGGER_TYPE VM_DEBUGGER_TYPE_HARDWARESERIAL;VM_DEBUG_BREAKPAUSE;" ProjectMacrosHaveChanged="1" McuMacrosHaveChanged="1" CompilerErrors="1" />
+    <Platform Name="arduino16x" Package="esp8266" Platform="esp8266" Architecture="1.20.0-26-gb404fb9-2">
+      <Board Name="esp8266_generic" Description="Generic ESP8266 Module" CoreFolder="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266" VariantFullPath="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\variants\generic" McuIdePath="d:\Program Files\Arduino" McuSketchBookPath="d:\users\pbecc\onedrive\Arduino" name="Generic ESP8266 Module" upload.tool="esptool" upload.speed="115200" upload.resetmethod="nodemcu" upload.maximum_size="1044464" upload.maximum_data_size="81920" upload.wait_for_upload_port="true" serial.disableDTR="true" serial.disableRTS="true" build.mcu="esp8266" build.f_cpu="80000000L" build.board="ESP8266_ESP01" build.core="esp8266" build.variant="generic" build.flash_mode="dio" build.spiffs_pagesize="256" build.debug_port="-DDEBUG_ESP_PORT=Serial" build.debug_level="-DDEBUG_ESP_OTA -DDEBUG_ESP_UPDATER" build.lwip_lib="-llwip" build.lwip_flags="" menu.CpuFrequency.80="80 MHz" menu.CpuFrequency.80.build.f_cpu="80000000L" menu.CpuFrequency.160="160 MHz" menu.CpuFrequency.160.build.f_cpu="160000000L" menu.FlashFreq.40="40MHz" menu.FlashFreq.40.build.flash_freq="40" menu.FlashFreq.80="80MHz" menu.FlashFreq.80.build.flash_freq="80" menu.FlashMode.dio="DIO" menu.FlashMode.dio.build.flash_mode="dio" menu.FlashMode.qio="QIO" menu.FlashMode.qio.build.flash_mode="qio" menu.UploadSpeed.115200="115200" menu.UploadSpeed.115200.upload.speed="115200" menu.UploadSpeed.9600="9600" menu.UploadSpeed.9600.upload.speed="9600" menu.UploadSpeed.57600="57600" menu.UploadSpeed.57600.upload.speed="57600" menu.UploadSpeed.256000.windows="256000" menu.UploadSpeed.256000.upload.speed="256000" menu.UploadSpeed.230400.linux="230400" menu.UploadSpeed.230400.macosx="230400" menu.UploadSpeed.230400.upload.speed="230400" menu.UploadSpeed.460800.linux="460800" menu.UploadSpeed.460800.macosx="460800" menu.UploadSpeed.460800.upload.speed="460800" menu.UploadSpeed.512000.windows="512000" menu.UploadSpeed.512000.upload.speed="512000" menu.UploadSpeed.921600="921600" menu.UploadSpeed.921600.upload.speed="921600" menu.FlashSize.512K64="512K (64K SPIFFS)" menu.FlashSize.512K64.build.flash_size="512K" menu.FlashSize.512K64.build.flash_ld="eagle.flash.512k64.ld" menu.FlashSize.512K64.build.spiffs_start="0x6B000" menu.FlashSize.512K64.build.spiffs_end="0x7B000" menu.FlashSize.512K64.build.spiffs_blocksize="4096" menu.FlashSize.512K64.upload.maximum_size="434160" menu.FlashSize.512K128="512K (128K SPIFFS)" menu.FlashSize.512K128.build.flash_size="512K" menu.FlashSize.512K128.build.flash_ld="eagle.flash.512k128.ld" menu.FlashSize.512K128.build.spiffs_start="0x5B000" menu.FlashSize.512K128.build.spiffs_end="0x7B000" menu.FlashSize.512K128.build.spiffs_blocksize="4096" menu.FlashSize.512K128.upload.maximum_size="368624" menu.FlashSize.512K0="512K (no SPIFFS)" menu.FlashSize.512K0.build.flash_size="512K" menu.FlashSize.512K0.build.flash_ld="eagle.flash.512k0.ld" menu.FlashSize.512K0.upload.maximum_size="499696" menu.FlashSize.1M512="1M (512K SPIFFS)" menu.FlashSize.1M512.build.flash_size="1M" menu.FlashSize.1M512.build.flash_ld="eagle.flash.1m512.ld" menu.FlashSize.1M512.build.spiffs_start="0x7B000" menu.FlashSize.1M512.build.spiffs_end="0xFB000" menu.FlashSize.1M512.build.spiffs_blocksize="8192" menu.FlashSize.1M512.upload.maximum_size="499696" menu.FlashSize.1M256="1M (256K SPIFFS)" menu.FlashSize.1M256.build.flash_size="1M" menu.FlashSize.1M256.build.flash_ld="eagle.flash.1m256.ld" menu.FlashSize.1M256.build.spiffs_start="0xBB000" menu.FlashSize.1M256.build.spiffs_end="0xFB000" menu.FlashSize.1M256.build.spiffs_blocksize="4096" menu.FlashSize.1M256.upload.maximum_size="761840" menu.FlashSize.1M192="1M (192K SPIFFS)" menu.FlashSize.1M192.build.flash_size="1M" menu.FlashSize.1M192.build.flash_ld="eagle.flash.1m192.ld" menu.FlashSize.1M192.build.spiffs_start="0xCB000" menu.FlashSize.1M192.build.spiffs_end="0xFB000" menu.FlashSize.1M192.build.spiffs_blocksize="4096" menu.FlashSize.1M192.upload.maximum_size="827376" menu.FlashSize.1M160="1M (160K SPIFFS)" menu.FlashSize.1M160.build.flash_size="1M" menu.FlashSize.1M160.build.flash_ld="eagle.flash.1m160.ld" menu.FlashSize.1M160.build.spiffs_start="0xD3000" menu.FlashSize.1M160.build.spiffs_end="0xFB000" menu.FlashSize.1M160.build.spiffs_blocksize="4096" menu.FlashSize.1M160.upload.maximum_size="860144" menu.FlashSize.1M144="1M (144K SPIFFS)" menu.FlashSize.1M144.build.flash_size="1M" menu.FlashSize.1M144.build.flash_ld="eagle.flash.1m144.ld" menu.FlashSize.1M144.build.spiffs_start="0xD7000" menu.FlashSize.1M144.build.spiffs_end="0xFB000" menu.FlashSize.1M144.build.spiffs_blocksize="4096" menu.FlashSize.1M144.upload.maximum_size="876528" menu.FlashSize.1M128="1M (128K SPIFFS)" menu.FlashSize.1M128.build.flash_size="1M" menu.FlashSize.1M128.build.flash_ld="eagle.flash.1m128.ld" menu.FlashSize.1M128.build.spiffs_start="0xDB000" menu.FlashSize.1M128.build.spiffs_end="0xFB000" menu.FlashSize.1M128.build.spiffs_blocksize="4096" menu.FlashSize.1M128.upload.maximum_size="892912" menu.FlashSize.1M64="1M (64K SPIFFS)" menu.FlashSize.1M64.build.flash_size="1M" menu.FlashSize.1M64.build.flash_ld="eagle.flash.1m64.ld" menu.FlashSize.1M64.build.spiffs_start="0xEB000" menu.FlashSize.1M64.build.spiffs_end="0xFB000" menu.FlashSize.1M64.build.spiffs_blocksize="4096" menu.FlashSize.1M64.upload.maximum_size="958448" menu.FlashSize.2M="2M (1M SPIFFS)" menu.FlashSize.2M.build.flash_size="2M" menu.FlashSize.2M.build.flash_ld="eagle.flash.2m.ld" menu.FlashSize.2M.build.spiffs_start="0x100000" menu.FlashSize.2M.build.spiffs_end="0x1FB000" menu.FlashSize.2M.build.spiffs_blocksize="8192" menu.FlashSize.2M.upload.maximum_size="1044464" menu.FlashSize.4M1M="4M (1M SPIFFS)" menu.FlashSize.4M1M.build.flash_size="4M" menu.FlashSize.4M1M.build.flash_ld="eagle.flash.4m1m.ld" menu.FlashSize.4M1M.build.spiffs_start="0x300000" menu.FlashSize.4M1M.build.spiffs_end="0x3FB000" menu.FlashSize.4M1M.build.spiffs_blocksize="8192" menu.FlashSize.4M1M.build.spiffs_pagesize="256" menu.FlashSize.4M1M.upload.maximum_size="1044464" menu.FlashSize.4M3M="4M (3M SPIFFS)" menu.FlashSize.4M3M.build.flash_size="4M" menu.FlashSize.4M3M.build.flash_ld="eagle.flash.4m.ld" menu.FlashSize.4M3M.build.spiffs_start="0x100000" menu.FlashSize.4M3M.build.spiffs_end="0x3FB000" menu.FlashSize.4M3M.build.spiffs_blocksize="8192" menu.FlashSize.4M3M.upload.maximum_size="1044464" menu.ResetMethod.ck="ck" menu.ResetMethod.ck.upload.resetmethod="ck" menu.ResetMethod.nodemcu="nodemcu" menu.ResetMethod.nodemcu.upload.resetmethod="nodemcu" menu.Debug.Disabled="Disabled" menu.Debug.Disabled.build.debug_port="" menu.Debug.Serial="Serial" menu.Debug.Serial.build.debug_port="-DDEBUG_ESP_PORT=Serial" menu.Debug.Serial1="Serial1" menu.Debug.Serial1.build.debug_port="-DDEBUG_ESP_PORT=Serial1" menu.DebugLevel.None____="None" menu.DebugLevel.None____.build.debug_level="" menu.DebugLevel.Core____="Core" menu.DebugLevel.Core____.build.debug_level="-DDEBUG_ESP_CORE" menu.DebugLevel.SSL_____="Core + SSL" menu.DebugLevel.SSL_____.build.debug_level="-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL" menu.DebugLevel.SSL_MEM_="Core + SSL + TLS Mem" menu.DebugLevel.SSL_MEM_.build.debug_level="-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_TLS_MEM" menu.DebugLevel.WiFic___="Core + WiFi" menu.DebugLevel.WiFic___.build.debug_level="-DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI" menu.DebugLevel.WiFi____="WiFi" menu.DebugLevel.WiFi____.build.debug_level="-DDEBUG_ESP_WIFI" menu.DebugLevel.HTTPClient="HTTPClient" menu.DebugLevel.HTTPClient.build.debug_level="-DDEBUG_ESP_HTTP_CLIENT" menu.DebugLevel.HTTPClient2="HTTPClient + SSL" menu.DebugLevel.HTTPClient2.build.debug_level="-DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_SSL" menu.DebugLevel.HTTPUpdate="HTTPUpdate" menu.DebugLevel.HTTPUpdate.build.debug_level="-DDEBUG_ESP_HTTP_UPDATE" menu.DebugLevel.HTTPUpdate2="HTTPClient + HTTPUpdate" menu.DebugLevel.HTTPUpdate2.build.debug_level="-DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_UPDATE" menu.DebugLevel.HTTPUpdate3="HTTPClient + HTTPUpdate + Updater" menu.DebugLevel.HTTPUpdate3.build.debug_level="-DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER" menu.DebugLevel.HTTPServer="HTTPServer" menu.DebugLevel.HTTPServer.build.debug_level="-DDEBUG_ESP_HTTP_SERVER" menu.DebugLevel.UPDATER="Updater" menu.DebugLevel.UPDATER.build.debug_level="-DDEBUG_ESP_UPDATER" menu.DebugLevel.OTA_____="OTA" menu.DebugLevel.OTA_____.build.debug_level="-DDEBUG_ESP_OTA" menu.DebugLevel.OTA2____="OTA + Updater" menu.DebugLevel.OTA2____.build.debug_level="-DDEBUG_ESP_OTA -DDEBUG_ESP_UPDATER" menu.DebugLevel.all_____="All" menu.DebugLevel.all_____.build.debug_level="-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_TLS_MEM" menu.UploadSpeed.256000="256000" menu.UploadSpeed.512000="512000" runtime.ide.path="d:\Program Files\Arduino" runtime.os="windows" build.system.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\system" runtime.ide.version="10608" target_package="esp8266" target_platform="esp8266" runtime.hardware.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266" originalid="generic" intellisense.tools.path="{compiler.toolchain.path}" intellisense.include.paths="{runtime.tools.xtensa-lx106-elf-gcc.path}\xtensa-lx106-elf\include\c++\4.8.2;{runtime.tools.xtensa-lx106-elf-gcc.path}\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf;{runtime.tools.xtensa-lx106-elf-gcc.path}\xtensa-lx106-elf\include;{runtime.tools.xtensa-lx106-elf-gcc.path}\lib\gcc\xtensa-lx106-elf\4.8.2\include;{runtime.platform.path}\tools\sdk\include" tools.wwwfiles.name="ESP8266 Sketch Data Upload" tools.wwwfiles.ssh="false" tools.wwwfiles.cmd.windows="ESP8266FSUpload.exe" recipe.wwwfiles.upload.pattern="&quot;{vm.path}/{tools.wwwfiles.cmd}&quot; -serial.port={serial.port} -build.path=&quot;{build.path}&quot; -target_platform=&quot;{target_platform}&quot; -runtime.tools.mkspiffs.path=&quot;{runtime.tools.mkspiffs.path}&quot; -board.name=&quot;{name}&quot; -upload.verbose={upload.verbose} -upload.resetmethod={upload.resetmethod} -upload.speed={upload.speed}  -platform.path=&quot;{platform.path}&quot; -project.name=&quot;{project.name}&quot; -project.path=&quot;{project.path}&quot; -tools.esptool.cmd=&quot;{tools.esptool.cmd}&quot; -runtime.tools.esptool.path=&quot;{runtime.tools.esptool.path}&quot; -compiler.path=&quot;{compiler.path}&quot; -build.spiffs_start=&quot;{build.spiffs_start}&quot; -build.spiffs_end=&quot;{build.spiffs_end}&quot; -build.spiffs_pagesize=&quot;{build.spiffs_pagesize}&quot; -build.spiffs_blocksize=&quot;{build.spiffs_blocksize}&quot;" tools.wwwfiles.cmd="ESP8266FSUpload.exe" version="2.2.0" compiler.warning_flags="-w" compiler.warning_flags.none="-w" compiler.warning_flags.default="" compiler.warning_flags.more="-Wall" compiler.warning_flags.all="-Wall -Wextra" compiler.path="{runtime.tools.xtensa-lx106-elf-gcc.path}/bin/" compiler.sdk.path="{runtime.platform.path}/tools/sdk" compiler.cpreprocessor.flags="-D__ets__ -DICACHE_FLASH -U__STRICT_ANSI__ &quot;-I{compiler.sdk.path}/include&quot; &quot;-I{compiler.sdk.path}/lwip/include&quot;" compiler.c.cmd="xtensa-lx106-elf-gcc" compiler.c.flags="-c {compiler.warning_flags} -Os -g -Wpointer-arith -Wno-implicit-function-declaration -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -falign-functions=4 -MMD -std=gnu99 -ffunction-sections -fdata-sections" compiler.S.cmd="xtensa-lx106-elf-gcc" compiler.S.flags="-c -g -x assembler-with-cpp -MMD -mlongcalls" compiler.c.elf.flags="-g {compiler.warning_flags} -Os -nostdlib -Wl,--no-check-sections -u call_user_start -Wl,-static &quot;-L{compiler.sdk.path}/lib&quot; &quot;-L{compiler.sdk.path}/ld&quot; &quot;-T{build.flash_ld}&quot; -Wl,--gc-sections -Wl,-wrap,system_restart_local -Wl,-wrap,register_chipv6_phy" compiler.c.elf.cmd="xtensa-lx106-elf-gcc" compiler.c.elf.libs="-lm -lgcc -lhal -lphy -lpp -lnet80211 -lwpa -lcrypto -lmain -lwps -laxtls -lsmartconfig -lmesh -lwpa2 {build.lwip_lib}" compiler.cpp.cmd="xtensa-lx106-elf-g++" compiler.cpp.flags="-c {compiler.warning_flags} -Os -g -mlongcalls -mtext-section-literals -fno-exceptions -fno-rtti -falign-functions=4 -std=c++11 -MMD -ffunction-sections -fdata-sections" compiler.as.cmd="xtensa-lx106-elf-as" compiler.ar.cmd="xtensa-lx106-elf-ar" compiler.ar.flags="cru" compiler.elf2hex.cmd="esptool" compiler.elf2hex.flags="" compiler.size.cmd="xtensa-lx106-elf-size" compiler.esptool.cmd="esptool.exe" compiler.esptool.cmd.windows="esptool.exe" build.extra_flags="-DESP8266" compiler.c.extra_flags="" compiler.c.elf.extra_flags="" compiler.S.extra_flags="" compiler.cpp.extra_flags="" compiler.ar.extra_flags="" compiler.objcopy.eep.extra_flags="" compiler.elf2hex.extra_flags="" recipe.c.o.pattern="&quot;{compiler.path}{compiler.c.cmd}&quot; {compiler.cpreprocessor.flags} {compiler.c.flags} -DF_CPU={build.f_cpu} {build.lwip_flags} {build.debug_port} {build.debug_level} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.c.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot; -o &quot;{object_file}&quot;" recipe.cpp.o.pattern="&quot;{compiler.path}{compiler.cpp.cmd}&quot; {compiler.cpreprocessor.flags} {compiler.cpp.flags} -DF_CPU={build.f_cpu} {build.lwip_flags} {build.debug_port} {build.debug_level} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot; -o &quot;{object_file}&quot;" recipe.S.o.pattern="&quot;{compiler.path}{compiler.c.cmd}&quot; {compiler.cpreprocessor.flags} {compiler.S.flags} -DF_CPU={build.f_cpu} {build.lwip_flags} {build.debug_port} {build.debug_level} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.c.extra_flags} {build.extra_flags} {includes} &quot;{source_file}&quot; -o &quot;{object_file}&quot;" recipe.ar.pattern="&quot;{compiler.path}{compiler.ar.cmd}&quot; {compiler.ar.flags} {compiler.ar.extra_flags} &quot;{archive_file_path}&quot; &quot;{object_file}&quot;" recipe.c.combine.pattern="&quot;{compiler.path}{compiler.c.elf.cmd}&quot; {compiler.c.elf.flags} {compiler.c.elf.extra_flags} -o &quot;{build.path}/{build.project_name}.elf&quot; -Wl,--start-group {object_files} &quot;{build.path}/{archive_file}&quot; {compiler.c.elf.libs} -Wl,--end-group  &quot;-L{build.path}&quot;" recipe.objcopy.eep.pattern="" recipe.objcopy.hex.pattern="&quot;{runtime.tools.esptool.path}/{compiler.esptool.cmd}&quot; -eo &quot;{runtime.platform.path}/bootloaders/eboot/eboot.elf&quot; -bo &quot;{build.path}/{build.project_name}.bin&quot; -bm {build.flash_mode} -bf {build.flash_freq} -bz {build.flash_size} -bs .text -bp 4096 -ec -eo &quot;{build.path}/{build.project_name}.elf&quot; -bs .irom0.text -bs .text -bs .data -bs .rodata -bc -ec" recipe.output.tmp_file="{build.project_name}.bin" recipe.output.save_file="{build.project_name}.{build.variant}.bin" recipe.size.pattern="&quot;{compiler.path}{compiler.size.cmd}&quot; -A &quot;{build.path}/{build.project_name}.elf&quot;" recipe.size.regex="^(?:\.irom0\.text|\.text|\.data|\.rodata|)\s+([0-9]+).*" recipe.size.regex.data="^(?:\.data|\.rodata|\.bss)\s+([0-9]+).*" tools.esptool.cmd="esptool.exe" tools.esptool.cmd.windows="esptool.exe" tools.esptool.path="{runtime.tools.esptool.path}" tools.esptool.network_cmd="python.exe" tools.esptool.network_cmd.windows="python.exe" tools.esptool.upload.protocol="esp" tools.esptool.upload.params.verbose="-vv" tools.esptool.upload.params.quiet="" tools.esptool.upload.pattern="&quot;{path}/{cmd}&quot; {upload.verbose} -cd {upload.resetmethod} -cb {upload.speed} -cp &quot;{serial.port}&quot; -ca 0x00000 -cf &quot;{build.path}/{build.project_name}.bin&quot;" tools.esptool.upload.network_pattern="&quot;{network_cmd}&quot; &quot;{runtime.platform.path}/tools/espota.py&quot; -i &quot;{serial.port}&quot; -p &quot;{network.port}&quot; &quot;--auth={network.password}&quot; -f &quot;{build.path}/{build.project_name}.bin&quot;" tools.mkspiffs.cmd="mkspiffs.exe" tools.mkspiffs.cmd.windows="mkspiffs.exe" tools.mkspiffs.path="{runtime.tools.mkspiffs.path}" tools.espota.cmd="python.exe" tools.espota.cmd.windows="python.exe" tools.espota.path="{runtime.platform.path}/tools" tools.espota.upload.protocol="espota" tools.espota.upload.params.verbose="" tools.espota.upload.params.quiet="" tools.espota.upload.pattern="&quot;{cmd}&quot; &quot;{path}/espota.py&quot; -i &quot;{serial.port}&quot; -p 8266 -f &quot;{build.path}/{build.project_name}.bin&quot;" vm.platform.root.path="D:\Program Files\VisualStudio\Common7\IDE\Extensions\zzpfl3s3.2c2\Micro Platforms\arduino16x" runtime.tools.xtensa-lx106-elf-gcc.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2" runtime.tools.xtensa-lx106-elf-gcc-1.20.0-26-gb404fb9-2.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2" runtime.tools.esptool.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\esptool\0.4.8" runtime.tools.esptool-0.4.8.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\esptool\0.4.8" runtime.tools.mkspiffs.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\mkspiffs\0.1.2" runtime.tools.mkspiffs-0.1.2.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\mkspiffs\0.1.2" runtime.tools.avrdude.path="d:\Program Files\Arduino\hardware\tools\avr" runtime.tools.avrdude-6.0.1-arduino5.path="d:\Program Files\Arduino\hardware\tools\avr" runtime.tools.avr-gcc.path="d:\Program Files\Arduino\hardware\tools\avr" runtime.tools.avr-gcc-4.8.1-arduino5.path="d:\Program Files\Arduino\hardware\tools\avr" runtime.vm.boardinfo.id="esp8266_generic" runtime.vm.boardinfo.name="esp8266_generic" runtime.vm.boardinfo.desc="Generic ESP8266 Module" runtime.vm.boardinfo.src_location="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1" ide.hint="For all platforms that use Board Manager" ide.location.key="Arduino16x" ide.location.ide.winreg="Arduino 1.6.x Application" ide.location.sketchbook.winreg="Arduino 1.6.x Sketchbook" ide.location.sketchbook.preferences="sketchbook.path" ide.default.revision_name="1.6.9" ide.default.version="10609" ide.default.package="arduino" ide.default.platform="avr" ide.multiplatform="true" ide.includes="arduino.h" ide.exe_name="arduino" ide.platformswithoutpackage="false" ide.includes.fallback="wprogram.h" ide.extension="ino" ide.extension.fallback="pde" ide.versionGTEQ="160" ide.exe="arduino.exe" ide.hosts="atmel" ide.url="http://arduino.cc/en/Main/Software" ide.help.reference.path="reference\arduino.cc\en\Reference" ide.help.reference.path2="reference\www.arduino.cc\en\Reference" ide.help.reference.serial="reference\www.arduino.cc\en\Serial" vm.debug="true" software="ARDUINO" ssh.user.name="root" ssh.user.default.password="arduino" ssh.host.wwwfiles.path="/www/sd" build.working_directory="{runtime.ide.path}" ide.location.preferences.portable="{runtime.ide.path}\portable" ide.location.preferences="%VM_APPDATA_LOCAL%\arduino15\preferences.txt" ide.location.preferences_fallback="%VM_APPDATA_ROAMING%\arduino15\preferences.txt" ide.location.contributions="%VM_APPDATA_LOCAL%\arduino15" ide.location.contributions_fallback="%VM_APPDATA_ROAMING%\arduino15" ide.contributions.boards.allow="true" ide.contributions.boards.ignore_unless_rewrite_found="true" ide.contributions.libraries.allow="true" ide.contributions.boards.support.urls.wiki="https://github.com/arduino/Arduino/wiki/Unofficial-list-of-3rd-party-boards-support-urls" ide.create_platforms_from_boardsTXT.teensy="build.core" ide.appid="arduino16x" location.sketchbook="d:\users\pbecc\onedrive\Arduino" build.core.vmresolved="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266" build.core.parentfolder.vmresolved="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores" build.core.coresparentfolder.vmresolved="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1" build.core.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\cores\esp8266" vm.core.include="arduino.h" vm.boardsource.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1" runtime.platform.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1" vm.platformname.name="esp8266" build.arch="ESP8266" build.flash_size="4M" build.flash_ld="eagle.flash.4m.ld" build.spiffs_start="0x100000" build.spiffs_end="0x3FB000" build.spiffs_blocksize="8192" build.flash_freq="40" build.variant.vmresolved="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.2.0-rc1\variants\generic" build.architecture="1.20.0-26-gb404fb9-2" vmresolved.compiler.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\bin\" vmresolved.tools.path="d:\Users\pbecc\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2" vm.runtime.compiler.showwarnings="true" vm.runtime.upload.verbose="false" vm.runtime.upload.verify="false" vm.runtime.compiler.auto_discover_includes="false" vm.last.buildpath="d:\Users\pbecc\AppData\Local\Temp\VMicroBuilds\bitlashdemo\esp8266_generic" />
+    </Platform>
+    <Debug EnableBreak="1" DebugEnabled="1" IsGdb="0" RemotePortSpeedWrittenToDebugSource="115200" />
+    <VCCodeModel>
+      <VCCodeMacros />
+    </VCCodeModel>
+    <BreakPoints>
+      <BreakPoint Index="1" Name="json_parse_program.ino, riga 27" Id="fcb819e6-7db2-49de-8aac-eeb9ced649fe" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\opensprinkler\opensprinkler_arduino_v_2_1_6\json_parse_program\json_parse_program.ino" FileLine="27" FileColumn="1" FunctionName="" FunctionLineOffset="1" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='fcb819e6-7db2-49de-8aac-eeb9ced649fe'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>20	#define OTA
+21	#ifdef OTA
+22	#include &lt;ESP8266mDNS.h&gt;
+23	#include &lt;ArduinoOTA.h&gt;
+24	#endif
+25	////////////////////////////////////////////////////////////////////////////////////////
+26	//#include "Config.h"
+--&gt;27	//#include "../Defines.h"
+28	//#include "../OpenSprinkler.h"
+29	//#include "../utils.h"
+30	//#include "../OpenSprinklerProgram.h"
+31	
+32	// how many clients should be able to telnet to this ESP8266----------------------eelogger-------------------------
+33	#include &lt;Wire.h&gt;
+34	
+35	#include &lt;RTClib.h&gt;
+36	#include "../TimeNTP_ESP8266WiFi/TimeNTP_ESP8266WiFi.ino/NPTtimeSync.h"
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="2" Name="SensorServer.ino, riga 380" Id="82080c5b-b14d-418d-93bf-140ddf98ea0b" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\sensorserver\sensorserver.ino" FileLine="380" FileColumn="1" FunctionName="ET0_calc(byte type)" FunctionLineOffset="112" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='82080c5b-b14d-418d-93bf-140ddf98ea0b'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>373		float sun_azimut = acos((sin(sun_elevation)*sin(sta.lat*PI / 180) - sin(sol_dec(doy))) / (cos(sun_elevation)*cos(sta.lat*PI / 180.)));
+374		if (time_angle&lt;0) 	if(	sun_azimut&gt;0)sun_azimut *= -1.;
+375		else 	if (sun_azimut&lt;0)sun_azimut *= -1.;
+376		prev_elevation = sun_elevation;
+377		float time_factor = cos(sun_azimut)*cos(sta.beta) + sin(sun_azimut)*sin(sta.beta);
+378		float sun_panel_inclination_factor = (cos(sta.alfa)*sin(sun_elevation) + sin(sta.alfa)*cos(sun_elevation)*time_factor);
+379		SPS("sun_el "); SP(sun_elevation); SPS("Az"); SPS(sun_azimut); SPS("P_f"); SPS(sun_panel_inclination_factor);
+--&gt;380		
+381		SP(" corrF"); SPL(sin(sun_elevation) / sun_panel_inclination_factor);
+382		float expected_sunrad = 0;
+383		if (sun_elevation &gt; 0)
+384			expected_sunrad = 1352.*exp(-(39 / visibility + 0.85)*atmos_pres(sta.alt) / atmos_pres(0) / (0.9 + 9.4 * sin(sun_elevation)));
+385		/*	SPS_D(sol_dec(doy)); SPS_D(MID_DAY); SPS_D(time_angle); SPS_D(sun_elevation); SPS_D("es"); SPL_D(expected_sunrad);
+386			static int nfactor;
+387			if (expected_sunrad &gt; 10)
+388				if (nfactor == 0)
+389					if (time_angle &gt; 0)  // if is a restart and afternoon recompute previous_factor from records
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="3" Name="SensorServer.ino, riga 528" Id="13384b6f-1d1d-424f-9407-9de28421d3f0" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\sensorserver\sensorserver.ino" FileLine="528" FileColumn="1" FunctionName="ET0_calc(byte type)" FunctionLineOffset="260" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='13384b6f-1d1d-424f-9407-9de28421d3f0'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>521			net_out_lw_rad(
+522				w_min.temp, w_max.temp,
+523				Sun,
+524				rad_clearsky,
+525				ea_from_tmin(w_min.temp)));
+526		SP(' '); SP(net_radi);
+527	    weather[iw].penman = penman_monteith_ETo(net_radi, w_mean.temp, w_mean.wind / 3.6,
+--&gt;528			mean_es(w_min.temp, w_max.temp),
+529			ea_from_tmin(w_min.temp),
+530			delta_sat_vap_pres(w_mean.temp),
+531			psy_const(atmos_pres(sta.alt)),
+532			0.10);
+533		return weather[iw].penman;
+534	}
+535	
+536	
+537	#endif
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="4" Name="SensorServer.ino, riga 1849" Id="e6516375-8bde-4765-8c9c-51356cb05ac3" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\sensorserver\sensorserver.ino" FileLine="1849" FileColumn="1" FunctionName="" FunctionLineOffset="1" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='e6516375-8bde-4765-8c9c-51356cb05ac3'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>1842			parametri[1] = "sol_pan";
+1843			parametri[2] = "dayETsum";
+1844			my.beginSensor(4, 0, 3, "ET0", parametri);
+1845		}
+1846	#endif
+1847		sta = { opt[LATITUDE] / 10000.,
+1848				opt[LONGITUDE] / 10000.,
+--&gt;1849				opt[ELEVATION],
+1850				opt[PANEL_ANGLE] * PI / 180.,	
+1851				opt[PANEL_AZIMUT] * PI / 180 };
+1852		WiFi.mode(WIFI_STA);
+1853		
+1854		SPS(OpName[SSID]); SPS(OpName[PSW]);
+1855		if (opt[IP1] &gt; 0) {
+1856			if (!(eecode == 4&amp;&amp;ntimes&gt;3)) {
+1857				SPS("Fip "); SPS(opt[IP1]); SPS(opt[IP2]); SPS(opt[IP3]); SPS(opt[IP4]);
+1858	
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="5" Name="INTERRUPT.ino, riga 772" Id="9315d4ce-d247-40e9-bd0d-eb8d70f82da8" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\ee\eelogger_9_1_esp_2.ino\interrupt.ino" FileLine="772" FileColumn="1" FunctionName="print_waterlog(byte day, byte month)" FunctionLineOffset="11" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='9315d4ce-d247-40e9-bd0d-eb8d70f82da8'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>765	//	 if (!f)return;
+766		 f.seek(0, SeekSet);
+767		 char buff[600];
+768		 while (f.available()&gt;2) {
+769			 int len = f.available();
+770			 if (len &gt; 600)len = 600;
+771		//	 SPL_D(len);
+--&gt;772			 if (f.readBytesUntil('\n', buff, len)&gt;6 ){
+773				 SPL_D(buff);
+774				 char buf1[600];
+775				 strcpy(buf1, buff);
+776				 buf1[strlen(buff)] = 0;
+777	
+778				 char * dayP = strtok(buff, "-,");
+779				 if (dayP != NULL) {
+780					 byte thisday = atoi(dayP);
+781		//			 SPL_D(thisday);
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="6" Name="json_parse_program.ino, riga 2270" Id="07eee356-dd2a-4b7d-af2d-94540ef07953" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\opensprinkler\opensprinkler_arduino_v_2_1_6\json_parse_program\json_parse_program.ino" FileLine="2270" FileColumn="1" FunctionName="" FunctionLineOffset="1" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='07eee356-dd2a-4b7d-af2d-94540ef07953'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>2263		int color[] = { ILI9341_GREEN,ILI9341_BLUE,ILI9341_YELLOW,ILI9341_ORANGE,ILI9341_RED };
+2264	
+2265		//////////// PRINT STATUS/////
+2266	#define TABW 40		
+2267		/*void printLine(byte x,byte y,byte nargs, ...) {
+2268			va_list args;
+2269			byte tabn = 1;
+--&gt;2270			TFWin.charPos(x, y);
+2271			va_start(args, nargs);
+2272			for (i = 0; i &lt; nargs; i++)
+2273			{
+2274				TFWin.print(args);
+2275				TFWin.charPos(x + TABW*tabn++, y);
+2276			}
+2277			va_end(args);
+2278		}
+2279		*/
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="7" Name="json_parse_program.ino, riga 2371" Id="8b4637ba-570e-4b84-b2e2-29985c88d65a" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\opensprinkler\opensprinkler_arduino_v_2_1_6\json_parse_program\json_parse_program.ino" FileLine="2371" FileColumn="1" FunctionName="" FunctionLineOffset="1" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='8b4637ba-570e-4b84-b2e2-29985c88d65a'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>2364				EEPROM.write(RAIN_POS + rainD * 2, rainB);
+2365				EEPROM.write(RAIN_POS + rainD * 2+1, dayB);
+2366				rainD++;
+2367				EEPROM.write(RAIN_POS - 1, rainD);
+2368	
+2369				EEPROM.commit();
+2370			}
+--&gt;2371			float get(int day) {
+2372				rainD = EEPROM.read(RAIN_POS - 1);
+2373			//	SP_D(day);			 SP_D("Rd"); SPL_D(rainD);
+2374				for (byte i = 0; i &lt; rainD; i++) {
+2375					byte rainB = EEPROM.read(RAIN_POS + i * 2);
+2376					byte dayB = EEPROM.read(RAIN_POS + i * 2 + 1);
+2377			//		SPS_D(rainB); SPS_D(dayB); SPS_D(rainB &amp; 1); SPL_D();
+2378					if ((rainB &amp; 1) * 256 + dayB == day)return rainB / 2.;
+2379				}
+2380			return 0;
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="8" Name="json_parse_program.ino, riga 2189" Id="8e5593ab-55d2-4baf-bef6-cbbff5dd7dd8" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\opensprinkler\opensprinkler_arduino_v_2_1_6\json_parse_program\json_parse_program.ino" FileLine="2189" FileColumn="1" FunctionName="weather_control(float day_rain ,float ET0)" FunctionLineOffset="23" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='8e5593ab-55d2-4baf-bef6-cbbff5dd7dd8'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>2182			for (byte i = 0; i &lt; 5; i++) if (cD.rain_delay[i] &gt; max_rain_delay)max_rain_delay = cD.rain_delay[i];
+2183			SPL_D( (max_rain_delay - now()) / SECS_PER_DAY*month_penman[month()]);
+2184			// change raindelay if today rain&gt;1 and total cumulated&gt;5 or if cumulated rain is less than day delay interval * penman
+2185			if ((cD.cumulRain &gt;=5&amp;&amp;day_rain&gt;1)||cD.cumulRain+2&lt;(max_rain_delay-now())/SECS_PER_DAY*month_penman[month()]) {
+2186				SP("total-day rain "); SP(cD.cumulRain); SP(" "); SP(day_rain); SP("to");
+2187				float rain_delay = cD.cumulRain / month_penman[month()]*10;
+2188				char rainCommand[10];
+--&gt;2189				time_t rain_del = now() + rain_delay*SECS_PER_DAY;
+2190				rain_del = rain_del - hour(rain_del) * 3600;						 // __________________________stop at midmnight
+2191				sprintf(rainCommand, "&amp;rd=%d", int(rain_delay * 24) - hour(rain_del));
+2192				SP_D(rain_del); SP_D(" "); SPL_D(rainCommand);
+2193	
+2194				for (byte ic = 0; ic &lt; N_OS_STA; ic++) {
+2195			// correct rain delay if greater or smaller	
+2196			//		if (rain_del &gt; cD.rain_delay[ic])
+2197					{
+2198						cD.rain_delay[ic] = rain_del;
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="9" Name="bitlashMio.ino, riga 283" Id="32d8bfdc-7223-49fc-8541-1767cd1fc15e" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="283" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="2" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='32d8bfdc-7223-49fc-8541-1767cd1fc15e'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>276		if (!isstringarg(which)) expected(M_string);
+277		return getarg(which);
+278	}
+279	#endif
+280	
+281	
+282	void parsearglist(void) {
+--&gt;283		vpush((numvar)arg);				// save base of current argblock
+284	#if defined(STRING_POOL)
+285		vpush(0);							// argtype: argument type vector, initially 0
+286		vpush((numvar)stringPool);			// save stringPool base for later release
+287		strpush(idbuf);						// save called function's name as arg[-1]
+288	#endif
+289		numvar *newarg = &amp;vstack[vsptr];	// move global arg pointer to base of new block
+290		vpush(0);							// initialize new arg(0) (a/k/a argc) to 0
+291	
+292		if (sym == s_lparen) {
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="10" Name="bitlashMio.ino, riga 285" Id="d599506c-a4a6-4c03-ad0d-71a8b6aa5761" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="285" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="4" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='d599506c-a4a6-4c03-ad0d-71a8b6aa5761'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>278	}
+279	#endif
+280	
+281	
+282	void parsearglist(void) {
+283		vpush((numvar)arg);				// save base of current argblock
+284	#if defined(STRING_POOL)
+--&gt;285		vpush(0);							// argtype: argument type vector, initially 0
+286		vpush((numvar)stringPool);			// save stringPool base for later release
+287		strpush(idbuf);						// save called function's name as arg[-1]
+288	#endif
+289		numvar *newarg = &amp;vstack[vsptr];	// move global arg pointer to base of new block
+290		vpush(0);							// initialize new arg(0) (a/k/a argc) to 0
+291	
+292		if (sym == s_lparen) {
+293			getsym();		// eat arglist '('
+294			while ((sym != s_rparen) &amp;&amp; (sym != s_eof)) {
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="11" Name="bitlashMio.ino, riga 308" Id="da662a41-6c80-40e3-ba7c-681ace407732" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="308" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="27" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='da662a41-6c80-40e3-ba7c-681ace407732'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>301					getsym();					// eat closing "
+302	
+303												// bug: more than 32 args fails here
+304					newarg[2] |= (1 &lt;&lt; newarg[0]);	// argtype: set string bit for this arg
+305				}
+306				else
+307	#endif
+--&gt;308					vpush(getnum());				// push the value
+309				newarg[0]++;					// bump the count
+310				if (sym == s_comma) getsym();	// eat arglist ',' and go around
+311				else break;
+312			}
+313			if (sym == s_rparen) getsym();		// eat the ')'
+314			else expected(M_rparen);
+315		}
+316		arg = newarg;		// activate new argument frame
+317	}
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="12" Name="bitlashMio.ino, riga 313" Id="86edd4c5-f4a9-415e-b5f4-0569f1bd7864" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="313" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="32" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='86edd4c5-f4a9-415e-b5f4-0569f1bd7864'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>306				else
+307	#endif
+308					vpush(getnum());				// push the value
+309				newarg[0]++;					// bump the count
+310				if (sym == s_comma) getsym();	// eat arglist ',' and go around
+311				else break;
+312			}
+--&gt;313			if (sym == s_rparen) getsym();		// eat the ')'
+314			else expected(M_rparen);
+315		}
+316		arg = newarg;		// activate new argument frame
+317	}
+318	
+319	
+320	// release the top argblock once its execution context has expired
+321	//
+322	void releaseargblock(void) {
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="13" Name="bitlashMio.ino, riga 316" Id="d5616fb2-1dde-4e29-898c-9e7d220e4bfb" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="316" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="35" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='d5616fb2-1dde-4e29-898c-9e7d220e4bfb'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>309				newarg[0]++;					// bump the count
+310				if (sym == s_comma) getsym();	// eat arglist ',' and go around
+311				else break;
+312			}
+313			if (sym == s_rparen) getsym();		// eat the ')'
+314			else expected(M_rparen);
+315		}
+--&gt;316		arg = newarg;		// activate new argument frame
+317	}
+318	
+319	
+320	// release the top argblock once its execution context has expired
+321	//
+322	void releaseargblock(void) {
+323		vsptr += arg[0] + 1;				// pop all args en masse, and the count
+324	
+325	#if defined(STRING_POOL)
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="14" Name="bitlashMio.ino, riga 289" Id="d45b4709-2f4b-4349-b7fa-d401787ff086" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="289" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="8" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='d45b4709-2f4b-4349-b7fa-d401787ff086'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>282	void parsearglist(void) {
+283		vpush((numvar)arg);				// save base of current argblock
+284	#if defined(STRING_POOL)
+285		vpush(0);							// argtype: argument type vector, initially 0
+286		vpush((numvar)stringPool);			// save stringPool base for later release
+287		strpush(idbuf);						// save called function's name as arg[-1]
+288	#endif
+--&gt;289		numvar *newarg = &amp;vstack[vsptr];	// move global arg pointer to base of new block
+290		vpush(0);							// initialize new arg(0) (a/k/a argc) to 0
+291	
+292		if (sym == s_lparen) {
+293			getsym();		// eat arglist '('
+294			while ((sym != s_rparen) &amp;&amp; (sym != s_eof)) {
+295	
+296	#if defined(STRING_POOL)
+297				if (sym == s_quote) {
+298					vpush((numvar)stringPool);	// push the string pointer
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="15" Name="bitlashMio.ino, riga 287" Id="d104464c-5276-4d90-8d11-69d06165f448" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="287" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="6" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='d104464c-5276-4d90-8d11-69d06165f448'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>280	
+281	
+282	void parsearglist(void) {
+283		vpush((numvar)arg);				// save base of current argblock
+284	#if defined(STRING_POOL)
+285		vpush(0);							// argtype: argument type vector, initially 0
+286		vpush((numvar)stringPool);			// save stringPool base for later release
+--&gt;287		strpush(idbuf);						// save called function's name as arg[-1]
+288	#endif
+289		numvar *newarg = &amp;vstack[vsptr];	// move global arg pointer to base of new block
+290		vpush(0);							// initialize new arg(0) (a/k/a argc) to 0
+291	
+292		if (sym == s_lparen) {
+293			getsym();		// eat arglist '('
+294			while ((sym != s_rparen) &amp;&amp; (sym != s_eof)) {
+295	
+296	#if defined(STRING_POOL)
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="16" Name="bitlashMio.ino, riga 293" Id="88d70fde-1768-4da9-b8b7-5030b8c453d6" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="293" FileColumn="1" FunctionName="parsearglist(void)" FunctionLineOffset="12" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='88d70fde-1768-4da9-b8b7-5030b8c453d6'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>286		vpush((numvar)stringPool);			// save stringPool base for later release
+287		strpush(idbuf);						// save called function's name as arg[-1]
+288	#endif
+289		numvar *newarg = &amp;vstack[vsptr];	// move global arg pointer to base of new block
+290		vpush(0);							// initialize new arg(0) (a/k/a argc) to 0
+291	
+292		if (sym == s_lparen) {
+--&gt;293			getsym();		// eat arglist '('
+294			while ((sym != s_rparen) &amp;&amp; (sym != s_eof)) {
+295	
+296	#if defined(STRING_POOL)
+297				if (sym == s_quote) {
+298					vpush((numvar)stringPool);	// push the string pointer
+299					parsestring(&amp;spush);		// parse it into the pool
+300					spush(0);					// and terminate it
+301					getsym();					// eat closing "
+302	
+</Source>
+      </BreakPoint>
+      <BreakPoint Index="17" Name="bitlashMio.ino, riga 848" Id="27d07dd6-c96b-4396-aa97-02642c583c00" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\bitlashmio\bitlashmio.ino" FileLine="848" FileColumn="1" FunctionName="getterm(void)" FunctionLineOffset="5" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='6c7c9fd5-075f-4f49-8219-5ee292d7bbc7'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>841	#endif
+842	
+843	
+844	void getterm(void) {
+845	#ifdef USE_PARSEREDUCE
+846		parseReduce(&amp;getfactor, s_mul, s_div, s_mod);
+847	#else
+--&gt;848		getfactor();
+849		while ((sym == s_mul) || (sym == s_div) || (sym == s_mod)) {
+850			byte op = sym;
+851			getsym();
+852			getfactor();
+853			vop(op);
+854		}
+855	#endif
+856	}
+857	
+</Source>
+      </BreakPoint>
+    </BreakPoints>
+  </Program>
+</VisualMicro>

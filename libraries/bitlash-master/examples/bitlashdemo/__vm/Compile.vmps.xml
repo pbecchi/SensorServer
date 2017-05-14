@@ -1,0 +1,52 @@
+<VisualMicro>
+  <Program Name="bitlashdemo" Ext=".pde" Location="D:\Users\pbecc\OneDrive\Arduino\libraries\bitlash-master\examples\bitlashdemo">
+    <Compile ReCompileIfSourceIsNewer="1" IsDebugStart="1" IsCompiled="0" ConfigurationName="Debug" StopOnError="False" OptimiseLibs="True" OptimiseCore="True" BuildPath="d:\Users\pbecc\AppData\Local\Temp\VMicroBuilds\bitlashdemo\uno" IncludesDebug="0" SketchName="bitlashdemo" ReportDigitalPins="0" ReportAnalogPins="0" ReportI2C="0" ReportFreeMemory="0" IncludeDebug="1" LastDebugPreProcessorDefinitions="VM_DEBUG;VM_DEBUG_ENABLE 1;VM_DEBUG_BANDWIDTH_THROTTLE_MS 100;VM_DEBUGGER_TYPE_HARDWARESERIAL 0;VM_DEBUGGER_TYPE_SOFTWARESERIAL 1;VM_DEBUGGER_TYPE_FASTSERIAL 2;VM_DEBUGGER_TYPE_USB 3;VM_DEBUGGER_TYPE_TEENSY 4;VM_DEBUGGER_TYPE_UART 5;VM_DEBUGGER_TYPE_USART 6;VM_DEBUGGER_TYPE_USBSERIAL 7;VM_DEBUGGER_TYPE_TTYUART 8;VM_DEBUGGER_TYPE_NET_CONSOLE 9;VM_DEBUGGER_TYPE_Uart 10;VM_DEBUGGER_TYPE_COSA 11;VM_DEBUGGER_TYPE_CDCSerialClass 12;VM_DEBUGGER_TYPE_HARDWARESERIAL1 13;VM_DEBUGGER_TYPE_HARDWARESERIAL2 14;VM_DEBUGGER_TYPE_HARDWARESERIAL3 15;VM_DEBUGGER_TYPE VM_DEBUGGER_TYPE_HARDWARESERIAL;VM_DEBUG_BREAKPAUSE;" CompilerErrors="1" />
+    <Platform Name="arduino10x" Package="arduino" Platform="avr" Architecture="avr">
+      <Board Name="uno" Description="Arduino Uno" CoreFolder="d:\Program Files\arduino023\arduino-0023\hardware\arduino\cores\arduino" VariantFullPath="" McuIdePath="d:\Program Files\arduino023\arduino-0023" McuSketchBookPath="d:\Users\pbecc\OneDrive\Arduino" name="Arduino Uno" upload.protocol="stk500" upload.maximum_size="32256" upload.speed="115200" bootloader.low_fuses="0xff" bootloader.high_fuses="0xde" bootloader.extended_fuses="0x05" bootloader.path="optiboot" bootloader.file="optiboot_atmega328.hex" bootloader.unlock_bits="0x3F" bootloader.lock_bits="0x0F" build.mcu="atmega328p" build.f_cpu="16000000L" build.core="arduino" runtime.ide.path="d:\Program Files\arduino023\arduino-0023" runtime.os="windows" build.system.path="d:\Program Files\arduino023\arduino-0023\hardware\arduino\system" runtime.ide.version="166" target_package="arduino" target_platform="avr" runtime.hardware.path="d:\Program Files\arduino023\arduino-0023\hardware" originalid="uno" vm.platform.root.path="D:\Program Files\VisualStudio\Common7\IDE\Extensions\zzpfl3s3.2c2\Micro Platforms\arduino10x" avrisp.name="AVR ISP" avrisp.communication="serial" avrisp.protocol="stk500v1" avrispmkii.name="AVRISP mkII" avrispmkii.communication="usb" avrispmkii.protocol="stk500v2" usbtinyisp.name="USBtinyISP" usbtinyisp.protocol="usbtiny" parallel.name="Parallel Programmer" parallel.protocol="dapa" parallel.force="true" arduinoisp.name="Arduino as ISP" arduinoisp.communication="serial" arduinoisp.protocol="stk500v1" arduinoisp.speed="19200" runtime.vm.boardinfo.id="uno" runtime.vm.boardinfo.name="uno" runtime.vm.boardinfo.desc="Arduino Uno" runtime.vm.boardinfo.src_location="d:\Program Files\arduino023\arduino-0023\hardware\arduino" ide.hint="For use with Arduino 0023 and 1.0.x versions" ide.location.key="Arduino" ide.location.ide.winreg="Arduino 1.0.x Application" ide.location.sketchbook.winreg="Arduino 1.0.x Sketchbook" ide.location.sketchbook.preferences="sketchbook.path" ide.location.sketchbook.default="%MYDOCUMENTS%\arduino" ide.location.preferences="%VM_APPDATA_ROAMING%\arduino\preferences.txt" ide.default.package="arduino" ide.default.platform="avr" ide.multiplatform="true" ide.includes="arduino.h" ide.platformswithoutpackage="true" ide.includes.fallback="wprogram.h" ide.extension="ino" ide.extension.fallback="pde" ide.versionLTEQ="149" ide.exe="arduino.exe" ide.hosts="atmel" ide.url="http://arduino.cc/en/Main/Software" vm.debug="true" software="ARDUINO" ide.appid="arduino10x" location.sketchbook="d:\Users\pbecc\OneDrive\Arduino" build.core.vmresolved="d:\Program Files\arduino023\arduino-0023\hardware\arduino\cores\arduino" build.core.parentfolder.vmresolved="d:\Program Files\arduino023\arduino-0023\hardware\arduino\cores" build.core.coresparentfolder.vmresolved="d:\Program Files\arduino023\arduino-0023\hardware\arduino" build.core.path="d:\Program Files\arduino023\arduino-0023\hardware\arduino\cores\arduino" vm.core.include="wprogram.h" build.board="AVR_UNO" vm.boardsource.path="d:\Program Files\arduino023\arduino-0023\hardware\arduino" runtime.platform.path="d:\Program Files\arduino023\arduino-0023\hardware\arduino" vm.platformname.name="avr" build.arch="AVR" vm.runtime.compiler.showwarnings="true" vm.runtime.upload.verbose="false" vm.runtime.upload.verify="false" vm.runtime.compiler.auto_discover_includes="true" vm.last.buildpath="d:\Users\pbecc\AppData\Local\Temp\VMicroBuilds\bitlashdemo\uno" />
+    </Platform>
+    <Debug EnableBreak="1" DebugEnabled="1" IsGdb="0" RemotePortSpeedWrittenToDebugSource="115200" />
+    <VCCodeModel>
+      <VCCodeMacros />
+    </VCCodeModel>
+    <BreakPoints>
+      <BreakPoint Index="1" Name="bitlashdemo.pde, riga 51" Id="643f5efc-0f8e-4428-94e7-5c2db82b95c9" Enabled="1" Message="  Millis is currently {millis()}.&#xD;&#xA;Press F5 to continue.&#xD;&#xA;    Press Ctrl+F5 to stop debugging or close/stop the Serial Monitor&#xD;&#xA;  &#xD;&#xA;    The code is stopped at the start of the loop() function, where you see a red dot.&#xD;&#xA;    The red dot is a ‘breakpoint’.&#xD;&#xA;    This breakpoint is automatically set by Visual Micro to demonstrate the Arduino debugger.&#xD;&#xA;    Add your own breakpoints by placing the cursor on any code line and pressing F9. Press F9 again to delete the breakpoint.&#xD;&#xA;    Read more about the Visual Micro debugger at http://www.visualmicro.com/page/Debugging-for-Arduino.aspx&#xD;&#xA;    Take some time to learn about debugging, it’s worth it!&#xD;&#xA;    To switch the demo breakpoint and other tips off, deselect Visual Micro&gt;Tutorial Mode.&#xD;&#xA;" MessageTextType="0" PreProcessedMessage="  Millis is currently {0}.&#xD;&#xA;Press F5 to continue.&#xD;&#xA;    Press Ctrl+F5 to stop debugging or close/stop the Serial Monitor&#xD;&#xA;  &#xD;&#xA;    The code is stopped at the start of the loop() function, where you see a red dot.&#xD;&#xA;    The red dot is a ‘breakpoint’.&#xD;&#xA;    This breakpoint is automatically set by Visual Micro to demonstrate the Arduino debugger.&#xD;&#xA;    Add your own breakpoints by placing the cursor on any code line and pressing F9. Press F9 again to delete the breakpoint.&#xD;&#xA;    Read more about the Visual Micro debugger at http://www.visualmicro.com/page/Debugging-for-Arduino.aspx&#xD;&#xA;    Take some time to learn about debugging, it’s worth it!&#xD;&#xA;    To switch the demo breakpoint and other tips off, deselect Visual Micro&gt;Tutorial Mode.&#xD;&#xA;" Condition="millis()&gt;0 || millis()&gt;1" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\libraries\bitlash-master\examples\bitlashdemo\bitlashdemo.pde" FileLine="51" FileColumn="1" FunctionName="" FunctionLineOffset="1" FunctionColumnOffset="1" HitCountTarget="250" HitCountType="4" Language="C++" LocationType="3" Tag="&lt;vmbp Id='643f5efc-0f8e-4428-94e7-5c2db82b95c9'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>44		initBitlash(57600);
+45	
+46		// you can execute commands here to set up initial state
+47		// bear in mind these execute after the startup macro
+48		 doCommand("print(1+1)");
+49	}
+50	
+--&gt;51	void loop(void) {
+52		runBitlash();
+53	
+54		
+55	}
+</Source>
+        <MessageVariables>
+          <MessageVariable Name="millis()" Index="1" />
+        </MessageVariables>
+      </BreakPoint>
+      <BreakPoint Index="2" Name="bitlash-taskmgr.c, riga 90" Id="dc95b598-c7ff-4bf2-bae4-65dbac7451d1" Enabled="1" Message="" MessageTextType="2" PreProcessedMessage="" Condition="" ConditionType="1" CurrentHits="0" File="d:\users\pbecc\onedrive\arduino\libraries\bitlash-master\src\bitlash-taskmgr.c" FileLine="90" FileColumn="1" FunctionName="" FunctionLineOffset="1" FunctionColumnOffset="1" HitCountTarget="1" HitCountType="1" Language="C++" LocationType="3" Tag="&lt;vmbp Id='1d867e96-c563-436e-a9a3-d6e1b63a1d5c'/&gt;" Type="1" ToString="System.__ComObject" BreakWhenHit="1">
+        <Source>83	
+84	
+85	//////////
+86	//
+87	//	runBackgroundTasks
+88	//
+89	//	Runs one eligible background task per invocation
+--&gt;90	//	Returns true if a task was run
+91	//
+92	void runBackgroundTasks(void) {
+93	byte i;	
+94	
+95	#ifdef suspendBackground
+96		if (suspendBackground) return;
+97	#endif
+98	
+99		for (i=0; i&lt;NUMTASKS; i++) {
+</Source>
+      </BreakPoint>
+    </BreakPoints>
+  </Program>
+</VisualMicro>

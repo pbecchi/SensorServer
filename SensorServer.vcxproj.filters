@@ -16,6 +16,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SensorServer.ino" />
+    <None Include="..\..\Project\SensorServer\pbecchi_SensorServer.html">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Project\SensorServer\SENSOR SERVER Wiki · pbecchi_SensorServer Wiki.html">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="README.md" />
+    <None Include="md-styles.css" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitlashMio-functionsOld.h">
@@ -65,5 +73,10 @@
     <ClCompile Include="NPTtimeSync1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\config.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
